@@ -3,7 +3,6 @@
     <p class="head">Управление пользователями</p>
     <div class="user_management_table">
       <div class="user_management_table_element"
-
       >
         <div
             v-for="title in titles"
@@ -12,7 +11,20 @@
           <p>{{ title.category }}</p>
         </div>
       </div>
-      <p>{{info}}</p>
+      <div
+          v-for="user in users"
+          :key="user.data.id"
+          class="user_management_table_element color">
+        <div class="user_management_table_element_content item1"><p>{{ user.data['common-data'].discordName }}</p></div>
+        <div class="user_management_table_element_content item1"><p>{{ user.data['common-data'].Role }}</p></div>
+        <div class="user_management_table_element_content item2"><p>{{ user.data['renew-data'].renewPrice }}</p></div>
+        <div class="user_management_table_element_content item3"><p>{{ user.data['licence-data'].licenceKey }}</p></div>
+        <div class="user_management_table_element_content item3"><p>{{ user.data['renew-data'].renewDate }}</p></div>
+        <div class="user_management_table_element_content item2"><p>{{ user.data['licence-data'].keyBind }}</p></div>
+        <div class="user_management_table_element_content item1"><p>Succesful</p></div>
+        <div class="user_management_table_element_content item2"><p>{{ user.data['billing-data'].cartBind }}</p></div>
+
+      </div>
     </div>
   </div>
 </template>
@@ -22,24 +34,32 @@ import axios from "axios";
 
 export default {
   name: "UserManagement",
-  data: () =>({
-    titles:[
-      {category:'Discord tag'},
-      {category:'Role'},
-      {category:'License type'},
-      {category:'License key'},
-      {category:'Renewal date'},
-      {category:'Key bind'},
-      {category:'Payment status'},
-      {category:'Card bind'},
+  data: () => ({
+    titles: [
+      {category: 'Discord tag', class:'user_management_table_element_content item1'},
+      {category: 'Role', class:'user_management_table_element_content item1'},
+      {category: 'License type', class:'user_management_table_element_content item2'},
+      {category: 'License key'},
+      {category: 'Renewal date'},
+      {category: 'Key bind'},
+      {category: 'Payment status'},
+      {category: 'Card bind'},
     ],
-    info: null,
+    users: null,
   }),
-  mounted() {
-    axios
-        .get('http://localhost:8080/api/v1/users/details/')
-        .then(response => (this.info = response));
-  }
+  beforeMount() {
+    (async () => {
+      await axios
+          .get('http://localhost:8080/api/v1/users/details/')
+          .then(resObj => (this.users = resObj.data))
+          .catch(error => {
+            console.log(error);
+          });
+    })();
+  },
+  methods: {
+
+  },
 }
 </script>
 
@@ -67,18 +87,19 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
   align-content: center;
-  /*padding: 1% 1% 0 1%;*/
-  min-width: 100vh;
+  padding: 0 1% 1% 1%;
+  min-width: 500px;
 }
 .user_management_table_element{
-  width: 100%;
+  /*width: 100%;*/
   height: 5vh;
-  margin: 1vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   border-radius: 3px;
   align-items: center;
+  margin: 0.5vh;
+
 }
 .user_management_table_element_content{
   height: 100%;
@@ -89,7 +110,8 @@ export default {
   flex-direction: row;
   align-content: space-between;
   justify-content: space-between;
-  padding-left: 1vh;
+  margin-left: 1vh;
+  min-height: 10px;
 }
 p{
   font-weight: 500;
@@ -98,7 +120,21 @@ p{
   letter-spacing: 0.01em;
   color: #FFFFFF;
 }
-.user_management_table_element_clr{
+.color{
   background-color: #161E29;
+  border-radius: 3px;
+
+}
+.item1{
+  flex-basis: 12vh;
+  min-width: 100px;
+}
+.item2{
+  flex-basis: 5vh;
+  min-width: 60px;
+}
+.item3{
+  flex-basis: 20vh;
+  min-width: 200px;
 }
 </style>

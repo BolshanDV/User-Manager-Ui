@@ -39,21 +39,23 @@ export default {
 .navbar-column1{
   float: left;
   background-color: #0D121A;
-  width: 18%;
+  width: 16%;
   position: fixed;
   /*height: 100%;*/
   min-height:900px;
+  min-width: 250px;
 
 }
 .space-graphs1{
   float: left;
-  width: 82%;
+  width: 84%;
   margin-top: 20px;
-  margin-left: 18%;
+  margin-left: 16%;
   background-color: #161E29;
   background-size: cover;
   min-height: 950px;
   min-width: 900px;
+
 }
 
 </style>
