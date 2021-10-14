@@ -1,24 +1,25 @@
 <template>
-  <div>
-      <div class="text">
-        <Navbar/>
-        <div class="flex-container1">
-          <div class="navbar-column1">
-            <Sidebar/>
-          </div>
-          <div class="space-graphs1">
-            <router-view />
-          </div>
-        </div>
-      </div>
+<div class="all_element">
+  <div class="navbar">
+    <Navbar/>
   </div>
+  <div class ="container_flex">
+    <div class="sidebar">
+      <Sidebar />
+    </div>
+
+    <div class="work_space">
+      <router-view />
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
 import Navbar from "@/layouts/LayoutComponent/Navbar";
 import Sidebar from "@/layouts/LayoutComponent/Sidebar";
 export default {
-  name: "Layout",
+name: "NewLayout",
   components:{
     Navbar,
     Sidebar
@@ -27,35 +28,38 @@ export default {
 </script>
 
 <style scoped>
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-.text{
-  font-family: 'Roboto', sans-serif;
+.all_element{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: flex-start;
 }
-.flex-container1{
-  display: inline;
-  font-family: 'Roboto', sans-serif;
-}
-.navbar-column1{
-  float: left;
-  background-color: #0D121A;
-  width: 16%;
+.navbar{
+  width: 100%;
   position: fixed;
-  /*height: 100%;*/
-  min-height:900px;
-  min-width: 250px;
-
+  z-index: 100;
 }
-.space-graphs1{
-  float: left;
-  width: 84%;
-  margin-top: 20px;
-  margin-left: 16%;
+.sidebar{
+  background: #080D16;
+  height: 100%;
+  position: fixed;
+  z-index: 100;
+  width:245px;
+  min-width: 200px;
+}
+.work_space{
   background-color: #161E29;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  float: top;
+  height: 100%;
+  margin-left: 245px;
+  margin-top: 50px;
   background-size: cover;
-  min-height: 950px;
-  min-width: 900px;
-
+  padding-top: 3vh;
+  min-width: 1200px;
+  width: auto;
 }
 
 </style>

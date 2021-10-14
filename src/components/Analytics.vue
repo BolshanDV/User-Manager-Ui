@@ -116,13 +116,13 @@ export default {
   align-content: center;
   flex-flow: column nowrap;
   align-items: center;
-  margin: 7vh 0 5vh 0;
+  margin: 0vh 0 5vh 0;
 }
 .element_Analytics {
   height: 70vh;
   width: 98%;
   background: #0D121A;
-  margin: 0 0 3vh 0;
+  margin: 0vh 0 3vh 0;
   border-radius: 10px;
 }
   .element_Analytics_Row {

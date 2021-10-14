@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar">
+  <div>
     <div class="navbar_flex">
       <div class="navbar_user"><a>User</a></div>
       <div class="navbar_exit"><a class="waves-effect waves-light btn">Выйти</a></div>
@@ -13,30 +13,30 @@ name: "Navbar"
 }
 </script>
 <style scoped>
-.navbar{
-  position: fixed;
-  width: 100%;
-  height: 8%;
-  background: #080D16;
-  min-height: 35px;
+/*.navbar{*/
+/*  !*position: fixed;*!*/
+/*  !*width: 100%;*!*/
+/*  !*height: 8%;*!*/
+/*  !*background: #080D16;*!*/
+/*  !*min-height: 35px;*!*/
 
-}
+/*}*/
 .navbar_flex{
   display: flex;
   flex-direction: row;
+  background: #080D16;
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  height: 5vh;
-  margin-top: 1.75vh;
+  height: 50px;
+  padding: 1.75vh 0 1.75vh 0;
 
 }
 .navbar_user{
   margin-right: 5vh;
 }
 .btn{
-  min-height: 3.5vh;
-  min-width: 8vh;
+
   text-align: center;
   margin-right: 5vh;
 }

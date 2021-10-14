@@ -38,7 +38,8 @@ name: "ManagingDrops"
   align-items: center;
   align-content: center;
   justify-content: center;
-  margin: 7vh 0 5vh 0;
+  margin: 0vh 0 5vh 0;
+
 }
 .managingDrops_column{
   height: 100vh;

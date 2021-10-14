@@ -21,7 +21,7 @@
           tag="div"
           class="page waves-effect waves-light"
           :to="link.url"
-          active-class="page_active"
+          active-class="page_active page"
           :exact="link.exact"
       >
         <img :src=" require('../../Assets/Photo/icons' + '/'+link.image)" alt="img" class="icons" >
@@ -59,7 +59,7 @@ export default {
   font-family: 'Roboto', sans-serif;
   justify-content: space-between;
   margin: 0 0 4vh 0 ;
-  min-width: 60px;
+  min-width: 120px;
 
 }
 .sidebar_mainData_members{
@@ -74,7 +74,18 @@ export default {
   padding: 1.5vh;
   margin: 2vh 3vh 2vh 3vh;
 }
-
+.page_active{
+  /*margin: 0.3vh;*/
+  /*background-color: #161E29;*/
+  /*padding: 3vh 1.5vh 3vh 3vh;*/
+  /*display: flex;*/
+  /*justify-content: flex-start;*/
+  /*flex-direction: row;*/
+  /*align-items: center;*/
+  border-right-style: solid;
+  border-color: #6E7F99 ;
+  /*color: #EBEBEB;*/
+}
 .page{
   margin: 0.3vh;
   background-color: #161E29;
@@ -85,20 +96,6 @@ export default {
   align-items: center;
   color: #EBEBEB;
 }
-
-.page_active{
-  margin: 0.3vh;
-  background-color: #161E29;
-  padding: 3vh 1.5vh 3vh 3vh;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: row;
-  align-items: center;
-  border-right-style: solid;
-  border-color: #6E7F99 ;
-  color: #EBEBEB;
-}
-
 .logo{
   margin: 2vh 2vh 1.5vh 0;
   text-align: center;
@@ -113,7 +110,11 @@ export default {
   width: 128px;
   margin-left: 1.75vh;
 }
-.sidebar{
-  min-height:1000px;
-}
+/*.sidebar{*/
+/*  background: #080D16;*/
+/*  height: 100%;*/
+/*  position: fixed;*/
+/*  z-index: 100;*/
+/*  width: 20%;*/
+/*}*/
 </style>

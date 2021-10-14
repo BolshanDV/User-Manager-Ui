@@ -2,12 +2,11 @@
   <div class="user_management_flex">
     <p class="head">Управление пользователями</p>
     <div class="user_management_table">
-      <div class="user_management_table_element"
-      >
+      <div class="user_management_table_element">
         <div
             v-for="title in titles"
             :key="title.category"
-            class="user_management_table_element_content">
+            :class="[title.class]">
           <p>{{ title.category }}</p>
         </div>
       </div>
@@ -39,11 +38,11 @@ export default {
       {category: 'Discord tag', class:'user_management_table_element_content item1'},
       {category: 'Role', class:'user_management_table_element_content item1'},
       {category: 'License type', class:'user_management_table_element_content item2'},
-      {category: 'License key'},
-      {category: 'Renewal date'},
-      {category: 'Key bind'},
-      {category: 'Payment status'},
-      {category: 'Card bind'},
+      {category: 'License key', class:'user_management_table_element_content item3'},
+      {category: 'Renewal date', class:'user_management_table_element_content item3'},
+      {category: 'Key bind', class:'user_management_table_element_content item2'},
+      {category: 'Payment status', class:'user_management_table_element_content item1'},
+      {category: 'Card bind', class:'user_management_table_element_content item2'},
     ],
     users: null,
   }),
@@ -65,12 +64,15 @@ export default {
 
 <style scoped>
 .user_management_flex{
-  margin: 7vh 2vh 5vh 2vh;
-  min-height: 800px;
-  min-width: 800px;
+  margin: 0vh 2vh 5vh 2vh;
   background: #0D121A;
   border-radius: 10px;
   padding: 2vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: auto;
 }
 .head{
   font-style: normal;
@@ -86,26 +88,23 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-content: center;
   padding: 0 1% 1% 1%;
   min-width: 500px;
+  width: auto;
 }
 .user_management_table_element{
-  /*width: 100%;*/
-  height: 5vh;
+  height: 45px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   border-radius: 3px;
   align-items: center;
   margin: 0.5vh;
-
+  width: auto;
 }
 .user_management_table_element_content{
   height: 100%;
   width: 16vh;
-  /*background-color: #6E7F99;*/
-  /*margin-right: 2vh;*/
   display: flex;
   flex-direction: row;
   align-content: space-between;
@@ -123,18 +122,14 @@ p{
 .color{
   background-color: #161E29;
   border-radius: 3px;
-
 }
 .item1{
-  flex-basis: 12vh;
-  min-width: 100px;
+  width: 100px;
 }
 .item2{
-  flex-basis: 5vh;
-  min-width: 60px;
+  width: 45px;
 }
 .item3{
-  flex-basis: 20vh;
-  min-width: 200px;
+  width: 180px;
 }
 </style>

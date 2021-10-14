@@ -21,8 +21,7 @@ export default {
     height: 100vh;
     display: flex;
     flex-direction: row;
-    /*background-color: #161E29;*/
-    margin: 7vh 0 5vh 0;
+    margin: 0vh 0 5vh 0;
     align-items: flex-start;
     align-content: center;
     justify-content: center;
