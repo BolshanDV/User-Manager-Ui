@@ -85,8 +85,8 @@
 </template>
 
 <script>
-import RevenueChart from "../Assets/Charts/RevenueChart";
-import CalendarRevenue from "../Assets/Calendars/CalendarRevenue";
+import RevenueChart from "../../Assets/Charts/RevenueChart";
+import CalendarRevenue from "../../Assets/Calendars/CalendarRevenue";
 export default {
   name: "Analytics",
   data() {
