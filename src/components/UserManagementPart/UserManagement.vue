@@ -6,15 +6,15 @@
       <div
           v-for="(user, index) in users"
           :key="user.id"
-          @click="handleClick(index)"
           class="user_management_table_section color"
       >
         <div
-            class="user_management_table_element "
+            @click="handleClick(index)"
+            class="user_management_table_element"
         >
-          <div class="user_management_table_element_content item1"><p>{{ user.discordUsername }}</p></div>
+          <div class="user_management_table_element_content item1 "><p>{{ user.discordUsername }}</p></div>
           <div class="user_management_table_element_content item1"><p>{{ user.licenceTypeDTO.role }}</p></div>
-          <div class="user_management_table_element_content item2"><p>{{ user.licenceTypeDTO.renewalPrice }}</p></div>
+          <div class="user_management_table_element_content item2 "><p>{{ user.licenceTypeDTO.renewalPrice }}</p></div>
           <div class="user_management_table_element_content item3"><p>{{ user.licenceDTO.licenceKey }}</p></div>
           <div class="user_management_table_element_content item1"><p>{{ user.licenceDTO.renewalDate }}</p></div>
           <div class="user_management_table_element_content item2"><p>{{ user.licenceDTO.keyBind }}</p></div>
@@ -23,7 +23,7 @@
         </div>
         <div
             v-show="user.flag"
-
+            class="element_content_show_container"
         >
           <div class="element_content_show">
             <div class="element_content_show_parameter">
@@ -47,9 +47,9 @@
               <p class="text_show">{{user.billingDTO.cartEnding}}</p>
             </div>
           </div>
-          <div>
-            <button><p>Kick User</p></button>
-            <button><p>Add Free Month</p></button>
+          <div class="element_content_show_container button">
+            <button class="waves-effect waves-light btn"><p>Kick User</p></button>
+            <button class="waves-effect waves-light btn"><p>Add Free Month</p></button>
           </div>
 
         </div>
@@ -61,6 +61,7 @@
 <script>
 import axios from "axios";
 import TitleCategory from "./TitleCategory";
+
 export default {
   name: "UserManagement",
   components:{
@@ -76,7 +77,7 @@ export default {
           .then(resObj => (this.users = resObj.data))
           .then(() => {
             for ( const user of this.users) {
-              user.flag = false;
+              this.$set(user, 'flag', false)
               if(user.billingDTO.cartEnding === null){
                 user.billingDTO.cartEnding = "empty"
               }
@@ -89,14 +90,10 @@ export default {
   },
   methods: {
      handleClick(id) {
-       // console.log(id)
-       // console.log(this.users[id].flag)
-       //
-       // console.log(this.users[id].flag)
-       this.users[id].flag = !this.users[id].flag
-       this.users[id].id++
-       // console.log(this.users[id].licenceTypeDTO.renewalPrice++)
+       this.users[id].flag = !this.users[id].flag;
     },
+
+
   },
 }
 </script>
@@ -175,7 +172,7 @@ p{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 1vh;
+  margin: 0.5vh 1vh 0.5vh 1vh;
 }
 .element_content_show{
   display: flex;
@@ -183,6 +180,7 @@ p{
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 0 2vh 0 2vh;
+  width: 65%;
 }
 .element_content_show_parameter{
   margin-right:2vh;
@@ -199,6 +197,24 @@ p{
 
   color: #C4C4C4;
   margin-left: 10px;
-
+}
+.element_content_show_container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-bottom:1vh ;
+}
+.btn{
+  text-align: center;
+  height: 40px;
+  margin-left: 3vh;
+}
+.waves-effect{
+  background: #1F2A39;
+  border-radius: 3px;
+}
+.button{
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 </style>
