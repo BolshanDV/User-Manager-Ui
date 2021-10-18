@@ -6,11 +6,11 @@
       </div>
 
       <div class="sidebar_mainData_members">
-        <p>1</p>
+        <p>-</p>
       </div>
 
       <div class="sidebar_mainData_revenue">
-        <p>2</p>
+        <p>-</p>
       </div>
 
     </div>
@@ -36,6 +36,7 @@
 
 <script>
 export default {
+  props: ['value'],
   name: "Sidebar",
   data: () =>({
     links:[
@@ -51,7 +52,14 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-
+.sidebar{
+  background: #080D16;
+  height: 100%;
+  position: fixed;
+  z-index: 100;
+  width:245px;
+  min-width: 200px;
+}
 .sidebar_mainData{
   display: flex;
   flex-direction: column;

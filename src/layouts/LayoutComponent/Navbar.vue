@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div @click="$emit('click')">
     <div class="navbar_flex">
       <div class="navbar_user"><a>User</a></div>
-      <div class="navbar_exit"><a class="waves-effect waves-light btn">Выйти</a></div>
+      <div class="navbar_exit"><p class="waves-effect waves-light btn">Выйти</p></div>
     </div>
   </div>
 </template>
@@ -13,14 +13,6 @@ name: "Navbar"
 }
 </script>
 <style scoped>
-/*.navbar{*/
-/*  !*position: fixed;*!*/
-/*  !*width: 100%;*!*/
-/*  !*height: 8%;*!*/
-/*  !*background: #080D16;*!*/
-/*  !*min-height: 35px;*!*/
-
-/*}*/
 .navbar_flex{
   display: flex;
   flex-direction: row;
