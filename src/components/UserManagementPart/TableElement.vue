@@ -17,7 +17,7 @@
         <div class="user_management_table_element_content item1"><p>{{ user.licenceTypeDTO.role }}</p></div>
         <div class="user_management_table_element_content item2 "><p>{{ user.licenceTypeDTO.renewalPrice }}</p></div>
         <div class="user_management_table_element_content item3"><p>{{ user.licenceDTO.licenceKey }}</p></div>
-        <div class="user_management_table_element_content item1"><p>{{ user.licenceDTO.renewalDate }}</p></div>
+        <div class="user_management_table_element_content item1"><p>{{ user.licenceDTO.renewalDate}}</p></div>
         <div class="user_management_table_element_content item2"><p>{{ user.licenceDTO.keyBind }}</p></div>
         <!--        <div class="user_management_table_element_content item1"><p>Succesful</p></div>-->
         <div class="user_management_table_element_content item2"><p>{{ user.billingDTO.cartBind }}</p></div>
@@ -49,8 +49,14 @@
           </div>
         </div>
         <div class="element_content_show_container button">
-          <button class="waves-effect waves-light btn"><p>Kick User</p></button>
-          <button class="waves-effect waves-light btn"><p>Add Free Month</p></button>
+          <button class="waves-effect waves-light btn">
+            <p>Kick User</p>
+          </button>
+          <button class="waves-effect waves-light btn"
+                  @click="freeMonth(index)"
+          >
+            <p>Add Free Month</p>
+          </button>
         </div>
 
       </div>
@@ -64,7 +70,8 @@ export default {
 name: "TableElement",
   data: () => ({
     users: null,
-    preloader: true
+    preloader: true,
+    renewalDate: null,
   }),
   beforeMount() {
     (async () => {
@@ -75,8 +82,11 @@ name: "TableElement",
             this.preloader = false
             for ( const user of this.users) {
               this.$set(user, 'flag', false)
-              if(user.billingDTO.cartEnding === null){
+              if(user.billingDTO.cartEnding === null ){
                 user.billingDTO.cartEnding = "empty"
+              }
+              if(user.billingDTO.paymentId === null ){
+                user.billingDTO.paymentId = "empty"
               }
             }
           })
@@ -89,6 +99,20 @@ name: "TableElement",
     handleClick(id) {
       this.users[id].flag = !this.users[id].flag;
     },
+    freeMonth(id){
+      this.renewalDate = new Date((this.users[id].licenceDTO.renewalDate))
+      this.renewalDate.setMonth(this.renewalDate.getMonth()+1)
+
+      let dd = this.renewalDate.getDate();
+      if (dd < 10) dd = '0' + dd;
+
+      let mm = this.renewalDate.getMonth() + 1;
+      if (mm < 10) mm = '0' + mm;
+
+      let yy = this.renewalDate.getFullYear() ;
+
+      this.users[id].licenceDTO.renewalDate = this.renewalDate =  yy + '-' + mm + '-' + mm;
+    }
   },
 }
 </script>
@@ -115,11 +139,13 @@ name: "TableElement",
   min-height: 10px;
 }
 p{
-  font-weight: 500;
+  font-weight: normal;
   font-size: 14px;
   line-height: 16px;
   letter-spacing: 0.01em;
   color: #FFFFFF;
+  font-style: normal;
+
 }
 .color{
   background-color: #161E29;

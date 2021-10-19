@@ -21,8 +21,6 @@ export default {
     TitleCategory,
     TableElement
   },
-  data: () => ({
-  }),
 }
 </script>
 
