@@ -62,6 +62,7 @@ name: "NewLayout",
   background-color: #161E29;
   display: flex;
   background-size: contain;
+  background-color: #161E29;
 }
 .fullWidth{
   margin-left: 0;

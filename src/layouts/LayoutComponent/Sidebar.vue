@@ -2,7 +2,7 @@
   <div class="sidebar">
     <div class="sidebar_mainData ">
       <div class="logo">
-        <img src="@/Assets/Photo/root.png" alt="img" class="logo_image">
+        <img src="@/assets/photo/root.png" alt="img" class="logo_image">
       </div>
 
       <div class="sidebar_mainData_members">
@@ -24,7 +24,7 @@
           active-class="page_active page"
           :exact="link.exact"
       >
-        <img :src=" require('../../Assets/Photo/icons' + '/'+link.image)" alt="img" class="icons" >
+        <img :src=" require('../../assets/photo/icons' + '/'+link.image)" alt="img" class="icons" >
         {{link.title}}
       </router-link>
 

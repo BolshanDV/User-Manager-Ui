@@ -13,7 +13,7 @@ const router = new VueRouter({
             meta: {
                 title: 'Analytics'
             },
-            component: () => import('./components/AnalyticsPart/Analytics')
+            component: () => import('./components/analyticsPart/Analytics')
         },
         {
             path:'/license',
@@ -22,7 +22,7 @@ const router = new VueRouter({
                 layout:'layout',
                 title : 'License Management'
             },
-            component: () => import('./components/LicenseManagementPart/LicenseManagement')
+            component: () => import('./components/licenseManagementPart/LicenseManagement')
         },
         {
             path:'/managing',
@@ -31,16 +31,16 @@ const router = new VueRouter({
                 layout:'layout',
                 title: 'Managing Drops'
             },
-            component: () => import('./components/ManagingDropsPart/ManagingDrops.vue')
+            component: () => import('./components/managingDropsPart/ManagingDrops.vue')
         },
         {
             path:'/user',
-            name:'UserManagementPart',
+            name:'userManagementPart',
             meta : {
                 layout : 'layout',
                 title: 'User Management'
             },
-            component: () => import('./components/UserManagementPart/UserManagement.vue')
+            component: () => import('./components/userManagementPart/UserManagement.vue')
         }
     ]
 })

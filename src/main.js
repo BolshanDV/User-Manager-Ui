@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import VCalendar from 'v-calendar';
 import Preloader from "./components/Preloader";
+import store from './store'
 import router from './router'
 import axios from "axios";
 import 'materialize-css/dist/js/materialize.min'
@@ -13,5 +14,6 @@ Vue.component('Preloader', Preloader)
 new Vue({
   router,
   axios,
+  store,
   render: h => h(App),
 }).$mount('#app')

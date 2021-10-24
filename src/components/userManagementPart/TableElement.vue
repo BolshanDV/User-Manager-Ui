@@ -5,7 +5,7 @@
     </div>
     <div
         v-else
-        v-for="(user, index) in users"
+        v-for="(user, index) in allUsers"
         :key="user.id"
         class="user_management_table_section color"
     >
@@ -65,54 +65,28 @@
 </template>
 
 <script>
-import axios from "axios";
+import {mapGetters, mapActions} from 'vuex'
 export default {
 name: "TableElement",
-  data: () => ({
-    users: null,
-    preloader: true,
-    renewalDate: null,
-  }),
-  beforeMount() {
-    (async () => {
-      await axios
-          .get('http://localhost:8080/api/v1/users/details')
-          .then(resObj => (this.users = resObj.data))
-          .then(() => {
-            this.preloader = false
-            for ( const user of this.users) {
-              this.$set(user, 'flag', false)
-              if(user.billingDTO.cartEnding === null ){
-                user.billingDTO.cartEnding = "empty"
-              }
-              if(user.billingDTO.paymentId === null ){
-                user.billingDTO.paymentId = "empty"
-              }
-            }
-          })
-          .catch(error => {
-            console.log(error);
-          });
-    })();
-  },
-  methods: {
-    handleClick(id) {
-      this.users[id].flag = !this.users[id].flag;
+  computed:{
+  ...mapGetters(
+        'userManagement',['allUsers','preloader']
+
+  )},
+  methods:{
+    ...mapActions('userManagement',['getUsers','HANDLE_CLICK','FREE_MONTH']),
+
+    handleClick(id){
+      this.HANDLE_CLICK(id)
     },
-    freeMonth(id){
-      this.renewalDate = new Date((this.users[id].licenceDTO.renewalDate))
-      this.renewalDate.setMonth(this.renewalDate.getMonth()+1)
 
-      let dd = this.renewalDate.getDate();
-      if (dd < 10) dd = '0' + dd;
-
-      let mm = this.renewalDate.getMonth() + 1;
-      if (mm < 10) mm = '0' + mm;
-
-      let yy = this.renewalDate.getFullYear() ;
-
-      this.users[id].licenceDTO.renewalDate = this.renewalDate =  yy + '-' + mm + '-' + mm;
+    freeMonth(id) {
+      this.FREE_MONTH(id)
     }
+  },
+
+  beforeMount() {
+    this.getUsers()
   },
 }
 </script>
