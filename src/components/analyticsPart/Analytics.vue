@@ -101,9 +101,7 @@ export default {
     addDateInf(data) {
       this.calendar = data.calendar
     }
-
   }
-
 }
 </script>
 

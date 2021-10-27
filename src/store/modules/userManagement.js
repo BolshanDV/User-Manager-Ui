@@ -6,17 +6,29 @@ export default {
 
     state: {
         users: [],
+        newSortUsers: [],
         preloader: true,
-        renewalDate: null
+        renewalDate: null,
+        sorts: {
+            previousButton : 'byRenewDate',
+            sortIsActive: false,
+            byRenewDate: false,
+            byLicence: false,
+        }
     },
 
     getters: {
         allUsers(state) {
-            return state.users
+            if (state.sorts.sortIsActive) {
+                return state.newSortUsers
+            } else {
+                return state.users
+            }
         },
+
         preloader(state) {
             return state.preloader
-        }
+        },
 
     },
     mutations: {
@@ -43,9 +55,13 @@ export default {
 
         addFreeMonth(state, {status, id, dd, mm, yy} ){
             if (status === 200) {
-                state.users[id].licenceDTO.renewalDate = state.renewalDate =  yy + '-' + mm + '-' + dd;
+                state.users[id].licenceDTO.renewalDate =  yy + '-' + mm + '-' + dd;
             }
         },
+        SORTED_USERS: (state,sortedUsers) => {
+            state.newSortUsers = sortedUsers
+        }
+
     },
 
     actions: {
@@ -88,7 +104,7 @@ export default {
             const status = await ctx.dispatch('putRequest', obj)
 
             ctx.commit('addFreeMonth', {
-                status: status,
+                status,
                 id,
                 dd,
                 mm,
@@ -107,6 +123,55 @@ export default {
                     console.log("There was an error!", error);
                 });
             return response;
+        },
+
+        SORT_HANDLER: async (ctx, sortType) => {
+            let currentButton = sortType;
+
+            if ((ctx.state.previousButton !== currentButton) && ctx.state.sorts.sortIsActive) {
+                ctx.state.sorts.sortIsActive = false;
+            }
+
+            ctx.state.sorts.sortIsActive = !ctx.state.sorts.sortIsActive;
+            for (const sort in ctx.state.sorts ) {
+                if (sortType === sort) {
+                    let sortedUsers = null;
+
+                    if (!ctx.state.sorts[sort]) {
+                        switch (sortType) {
+                            case "byRenewDate" : {
+                                sortedUsers = await ctx.dispatch('RENEWAL_DATE_SORT')
+                                break;
+                            }
+                            case "byLicence" : {
+                                sortedUsers = await ctx.dispatch('RENEWAL_DATE_PRICE')
+                                break;
+                            }
+                        }
+
+                        ctx.commit('SORTED_USERS', sortedUsers);
+                        break;
+                    }
+                }
+                ctx.state.sorts.previousButton = currentButton;
+            }
+        },
+
+        RENEWAL_DATE_SORT: async (ctx) => {
+            return ctx.state.users.slice().sort((a, b) => {
+                a = new Date(a.licenceDTO.renewalDate);
+                b = new Date(b.licenceDTO.renewalDate);
+                return b - a;
+            })
+        },
+
+        RENEWAL_DATE_PRICE: async (ctx) => {
+            return ctx.state.users.slice().sort((a, b) => {
+                a = a.licenceTypeDTO.renewalPrice;
+                b = b.licenceTypeDTO.renewalPrice;
+                return b - a;
+            })
         }
     },
+
 }
