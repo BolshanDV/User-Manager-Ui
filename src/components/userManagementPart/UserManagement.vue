@@ -2,6 +2,13 @@
   <div>
     <div class="user_management_flex" >
         <p class="head">Управление пользователями</p>
+      <div
+          @click="noSorting"
+          class="sorting_btn">
+        <div class="btn_color waves-effect waves-light">
+          No sorting
+        </div>
+      </div>
         <div class="user_management_table">
           <TitleCategory class="user_management_table_element" />
           <TableElement>
@@ -14,12 +21,19 @@
 <script>
 import TitleCategory from "./TitleCategory";
 import TableElement from "./TableElement";
+import {mapActions} from 'vuex'
 
 export default {
   name: "UserManagement",
   components:{
     TitleCategory,
     TableElement
+  },
+  methods: {
+    ...mapActions('userManagement',['NO_SORTING']),
+    noSorting() {
+      this.NO_SORTING()
+    }
   },
 }
 </script>
@@ -55,7 +69,7 @@ export default {
   width: auto;
 }
 .user_management_table_element{
-  height: 45px;
+  height: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -70,5 +84,23 @@ p{
   line-height: 16px;
   letter-spacing: 0.01em;
   color: #FFFFFF;
+}
+.sorting_btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 0 50px 17px 0;
+}
+.btn_color{
+  color: #C4C4C4;
+  background-color: #161E29;
+  padding: 5px;
+  width: 100px;
+  height: 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
 }
 </style>

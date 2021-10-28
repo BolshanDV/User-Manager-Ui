@@ -13,14 +13,42 @@
           @click="handleClick(index)"
           class="user_management_table_element"
       >
-        <div class="user_management_table_element_content item1 "><p>{{ user.discordUsername }}</p></div>
-        <div class="user_management_table_element_content item1"><p>{{ user.licenceTypeDTO.role }}</p></div>
-        <div class="user_management_table_element_content item2 "><p>{{ user.licenceTypeDTO.renewalPrice }}</p></div>
-        <div class="user_management_table_element_content item3"><p>{{ user.licenceDTO.licenceKey }}</p></div>
-        <div class="user_management_table_element_content item1"><p>{{ user.licenceDTO.renewalDate}}</p></div>
-        <div class="user_management_table_element_content item2"><p>{{ user.licenceDTO.keyBind }}</p></div>
-        <!--        <div class="user_management_table_element_content item1"><p>Succesful</p></div>-->
-        <div class="user_management_table_element_content item2"><p>{{ user.billingDTO.cartBind }}</p></div>
+        <div class="user_management_table_element_content item1 ">
+          <div class="text_element">{{ user.discordUsername }}</div>
+        </div>
+        <div class="user_management_table_element_content item5">
+          <div
+              class="text_element"
+              :class="user.roleStyle"
+          >{{ user.licenceTypeDTO.role }}</div>
+        </div>
+        <div class="user_management_table_element_content item2 ">
+          <div class="text_element">{{ user.licenceTypeDTO.renewalPrice}}
+            <img class="ruble_img" src="../../assets/photo/icons/ruble.png" alt="">
+            <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
+        </div>
+        </div>
+        <div class="user_management_table_element_content item3">
+          <div class="text_element">{{ user.licenceDTO.licenceKey }}</div>
+        </div>
+        <div class="user_management_table_element_content item2">
+          <div class="text_element">{{ user.licenceDTO.renewalDate}}</div>
+          <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
+        </div>
+        <div class="user_management_table_element_content item4">
+          <div
+             class="text_element"
+             :class="user.keyBindStyle">
+            {{ user.licenceDTO.keyBind}}
+          </div>
+        </div>
+        <div class="user_management_table_element_content item4">
+          <div
+              class="text_element"
+              :class="user.cartBindStyle"
+          >
+            {{ user.billingDTO.cartBind }}</div>
+        </div>
       </div>
       <div
           v-show="user.flag"
@@ -28,34 +56,34 @@
       >
         <div class="element_content_show">
           <div class="element_content_show_parameter">
-            <p>Email: </p>
-            <p class="text_show">{{user.discordEmail}}</p>
+            <div class="text_element">Email: </div>
+            <div class="text_show">{{user.discordEmail}}</div>
           </div>
           <div class="element_content_show_parameter">
-            <p>Creation date:</p>
-            <p class="text_show">{{user.creationDate}}</p>
+            <div class="text_element">Creation date:</div>
+            <div class="text_show">{{user.creationDate}}</div>
           </div>
           <div class="element_content_show_parameter">
-            <p>Payment id: </p>
-            <p class="text_show">{{user.billingDTO.paymentId}}</p>
+            <div class="text_element">Payment id: </div>
+            <div class="text_show">{{user.billingDTO.paymentId}}</div>
           </div>
           <div class="element_content_show_parameter">
-            <p>CartDate: </p>
-            <p class="text_show">{{user.billingDTO.cartDate}}</p>
+            <div class="text_element">CartDate: </div>
+            <div class="text_show">{{user.billingDTO.cartDate}}</div>
           </div>
           <div class="element_content_show_parameter">
-            <p>CartEnding: </p>
-            <p class="text_show">{{user.billingDTO.cartEnding}}</p>
+            <div class="text_element">CartEnding: </div>
+            <div class="text_show">{{user.billingDTO.cartEnding}}</div>
           </div>
         </div>
         <div class="element_content_show_container button">
           <button class="waves-effect waves-light btn">
-            <p>Kick User</p>
+            <div class="text_element">Kick User</div>
           </button>
           <button class="waves-effect waves-light btn"
                   @click="freeMonth(index)"
           >
-            <p>Add Free Month</p>
+            <div class="text_element">Add Free Month</div>
           </button>
         </div>
 
@@ -74,7 +102,7 @@ name: "TableElement",
 
   )},
   methods:{
-    ...mapActions('userManagement',['getUsers','HANDLE_CLICK','FREE_MONTH']),
+    ...mapActions('userManagement',['getUsers','HANDLE_CLICK', 'FREE_MONTH']),
 
     handleClick(id){
       this.HANDLE_CLICK(id)
@@ -93,7 +121,7 @@ name: "TableElement",
 
 <style scoped>
 .user_management_table_element{
-  height: 45px;
+  height: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -107,18 +135,23 @@ name: "TableElement",
   width: 16vh;
   display: flex;
   flex-direction: row;
-  align-content: space-between;
-  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
   margin-left: 1vh;
   min-height: 10px;
 }
-p{
+.text_element{
   font-weight: normal;
   font-size: 14px;
   line-height: 16px;
   letter-spacing: 0.01em;
   color: #FFFFFF;
   font-style: normal;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
 }
 .color{
@@ -129,10 +162,16 @@ p{
   width: 100px;
 }
 .item2{
-  width: 45px;
+  width: 120px;
 }
 .item3{
-  width: 180px;
+  width: 200px;
+}
+.item4{
+  width: 87px ;
+}
+.item5{
+  width: 84px;
 }
 .user_management_table_section{
   display: flex;
@@ -149,7 +188,7 @@ p{
   width: 65%;
 }
 .element_content_show_parameter{
-  margin-right:2vh;
+  margin: 15px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -182,5 +221,41 @@ p{
 .button{
   align-items: flex-end;
   justify-content: flex-end;
+}
+.ruble_img{
+  width: 18px;
+  height: 18px;
+}
+.pencil_img{
+  margin-left: 10px;
+  width: 15px;
+  height: 15px;
+}
+.unbinded{
+  color: #FF0000;
+}
+.binded{
+  color: #2BD6A2;
+}
+.customer{
+  color: #D45DE8;
+}
+.lifeTime{
+  color: #F1A0FF;
+}
+.FF{
+  color: #FF4343;
+}
+.developer{
+  color: rgba(0,224,255,0.96)
+}
+.supportTeam{
+  color: rgba(255,162,0,0.96);
+}
+.en{
+  color: rgba(99,0,219,0.96);
+}
+.moderator{
+  color: rgba(175,255,159,0.62);
 }
 </style>

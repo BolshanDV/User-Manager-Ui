@@ -1,14 +1,16 @@
 <template>
-  <div>
+  <div class="waves-effect waves-light">
     <div
       v-for="title in titles"
       :key="title.category"
-      :class="[title.class]">
+      :class="[title.class]"
+      @click="sortHandler(title.sortType)"
+    >
     <p>{{ title.category }}</p>
       <div
-          @click="sortHandler(title.sortType)"
+        v-if="title.img != null"
       >
-        <img src="../../assets/photo/icons/UserMRevers.png" alt="">
+        <img :src="require('../../assets/photo/icons/' + title.img)" alt="img" class="icons">
       </div>
     </div>
   </div>
@@ -26,28 +28,33 @@ name: "TitleCategory",
       },
       {
         category: 'Role',
-        class: 'user_management_table_element_content item1'
+        class: 'user_management_table_element_content item5',
+        sortType: 'byRole',
+        img: 'UserMRevers.png'
       },
       {
-        category: 'License type',
+        category: 'Licence type',
         class: 'user_management_table_element_content item2',
         sortType: 'byLicence',
+        img: 'UserMRevers.png'
       },
       {
         category: 'License key',
-        class: 'user_management_table_element_content item3'},
+        class: 'user_management_table_element_content item3'
+      },
       {
         category: 'Renewal date',
-        class: 'user_management_table_element_content item1',
-        sortType: 'byRenewDate'
+        class: 'user_management_table_element_content item2',
+        sortType: 'byRenewDate',
+        img: 'UserMRevers.png'
       },
       {
         category: 'Key bind',
-        class: 'user_management_table_element_content item2'
+        class: 'user_management_table_element_content item4'
       },
       {
         category: 'Card bind',
-        class:'user_management_table_element_content item2'
+        class:'user_management_table_element_content item4'
       },
     ],
   }),
@@ -69,8 +76,9 @@ name: "TitleCategory",
   flex-direction: row;
   align-content: center;
   justify-content: flex-start;
-  margin-left: 1vh;
   min-height: 10px;
+  border-radius: 3px;
+  margin: 5px 0 0 5px;
 }
 p{
   font-weight: 500;
@@ -83,10 +91,16 @@ p{
   width: 100px;
 }
 .item2{
-  width: 55px;
+  width: 114px;
 }
 .item3{
-  width: 180px;
+  width: 200px;
+}
+.item4{
+  width: 87px ;
+}
+.item5{
+  width: 84px;
 }
 img{
   width: 16px;

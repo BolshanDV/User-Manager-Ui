@@ -24,7 +24,7 @@
           active-class="page_active page"
           :exact="link.exact"
       >
-        <img :src=" require('../../assets/photo/icons' + '/'+link.image)" alt="img" class="icons" >
+        <img :src=" require('../../assets/photo/icons/'+link.image)" alt="img" class="icons" >
         {{link.title}}
       </router-link>
 
