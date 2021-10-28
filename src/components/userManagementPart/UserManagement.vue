@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="user_management_flex" >
-        <p class="head">Управление пользователями</p>
+        <div class="head">Управление пользователями</div>
       <div
           @click="noSorting"
           class="sorting_btn">
-        <div class="btn_color waves-effect waves-light">
+        <div class="btn_color waves-effect waves-light z-depth-5">
           No sorting
         </div>
       </div>
@@ -57,6 +57,7 @@ export default {
   line-height: 21px;
   letter-spacing: 0.01em;
   color: #FFFFFF;
+  margin: 20px 0 0 50px;
 }
 .user_management_table{
   background: #101722;
@@ -77,13 +78,6 @@ export default {
   align-items: center;
   margin: 0.5vh;
   width: auto;
-}
-p{
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: 0.01em;
-  color: #FFFFFF;
 }
 .sorting_btn{
   display: flex;

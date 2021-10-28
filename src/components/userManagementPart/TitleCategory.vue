@@ -54,7 +54,7 @@ name: "TitleCategory",
       },
       {
         category: 'Card bind',
-        class:'user_management_table_element_content item4'
+        class:'user_management_table_element_content item6'
       },
     ],
   }),
@@ -79,6 +79,7 @@ name: "TitleCategory",
   min-height: 10px;
   border-radius: 3px;
   margin: 5px 0 0 5px;
+
 }
 p{
   font-weight: 500;
@@ -91,7 +92,7 @@ p{
   width: 100px;
 }
 .item2{
-  width: 114px;
+  width: 120px;
 }
 .item3{
   width: 200px;
@@ -101,6 +102,9 @@ p{
 }
 .item5{
   width: 84px;
+}
+.item6{
+  width: 126px;
 }
 img{
   width: 16px;

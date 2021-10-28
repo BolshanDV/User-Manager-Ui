@@ -6,81 +6,127 @@
     <div
         v-else
         v-for="(user, index) in allUsers"
-        :key="user.id"
-        class="user_management_table_section color"
+        :key="user.userDTO.id"
+        class="color user_management_table_section  "
     >
       <div
-          @click="handleClick(index)"
-          class="user_management_table_element"
+          class="user_management_table_element waves-effect waves-light"
       >
         <div class="user_management_table_element_content item1 ">
-          <div class="text_element">{{ user.discordUsername }}</div>
+          <div class="text_element">
+            {{ user.userDTO.discordUsername }}
+          </div>
         </div>
         <div class="user_management_table_element_content item5">
           <div
               class="text_element"
               :class="user.roleStyle"
-          >{{ user.licenceTypeDTO.role }}</div>
+          >
+            {{ user.licenceTypeDTO.role }}
+          </div>
+          <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
         </div>
         <div class="user_management_table_element_content item2 ">
-          <div class="text_element">{{ user.licenceTypeDTO.renewalPrice}}
+          <div class="text_element">
+            {{ user.licenceTypeDTO.renewalPrice}}
             <img class="ruble_img" src="../../assets/photo/icons/ruble.png" alt="">
             <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
         </div>
         </div>
         <div class="user_management_table_element_content item3">
-          <div class="text_element">{{ user.licenceDTO.licenceKey }}</div>
+          <div class="text_element">
+            {{ user.licenceDTO.licenceKey }}
+          </div>
         </div>
         <div class="user_management_table_element_content item2">
-          <div class="text_element">{{ user.licenceDTO.renewalDate}}</div>
+          <div class="text_element">
+            {{ user.licenceDTO.renewalDate}}
+          </div>
           <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
         </div>
         <div class="user_management_table_element_content item4">
           <div
              class="text_element"
-             :class="user.keyBindStyle">
+             :class="user.keyBindStyle"
+          >
             {{ user.licenceDTO.keyBind}}
           </div>
         </div>
-        <div class="user_management_table_element_content item4">
+        <div class="user_management_table_element_content" >
+          <div class="item6">
+            <div
+                :class="user.cartBindStyle"
+            >
+              {{ user.billingDTO.cartBind }}
+            </div>
+          </div>
           <div
-              class="text_element"
-              :class="user.cartBindStyle"
+              @click="handleClick(index)"
+              :class="{rotate: user.flag}"
           >
-            {{ user.billingDTO.cartBind }}</div>
+            <img  class="arrow"
+                  src="../../assets/photo/icons/arrow.png" alt="">
+          </div>
         </div>
+
+
       </div>
+
       <div
           v-show="user.flag"
           class="element_content_show_container"
       >
         <div class="element_content_show">
           <div class="element_content_show_parameter">
+            <div class="text_element">Discord id: </div>
+            <div class="text_show">
+              {{user.userDTO.discordId}}
+            </div>
+            <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
+          </div>
+          <div class="element_content_show_parameter">
             <div class="text_element">Email: </div>
-            <div class="text_show">{{user.discordEmail}}</div>
+            <div class="text_show">
+              {{user.userDTO.discordEmail}}
+            </div>
           </div>
           <div class="element_content_show_parameter">
             <div class="text_element">Creation date:</div>
-            <div class="text_show">{{user.creationDate}}</div>
+            <div class="text_show">
+              {{user.userDTO.creationDate}}
+            </div>
           </div>
           <div class="element_content_show_parameter">
             <div class="text_element">Payment id: </div>
-            <div class="text_show">{{user.billingDTO.paymentId}}</div>
+            <div class="text_show">
+              {{user.billingDTO.paymentId}}
+            </div>
           </div>
           <div class="element_content_show_parameter">
             <div class="text_element">CartDate: </div>
-            <div class="text_show">{{user.billingDTO.cartDate}}</div>
+            <div class="text_show">
+              {{user.billingDTO.cartDate}}
+            </div>
           </div>
           <div class="element_content_show_parameter">
             <div class="text_element">CartEnding: </div>
-            <div class="text_show">{{user.billingDTO.cartEnding}}</div>
+            <div class="text_show">
+              {{user.billingDTO.cartEnding}}
+            </div>
           </div>
         </div>
         <div class="element_content_show_container button">
-          <button class="waves-effect waves-light btn">
-            <div class="text_element">Kick User</div>
-          </button>
           <button class="waves-effect waves-light btn"
+                  @click="kickUser(user.userDTO.id, index)"
+                  @mouseover="changeName(index)"
+                  @mouseleave="changeNameReturn(index)"
+          >
+            <div class="text_element"
+            >
+              {{user.kickUserText}}
+            </div>
+          </button>
+          <button class="waves-effect waves-light btn "
                   @click="freeMonth(index)"
           >
             <div class="text_element">Add Free Month</div>
@@ -102,7 +148,7 @@ name: "TableElement",
 
   )},
   methods:{
-    ...mapActions('userManagement',['getUsers','HANDLE_CLICK', 'FREE_MONTH']),
+    ...mapActions('userManagement',['getUsers','HANDLE_CLICK', 'FREE_MONTH', 'KICK_USER', 'CHANGE_NAME', 'CHANGE_NAME_RETURN']),
 
     handleClick(id){
       this.HANDLE_CLICK(id)
@@ -110,6 +156,18 @@ name: "TableElement",
 
     freeMonth(id) {
       this.FREE_MONTH(id)
+    },
+
+    kickUser(userID, id){
+      this.KICK_USER({userID, id})
+    },
+
+    changeName(id){
+      this.CHANGE_NAME(id)
+    },
+
+    changeNameReturn(id){
+      this.CHANGE_NAME_RETURN(id)
     }
   },
 
@@ -138,7 +196,7 @@ name: "TableElement",
   align-content: center;
   align-items: center;
   justify-content: flex-start;
-  margin-left: 1vh;
+  margin-left: 5px;
   min-height: 10px;
 }
 .text_element{
@@ -172,6 +230,9 @@ name: "TableElement",
 }
 .item5{
   width: 84px;
+}
+.item6{
+  width: 126px;
 }
 .user_management_table_section{
   display: flex;
@@ -231,6 +292,12 @@ name: "TableElement",
   width: 15px;
   height: 15px;
 }
+.arrow{
+  margin: 0 12px 0 12px;
+  width: 12px;
+  height: 12px;
+  transform: rotate(-90deg);
+}
 .unbinded{
   color: #FF0000;
 }
@@ -257,5 +324,12 @@ name: "TableElement",
 }
 .moderator{
   color: rgba(175,255,159,0.62);
+}
+.waves-effect{
+  background: #161E29;
+  transition-duration: 10s;
+}
+.rotate{
+  transform: rotate(90deg);
 }
 </style>

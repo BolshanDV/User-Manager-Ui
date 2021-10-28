@@ -6,7 +6,7 @@ export default {
 
     state: {
         users: [],
-        newSortUsers: [],
+        firstUsers: [],
         preloader: true,
         renewalDate: null,
         sorts: {
@@ -20,11 +20,7 @@ export default {
 
     getters: {
         allUsers(state) {
-            if (state.sorts.sortIsActive) {
-                return state.newSortUsers
-            } else {
-                return state.users
-            }
+            return state.users
         },
 
         preloader(state) {
@@ -35,15 +31,12 @@ export default {
     mutations: {
         UPDATE_USERS(state, users) {
             state.users = users
+            state.firstUsers = users
             state.preloader = false
         },
 
         HANDLE_CLICK(state, id) {
-            if (state.sorts.sortIsActive){
-                state.newSortUsers[id].flag = !state.newSortUsers[id].flag
-            } else {
-                state.users[id].flag = !state.users[id].flag;
-            }
+            state.users[id].flag = !state.users[id].flag;
         },
 
         addFreeMonth(state, {status, id, dd, mm, yy} ){
@@ -53,7 +46,7 @@ export default {
         },
 
         SORTED_USERS: (state,sortedUsers) => {
-            state.newSortUsers = sortedUsers
+            state.users = sortedUsers
         },
 
         NO_SORTING: state => {
@@ -61,14 +54,29 @@ export default {
             state.sorts.byLicence = false;
             state.sorts.byRenewDate = false;
             state.sorts.byRole = false
-        }
+            state.users = state.firstUsers
+        },
 
+        KICK_USER: (state, {status, id}) => {
+            if (status === 202) {
+                console.log(id)
+                Vue.delete(state.users, id)
+            }
+        },
+
+        CHANGE_NAME: (state, id) => {
+            state.users[id].kickUserText = 'Are you sure?'
+        },
+
+        CHANGE_NAME_RETURN: (state, id) => {
+            state.users[id].kickUserText = 'KICK USER'
+        },
     },
 
     actions: {
         async getUsers(ctx) {
             const users = await axios
-                .get('http://localhost:8081/api/v1/users/details')
+                .get('http://localhost:8082/api/v1/users/details')
                 .then(resObj => {
                     return resObj.data;
                 })
@@ -83,6 +91,7 @@ export default {
             {
                 for (const user of users) {
                     Vue.set(user, 'flag', false)
+                    Vue.set(user, 'kickUserText', 'KICK USER')
 
                     if (user.billingDTO.cartEnding === null) {
                         user.billingDTO.cartEnding = "~"
@@ -95,7 +104,7 @@ export default {
                     }
 
                     if ( user.licenceDTO.renewalDate=== null) {
-                        user.licenceDTO.renewalDate = "~"
+                        user.licenceDTO.renewalDate = 0
                     }
 
                     if ( user.licenceDTO.keyBind) {
@@ -152,7 +161,6 @@ export default {
         },
 
         async FREE_MONTH(ctx, id){
-
             ctx.state.renewalDate = new Date((ctx.state.users[id].licenceDTO.renewalDate))
             ctx.state.renewalDate.setMonth(ctx.state.renewalDate.getMonth() + 1)
 
@@ -166,11 +174,13 @@ export default {
             ctx.state.renewalDate = yy + '-' + mm + '-' + mm + ' 20:45:10.000000'
 
             const obj = {
+                id: ctx.state.users[id].userDTO.id,
+                licenceKey: ctx.state.users[id].licenceDTO.licenceKey,
+                keyBind: ctx.state.users[id].licenceDTO.keyBind,
                 renewalDate: ctx.state.renewalDate,
-                id: ctx.state.users[id].id
             }
 
-            const status = await ctx.dispatch('putRequest', obj)
+            const status = await ctx.dispatch('putRequestFreeMonth', obj)
 
             ctx.commit('addFreeMonth', {
                 status,
@@ -181,9 +191,9 @@ export default {
             })
         },
 
-        async putRequest(ctx, obj) {
+        async putRequestFreeMonth(ctx, obj) {
             return await axios
-                .put(`http://localhost:8081/api/v1/billing/`, obj
+                .put(`http://localhost:8082/api/v1/billings/`, obj
                 )
                 .then(response =>
                     response.status
@@ -261,7 +271,30 @@ export default {
 
         NO_SORTING: ctx => {
             ctx.commit('NO_SORTING')
-        }
+        },
+
+        KICK_USER: async (ctx, {userID, id}) => {
+            console.log(userID)
+            const status =  await axios
+                .delete(`http://localhost:8082/api/v1/users/${userID}`
+                )
+                .then(response =>
+                    response.status
+                )
+                .catch(error => {
+                    console.log("There was an error!", error);
+                });
+            console.log(status)
+            ctx.commit('KICK_USER', {status, id})
+        },
+
+        CHANGE_NAME: (ctx, id) => {
+            ctx.commit('CHANGE_NAME', id)
+        },
+
+        CHANGE_NAME_RETURN: (ctx, id) => {
+            ctx.commit('CHANGE_NAME_RETURN', id)
+        },
     },
 
 }

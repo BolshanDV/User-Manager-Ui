@@ -38,6 +38,8 @@ name: "NewLayout",
   flex-direction: column;
   width: 100%;
   justify-content: flex-start;
+  background: #161E29;
+  height: 100vh;
 }
 .navbar{
   width: 100%;
