@@ -7,71 +7,86 @@
         v-else
         v-for="(user, index) in allUsers"
         :key="user.userDTO.id"
-        class="color user_management_table_section  "
+        class="color user_management_table_section"
     >
-      <div
-          class="user_management_table_element waves-effect waves-light"
-      >
-        <div class="user_management_table_element_content item1 ">
-          <div class="text_element">
-            {{ user.userDTO.discordUsername }}
-          </div>
-        </div>
-        <div class="user_management_table_element_content item5">
-          <div
-              class="text_element"
-              :class="user.roleStyle"
-          >
-            {{ user.licenceTypeDTO.role }}
-          </div>
-          <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
-        </div>
-        <div class="user_management_table_element_content item2 ">
-          <div class="text_element">
-            {{ user.licenceTypeDTO.renewalPrice}}
-            <img class="ruble_img" src="../../assets/photo/icons/ruble.png" alt="">
-            <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
-        </div>
-        </div>
-        <div class="user_management_table_element_content item3">
-          <div class="text_element">
-            {{ user.licenceDTO.licenceKey }}
-          </div>
-        </div>
-        <div class="user_management_table_element_content item2">
-          <div class="text_element">
-            {{ user.licenceDTO.renewalDate}}
-          </div>
-          <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
-        </div>
-        <div class="user_management_table_element_content item4">
-          <div
-             class="text_element"
-             :class="user.keyBindStyle"
-          >
-            {{ user.licenceDTO.keyBind}}
-          </div>
-        </div>
-        <div class="user_management_table_element_content" >
-          <div class="item6">
-            <div
-                :class="user.cartBindStyle"
-            >
-              {{ user.billingDTO.cartBind }}
+      <div class="table_block">
+        <div
+            class="user_management_table_element waves-effect waves-light"
+        >
+          <div class="user_management_table_element_content item1 ">
+            <div class="text_element">
+              {{ user.userDTO.discordUsername }}
             </div>
           </div>
-          <div
-              @click="handleClick(index)"
-              :class="{rotate: user.flag}"
+          <div class="user_management_table_element_content item5">
+            <div
+                class="text_element"
+                :class="user.roleStyle"
+            >
+              {{ user.licenceTypeDTO.role }}
+            </div>
+            <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
+          </div>
+          <div class="user_management_table_element_content item2 "
+               @click="INPUT_CHANGE_LICENCE(index)"
           >
-            <img  class="arrow"
-                  src="../../assets/photo/icons/arrow.png" alt="">
+            <div class="text_element">
+              {{ user.licenceTypeDTO.renewalPrice}}
+              <img class="ruble_img" src="../../assets/photo/icons/ruble.png" alt="">
+              <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
+            </div>
+          </div>
+          <div class="user_management_table_element_content item3">
+            <div class="text_element">
+              {{ user.licenceDTO.licenceKey }}
+            </div>
+          </div>
+          <div class="user_management_table_element_content item2"
+               @click="INPUT_CHANGE_RENEWAL_DATE(index)"
+          >
+            <div
+                class="text_element"
+            >
+              {{ user.licenceDTO.renewalDate}}
+              <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
+            </div>
+          </div>
+          <div class="user_management_table_element_content item4">
+            <div
+                class="text_element"
+                :class="user.keyBindStyle"
+            >
+              {{ user.licenceDTO.keyBind}}
+            </div>
+          </div>
+          <div class="user_management_table_element_content" >
+            <div class="item6">
+              <div
+                  :class="user.cartBindStyle"
+              >
+                {{ user.billingDTO.cartBind }}
+              </div>
+            </div>
+            <div
+                @click="HANDLE_CLICK(index)"
+                :class="{rotate: user.flag}"
+            >
+              <img  class="arrow"
+                    src="../../assets/photo/icons/arrow.png" alt="">
+            </div>
           </div>
         </div>
-
-
+        <div
+            class="input_section"
+        >
+          <inputField
+              :id="index"
+              :inputFlagRenewal="user.inputFlagRenewal"
+              :inputFlagLicence="user.inputFlagLicence"
+              v-if="(user.inputFlagRenewal) || (user.inputFlagLicence)"
+          />
+        </div>
       </div>
-
       <div
           v-show="user.flag"
           class="element_content_show_container"
@@ -118,8 +133,8 @@
         <div class="element_content_show_container button">
           <button class="waves-effect waves-light btn"
                   @click="kickUser(user.userDTO.id, index)"
-                  @mouseover="changeName(index)"
-                  @mouseleave="changeNameReturn(index)"
+                  @mouseover="CHANGE_NAME(index)"
+                  @mouseleave="CHANGE_NAME_RETURN(index)"
           >
             <div class="text_element"
             >
@@ -127,7 +142,7 @@
             </div>
           </button>
           <button class="waves-effect waves-light btn "
-                  @click="freeMonth(index)"
+                  @click="FREE_MONTH(index)"
           >
             <div class="text_element">Add Free Month</div>
           </button>
@@ -140,35 +155,33 @@
 
 <script>
 import {mapGetters, mapActions} from 'vuex'
+import inputField from '../inputField'
 export default {
 name: "TableElement",
+  components: {
+    inputField
+  },
   computed:{
-  ...mapGetters(
-        'userManagement',['allUsers','preloader']
-
-  )},
+    ...mapGetters(
+        'userManagement',['allUsers','preloader'],
+    )
+  },
   methods:{
-    ...mapActions('userManagement',['getUsers','HANDLE_CLICK', 'FREE_MONTH', 'KICK_USER', 'CHANGE_NAME', 'CHANGE_NAME_RETURN']),
-
-    handleClick(id){
-      this.HANDLE_CLICK(id)
-    },
-
-    freeMonth(id) {
-      this.FREE_MONTH(id)
-    },
+    ...mapActions('userManagement',
+        ['getUsers',
+          'HANDLE_CLICK',
+          'FREE_MONTH',
+          'KICK_USER',
+          'CHANGE_NAME',
+          'CHANGE_NAME_RETURN',
+          'INPUT_CHANGE_RENEWAL_DATE',
+          'INPUT_CHANGE_LICENCE'
+        ]),
 
     kickUser(userID, id){
       this.KICK_USER({userID, id})
     },
 
-    changeName(id){
-      this.CHANGE_NAME(id)
-    },
-
-    changeNameReturn(id){
-      this.CHANGE_NAME_RETURN(id)
-    }
   },
 
   beforeMount() {
@@ -260,7 +273,6 @@ name: "TableElement",
   font-size: 14px;
   line-height: 16px;
   letter-spacing: 0.01em;
-
   color: #C4C4C4;
   margin-left: 10px;
 }
@@ -331,5 +343,14 @@ name: "TableElement",
 }
 .rotate{
   transform: rotate(90deg);
+}
+.table_block{
+  display: flex;
+  flex-direction: column;
+}
+.input_section{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 </style>

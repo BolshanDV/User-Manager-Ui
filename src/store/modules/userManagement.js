@@ -9,6 +9,7 @@ export default {
         firstUsers: [],
         preloader: true,
         renewalDate: null,
+        inputId: null,
         sorts: {
             previousButton : 'byRenewDate',
             sortIsActive: false,
@@ -27,6 +28,7 @@ export default {
             return state.preloader
         },
 
+
     },
     mutations: {
         UPDATE_USERS(state, users) {
@@ -39,13 +41,13 @@ export default {
             state.users[id].flag = !state.users[id].flag;
         },
 
-        addFreeMonth(state, {status, id, dd, mm, yy} ){
+        addFreeMonth(state, {status, id, dd, mm, yy}) {
             if (status === 200) {
-                state.users[id].licenceDTO.renewalDate =  yy + '-' + mm + '-' + dd;
+                state.users[id].licenceDTO.renewalDate = yy + '-' + mm + '-' + dd;
             }
         },
 
-        SORTED_USERS: (state,sortedUsers) => {
+        SORTED_USERS: (state, sortedUsers) => {
             state.users = sortedUsers
         },
 
@@ -71,230 +73,287 @@ export default {
         CHANGE_NAME_RETURN: (state, id) => {
             state.users[id].kickUserText = 'KICK USER'
         },
+
+        INPUT_CHANGE_RENEWAL_DATE: (state, id) => {
+            state.users[id].inputFlagRenewal = !state.users[id].inputFlagRenewal;
+        },
+
+        INPUT_CHANGE_LICENCE: (state, id) => {
+            state.users[id].inputFlagLicence = !state.users[id].inputFlagLicence;
+        },
+
+        UPDATE_RENEWAL_DATE: (state, {status, newRenewalDate, id}) => {
+            if (status === 200) {
+                console.log(newRenewalDate)
+                state.users[id].licenceDTO.renewalDate = newRenewalDate
+                state.users[id].inputFlagRenewal = !state.users[id].inputFlagRenewal;
+            }
+        },
+
+        UPDATE_RENEWAL_PRICE: (state, {status, id, renewalPrice, newRole}) => {
+            console.log(status)
+            if (status === 200) {
+                state.users[id].licenceTypeDTO.renewalPrice = renewalPrice
+                state.users[id].licenceTypeDTO.role = newRole
+                state.users[id].inputFlagLicence = !state.users[id].inputFlagLicence;
+            }
+        }
     },
 
-    actions: {
-        async getUsers(ctx) {
-            const users = await axios
-                .get('http://localhost:8082/api/v1/users/details')
-                .then(resObj => {
-                    return resObj.data;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-            ctx.dispatch('PROCESSING', users)
+        actions: {
+            async getUsers(ctx) {
+                const users = await axios
+                    .get('http://localhost:8082/api/v1/users/details')
+                    .then(resObj => {
+                        return resObj.data;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+                ctx.dispatch('PROCESSING', users)
 
-        },
+            },
 
-        PROCESSING: (ctx, users) => {
-            {
-                for (const user of users) {
-                    Vue.set(user, 'flag', false)
-                    Vue.set(user, 'kickUserText', 'KICK USER')
+            PROCESSING: (ctx, users) => {
+                {
+                    for (const user of users) {
+                        Vue.set(user, 'flag', false)
+                        Vue.set(user, 'kickUserText', 'KICK USER')
+                        Vue.set(user, 'inputFlagRenewal', false)
+                        Vue.set(user, 'inputFlagLicence', false)
 
-                    if (user.billingDTO.cartEnding === null) {
-                        user.billingDTO.cartEnding = "~"
-                    } else {
-                        user.billingDTO.cartEnding = "**** **** **** " + user.billingDTO.cartEnding
-                    }
+                        if (user.billingDTO.cartEnding === null) {
+                            user.billingDTO.cartEnding = "~"
+                        } else {
+                            user.billingDTO.cartEnding = "**** **** **** " + user.billingDTO.cartEnding
+                        }
 
-                    if (user.billingDTO.paymentId === null) {
-                        user.billingDTO.paymentId = "~"
-                    }
+                        if (user.billingDTO.paymentId === null) {
+                            user.billingDTO.paymentId = "~"
+                        }
 
-                    if ( user.licenceDTO.renewalDate=== null) {
-                        user.licenceDTO.renewalDate = 0
-                    }
+                        if (user.licenceDTO.renewalDate === null) {
+                            user.licenceDTO.renewalDate = 0
+                        }
 
-                    if ( user.licenceDTO.keyBind) {
-                        user.licenceDTO.keyBind = "Binded"
-                        Vue.set(user, 'keyBindStyle', 'binded')
-                    } else {
-                        user.licenceDTO.keyBind = "Unbinded"
-                        Vue.set(user, 'keyBindStyle', 'unbinded')
-                    }
+                        if (user.licenceDTO.keyBind) {
+                            user.licenceDTO.keyBind = "Binded"
+                            Vue.set(user, 'keyBindStyle', 'binded')
+                        } else {
+                            user.licenceDTO.keyBind = "Unbinded"
+                            Vue.set(user, 'keyBindStyle', 'unbinded')
+                        }
 
-                    if ( user.billingDTO.cartBind) {
-                        user.billingDTO.cartBind = "Binded"
-                        Vue.set(user, 'cartBindStyle', 'binded')
-                    } else {
-                        user.billingDTO.cartBind = "Unbinded"
-                        Vue.set(user, 'cartBindStyle', 'unbinded')
-                    }
+                        if (user.billingDTO.cartBind) {
+                            user.billingDTO.cartBind = "Binded"
+                            Vue.set(user, 'cartBindStyle', 'binded')
+                        } else {
+                            user.billingDTO.cartBind = "Unbinded"
+                            Vue.set(user, 'cartBindStyle', 'unbinded')
+                        }
 
-                    if (user.licenceTypeDTO.role === "Customer") {
-                        Vue.set(user, 'roleStyle', 'customer')
-                    }
+                        if (user.licenceTypeDTO.role === "Customer") {
+                            Vue.set(user, 'roleStyle', 'customer')
+                        }
 
-                    if (user.licenceTypeDTO.role === "Lifetime") {
-                        Vue.set(user, 'roleStyle', 'lifeTime')
-                    }
+                        if (user.licenceTypeDTO.role === "Lifetime") {
+                            Vue.set(user, 'roleStyle', 'lifeTime')
+                        }
 
-                    if (user.licenceTypeDTO.role === "Friends & Family") {
-                        user.licenceTypeDTO.role = "F&F"
-                        Vue.set(user, 'roleStyle', 'FF')
-                    }
+                        if (user.licenceTypeDTO.role === "Friends & Family") {
+                            user.licenceTypeDTO.role = "F&F"
+                            Vue.set(user, 'roleStyle', 'FF')
+                        }
 
-                    if (user.licenceTypeDTO.role === "Developer") {
-                        Vue.set(user, 'roleStyle', 'developer')
-                    }
+                        if (user.licenceTypeDTO.role === "Developer") {
+                            Vue.set(user, 'roleStyle', 'developer')
+                        }
 
-                    if (user.licenceTypeDTO.role === 'Support Team') {
-                        Vue.set(user, 'roleStyle', 'supportTeam')
-                    }
+                        if (user.licenceTypeDTO.role === 'Support Team') {
+                            Vue.set(user, 'roleStyle', 'supportTeam')
+                        }
 
-                    if (user.licenceTypeDTO.role === 'Beta EN') {
-                        Vue.set(user, 'roleStyle', 'en')
-                    }
+                        if (user.licenceTypeDTO.role === 'Beta EN') {
+                            Vue.set(user, 'roleStyle', 'en')
+                        }
 
-                    if (user.licenceTypeDTO.role === 'Moderator') {
-                        Vue.set(user, 'roleStyle', 'moderator')
-                    }
-                }
-            }
-            ctx.commit('UPDATE_USERS', users)
-        },
-
-        HANDLE_CLICK(ctx, id){
-            ctx.commit('HANDLE_CLICK', id)
-        },
-
-        async FREE_MONTH(ctx, id){
-            ctx.state.renewalDate = new Date((ctx.state.users[id].licenceDTO.renewalDate))
-            ctx.state.renewalDate.setMonth(ctx.state.renewalDate.getMonth() + 1)
-
-            let dd = ctx.state.renewalDate.getDate();
-            if (dd < 10) dd = '0' + dd;
-
-            let mm = ctx.state.renewalDate.getMonth() + 1;
-            if (mm < 10) mm = '0' + mm;
-
-            let yy = ctx.state.renewalDate.getFullYear();
-            ctx.state.renewalDate = yy + '-' + mm + '-' + mm + ' 20:45:10.000000'
-
-            const obj = {
-                id: ctx.state.users[id].userDTO.id,
-                licenceKey: ctx.state.users[id].licenceDTO.licenceKey,
-                keyBind: ctx.state.users[id].licenceDTO.keyBind,
-                renewalDate: ctx.state.renewalDate,
-            }
-
-            const status = await ctx.dispatch('putRequestFreeMonth', obj)
-
-            ctx.commit('addFreeMonth', {
-                status,
-                id,
-                dd,
-                mm,
-                yy
-            })
-        },
-
-        async putRequestFreeMonth(ctx, obj) {
-            return await axios
-                .put(`http://localhost:8082/api/v1/billings/`, obj
-                )
-                .then(response =>
-                    response.status
-                )
-                .catch(error => {
-                    console.log("There was an error!", error);
-                });
-        },
-
-        SORT_HANDLER: async (ctx, sortType) => {
-            if ((sortType === 'byRenewDate') || (sortType === 'byLicence') || sortType === 'byRole') {
-                let currentButton = sortType;
-
-                if ((ctx.state.previousButton !== currentButton) && ctx.state.sorts.sortIsActive) {
-                    ctx.state.sorts.sortIsActive = false;
-                }
-
-                ctx.state.sorts.sortIsActive = !ctx.state.sorts.sortIsActive;
-                for (const sort in ctx.state.sorts ) {
-                    if (sortType === sort) {
-                        let sortedUsers = null;
-
-                        if (!ctx.state.sorts[sort]) {
-                            switch (sortType) {
-                                case "byRenewDate" : {
-                                    sortedUsers = await ctx.dispatch('RENEWAL_DATE_SORT')
-                                    break;
-                                }
-                                case "byLicence" : {
-                                    sortedUsers = await ctx.dispatch('PRICE_SORT')
-                                    break;
-                                }
-                                case "byRole" : {
-                                    sortedUsers = await ctx.dispatch('ROLE_SORT')
-                                    break;
-                                }
-                            }
-
-                            ctx.commit('SORTED_USERS', sortedUsers);
-                            break;
+                        if (user.licenceTypeDTO.role === 'Moderator') {
+                            Vue.set(user, 'roleStyle', 'moderator')
                         }
                     }
-                    ctx.state.sorts.previousButton = currentButton;
+                }
+                ctx.commit('UPDATE_USERS', users)
+            },
+
+            HANDLE_CLICK(ctx, id) {
+                ctx.commit('HANDLE_CLICK', id)
+            },
+
+            async FREE_MONTH(ctx, id) {
+                ctx.state.renewalDate = new Date((ctx.state.users[id].licenceDTO.renewalDate))
+                ctx.state.renewalDate.setMonth(ctx.state.renewalDate.getMonth() + 1)
+
+                let dd = ctx.state.renewalDate.getDate();
+                if (dd < 10) dd = '0' + dd;
+
+                let mm = ctx.state.renewalDate.getMonth() + 1;
+                if (mm < 10) mm = '0' + mm;
+
+                let yy = ctx.state.renewalDate.getFullYear();
+                ctx.state.renewalDate = yy + '-' + mm + '-' + mm + ' 20:45:10.000000'
+
+                const obj = {
+                    userId: ctx.state.users[id].userDTO.id,
+                    licenceKey: ctx.state.users[id].licenceDTO.licenceKey,
+                    keyBind: ctx.state.users[id].licenceDTO.keyBind,
+                    renewalDate: ctx.state.renewalDate,
+                }
+
+                const status = await ctx.dispatch('putRequest', obj)
+
+                ctx.commit('addFreeMonth', {
+                    status,
+                    id,
+                    dd,
+                    mm,
+                    yy
+                })
+            },
+
+            async putRequest(ctx, obj) {
+                return await axios
+                    .put(`http://localhost:8082/api/v1/billings/`, obj
+                    )
+                    .then(response =>
+                        response.status
+                    )
+                    .catch(error => {
+                        console.log("There was an error!", error);
+                    });
+            },
+
+            SORT_HANDLER: async (ctx, sortType) => {
+                if ((sortType === 'byRenewDate') || (sortType === 'byLicence') || sortType === 'byRole') {
+                    let currentButton = sortType;
+
+                    if ((ctx.state.previousButton !== currentButton) && ctx.state.sorts.sortIsActive) {
+                        ctx.state.sorts.sortIsActive = false;
+                    }
+
+                    ctx.state.sorts.sortIsActive = !ctx.state.sorts.sortIsActive;
+                    for (const sort in ctx.state.sorts) {
+                        if (sortType === sort) {
+                            let sortedUsers = null;
+
+                            if (!ctx.state.sorts[sort]) {
+                                switch (sortType) {
+                                    case "byRenewDate" : {
+                                        sortedUsers = await ctx.dispatch('RENEWAL_DATE_SORT')
+                                        break;
+                                    }
+                                    case "byLicence" : {
+                                        sortedUsers = await ctx.dispatch('PRICE_SORT')
+                                        break;
+                                    }
+                                    case "byRole" : {
+                                        sortedUsers = await ctx.dispatch('ROLE_SORT')
+                                        break;
+                                    }
+                                }
+
+                                ctx.commit('SORTED_USERS', sortedUsers);
+                                break;
+                            }
+                        }
+                        ctx.state.sorts.previousButton = currentButton;
+                    }
+                }
+            },
+
+            RENEWAL_DATE_SORT: async (ctx) => {
+                return ctx.state.users.slice().sort((a, b) => {
+                    a = new Date(a.licenceDTO.renewalDate);
+                    b = new Date(b.licenceDTO.renewalDate);
+                    return b - a;
+                })
+            },
+
+            PRICE_SORT: async (ctx) => {
+                return ctx.state.users.slice().sort((a, b) => {
+                    a = a.licenceTypeDTO.renewalPrice;
+                    b = b.licenceTypeDTO.renewalPrice;
+                    return b - a;
+                })
+            },
+
+            ROLE_SORT: async (ctx) => {
+                return ctx.state.users.slice().sort((a, b) => {
+                    a = a.licenceTypeDTO.role.toLowerCase();
+                    b = b.licenceTypeDTO.role.toLowerCase();
+                    if (a < b) //сортируем строки по возрастанию
+                        return 1
+                    if (a > b)
+                        return -1
+                    return 0
+                })
+            },
+
+            NO_SORTING: ctx => {
+                ctx.commit('NO_SORTING')
+            },
+
+            KICK_USER: async (ctx, {userID, id}) => {
+                const status = await axios
+                    .delete(`http://localhost:8082/api/v1/users/${userID}`
+                    )
+                    .then(response =>
+                        response.status
+                    )
+                    .catch(error => {
+                        console.log("There was an error!", error);
+                    });
+                ctx.commit('KICK_USER', {status, id})
+            },
+
+            CHANGE_NAME: (ctx, id) => {
+                ctx.commit('CHANGE_NAME', id)
+            },
+
+            CHANGE_NAME_RETURN: (ctx, id) => {
+                ctx.commit('CHANGE_NAME_RETURN', id)
+            },
+
+            INPUT_CHANGE_RENEWAL_DATE: (ctx, id) => {
+                ctx.commit('INPUT_CHANGE_RENEWAL_DATE', id)
+            },
+
+            INPUT_CHANGE_LICENCE: (ctx, id) => {
+                console.log(id)
+                ctx.commit('INPUT_CHANGE_LICENCE', id)
+            },
+
+            UPDATE_RENEWAL_DATE: async (ctx, {newRenewalDate, id}) => {
+                if (newRenewalDate.length === 10) {
+                    const obj = {
+                        userId: ctx.state.users[id].userDTO.id,
+                        renewalDate: newRenewalDate + ' 00:00:00.000000'
+                    }
+                    const status = await ctx.dispatch('putRequest', obj)
+                    ctx.commit('UPDATE_RENEWAL_DATE', {status, newRenewalDate, id})
+
+                }
+            },
+
+            UPDATE_RENEWAL_PRICE: async (ctx, {renewalPrice, newRole,  id}) => {
+                if(newRole === 'Customer' || (newRole === 'LifeTime') || (newRole === 'Support time') || (newRole === 'Moderator') || (newRole === 'Developer') || (newRole === 'Beta EN') || (newRole === 'F&F')) {
+                    const obj = {
+                        userId: ctx.state.users[id].userDTO.id,
+                        renewalPrice: renewalPrice,
+                        role: newRole
+                    }
+                    const status = await ctx.dispatch('putRequest', obj)
+                    ctx.commit('UPDATE_RENEWAL_PRICE', {status, renewalPrice, newRole, id})
                 }
             }
-        },
-
-        RENEWAL_DATE_SORT: async (ctx) => {
-            return ctx.state.users.slice().sort((a, b) => {
-                a = new Date(a.licenceDTO.renewalDate);
-                b = new Date(b.licenceDTO.renewalDate);
-                return b - a;
-            })
-        },
-
-        PRICE_SORT: async (ctx) => {
-            return ctx.state.users.slice().sort((a, b) => {
-                a = a.licenceTypeDTO.renewalPrice;
-                b = b.licenceTypeDTO.renewalPrice;
-                return b - a;
-            })
-        },
-
-        ROLE_SORT: async (ctx) => {
-            return ctx.state.users.slice().sort((a, b) => {
-                a = a.licenceTypeDTO.role.toLowerCase();
-                b = b.licenceTypeDTO.role.toLowerCase();
-                if (a < b) //сортируем строки по возрастанию
-                    return 1
-                if (a > b)
-                    return -1
-                return 0
-            })
-        },
-
-        NO_SORTING: ctx => {
-            ctx.commit('NO_SORTING')
-        },
-
-        KICK_USER: async (ctx, {userID, id}) => {
-            console.log(userID)
-            const status =  await axios
-                .delete(`http://localhost:8082/api/v1/users/${userID}`
-                )
-                .then(response =>
-                    response.status
-                )
-                .catch(error => {
-                    console.log("There was an error!", error);
-                });
-            console.log(status)
-            ctx.commit('KICK_USER', {status, id})
-        },
-
-        CHANGE_NAME: (ctx, id) => {
-            ctx.commit('CHANGE_NAME', id)
-        },
-
-        CHANGE_NAME_RETURN: (ctx, id) => {
-            ctx.commit('CHANGE_NAME_RETURN', id)
-        },
-    },
-
+        }
 }

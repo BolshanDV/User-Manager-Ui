@@ -4,7 +4,7 @@
       v-for="title in titles"
       :key="title.category"
       :class="[title.class]"
-      @click="sortHandler(title.sortType)"
+      @click="SORT_HANDLER(title.sortType)"
     >
     <p>{{ title.category }}</p>
       <div
@@ -17,53 +17,15 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 export default {
 name: "TitleCategory",
-  data: () => ({
-    titles: [
-      {
-        category: 'Discord tag',
-        class: 'user_management_table_element_content item1'
-      },
-      {
-        category: 'Role',
-        class: 'user_management_table_element_content item5',
-        sortType: 'byRole',
-        img: 'UserMRevers.png'
-      },
-      {
-        category: 'Licence type',
-        class: 'user_management_table_element_content item2',
-        sortType: 'byLicence',
-        img: 'UserMRevers.png'
-      },
-      {
-        category: 'License key',
-        class: 'user_management_table_element_content item3'
-      },
-      {
-        category: 'Renewal date',
-        class: 'user_management_table_element_content item2',
-        sortType: 'byRenewDate',
-        img: 'UserMRevers.png'
-      },
-      {
-        category: 'Key bind',
-        class: 'user_management_table_element_content item4'
-      },
-      {
-        category: 'Card bind',
-        class:'user_management_table_element_content item6'
-      },
-    ],
-  }),
-  methods: {
-    ...mapActions('userManagement',['SORT_HANDLER']),
+  computed: {
+    ...mapGetters('titleCategory', ['titles'])
+  },
 
-    sortHandler(sortType) {
-      this.SORT_HANDLER(sortType)
-    }
+  methods: {
+    ...mapActions('userManagement', ['SORT_HANDLER']),
   }
 }
 </script>
