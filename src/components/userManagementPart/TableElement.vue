@@ -132,7 +132,7 @@
         </div>
         <div class="element_content_show_container button">
           <button class="waves-effect waves-light btn"
-                  @click="kickUser(user.userDTO.id, index)"
+                  @click="KICK_USER(user.userDTO.id)"
                   @mouseover="CHANGE_NAME(index)"
                   @mouseleave="CHANGE_NAME_RETURN(index)"
           >
@@ -177,11 +177,6 @@ name: "TableElement",
           'INPUT_CHANGE_RENEWAL_DATE',
           'INPUT_CHANGE_LICENCE'
         ]),
-
-    kickUser(userID, id){
-      this.KICK_USER({userID, id})
-    },
-
   },
 
   beforeMount() {

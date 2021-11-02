@@ -41,12 +41,6 @@ export default {
             state.users[id].flag = !state.users[id].flag;
         },
 
-        addFreeMonth(state, {status, id, dd, mm, yy}) {
-            if (status === 200) {
-                state.users[id].licenceDTO.renewalDate = yy + '-' + mm + '-' + dd;
-            }
-        },
-
         SORTED_USERS: (state, sortedUsers) => {
             state.users = sortedUsers
         },
@@ -57,13 +51,6 @@ export default {
             state.sorts.byRenewDate = false;
             state.sorts.byRole = false
             state.users = state.firstUsers
-        },
-
-        KICK_USER: (state, {status, id}) => {
-            if (status === 202) {
-                console.log(id)
-                Vue.delete(state.users, id)
-            }
         },
 
         CHANGE_NAME: (state, id) => {
@@ -81,23 +68,6 @@ export default {
         INPUT_CHANGE_LICENCE: (state, id) => {
             state.users[id].inputFlagLicence = !state.users[id].inputFlagLicence;
         },
-
-        UPDATE_RENEWAL_DATE: (state, {status, newRenewalDate, id}) => {
-            if (status === 200) {
-                console.log(newRenewalDate)
-                state.users[id].licenceDTO.renewalDate = newRenewalDate
-                state.users[id].inputFlagRenewal = !state.users[id].inputFlagRenewal;
-            }
-        },
-
-        UPDATE_RENEWAL_PRICE: (state, {status, id, renewalPrice, newRole}) => {
-            console.log(status)
-            if (status === 200) {
-                state.users[id].licenceTypeDTO.renewalPrice = renewalPrice
-                state.users[id].licenceTypeDTO.role = newRole
-                state.users[id].inputFlagLicence = !state.users[id].inputFlagLicence;
-            }
-        }
     },
 
         actions: {
@@ -132,7 +102,7 @@ export default {
                             user.billingDTO.paymentId = "~"
                         }
 
-                        if (user.licenceDTO.renewalDate === null) {
+                        if ((user.licenceDTO.renewalDate === null || (user.licenceDTO.renewalDate === ''))) {
                             user.licenceDTO.renewalDate = 0
                         }
 
@@ -151,34 +121,24 @@ export default {
                             user.billingDTO.cartBind = "Unbinded"
                             Vue.set(user, 'cartBindStyle', 'unbinded')
                         }
-
-                        if (user.licenceTypeDTO.role === "Customer") {
-                            Vue.set(user, 'roleStyle', 'customer')
-                        }
-
-                        if (user.licenceTypeDTO.role === "Lifetime") {
-                            Vue.set(user, 'roleStyle', 'lifeTime')
-                        }
-
-                        if (user.licenceTypeDTO.role === "Friends & Family") {
-                            user.licenceTypeDTO.role = "F&F"
-                            Vue.set(user, 'roleStyle', 'FF')
-                        }
-
-                        if (user.licenceTypeDTO.role === "Developer") {
-                            Vue.set(user, 'roleStyle', 'developer')
-                        }
-
-                        if (user.licenceTypeDTO.role === 'Support Team') {
-                            Vue.set(user, 'roleStyle', 'supportTeam')
-                        }
-
-                        if (user.licenceTypeDTO.role === 'Beta EN') {
-                            Vue.set(user, 'roleStyle', 'en')
-                        }
-
-                        if (user.licenceTypeDTO.role === 'Moderator') {
-                            Vue.set(user, 'roleStyle', 'moderator')
+                        switch (user.licenceTypeDTO.role){
+                            case "Customer":  Vue.set(user, 'roleStyle', 'customer')
+                                break;
+                            case "Lifetime" : Vue.set(user, 'roleStyle', 'lifeTime')
+                                break;
+                            case "Friends & Family" : {
+                                user.licenceTypeDTO.role = "F&F"
+                                Vue.set(user, 'roleStyle', 'FF')
+                                break;
+                            }
+                            case "Developer" : Vue.set(user, 'roleStyle', 'developer')
+                                break;
+                            case "Support Team" :  Vue.set(user, 'roleStyle', 'supportTeam')
+                                break
+                            case "Beta EN" :  Vue.set(user, 'roleStyle', 'en')
+                                break;
+                            case "Moderator" : Vue.set(user, 'roleStyle', 'moderator')
+                                break;
                         }
                     }
                 }
@@ -211,13 +171,7 @@ export default {
 
                 const status = await ctx.dispatch('putRequest', obj)
 
-                ctx.commit('addFreeMonth', {
-                    status,
-                    id,
-                    dd,
-                    mm,
-                    yy
-                })
+                if (status === 200) ctx.dispatch('getUsers')
             },
 
             async putRequest(ctx, obj) {
@@ -302,7 +256,7 @@ export default {
                 ctx.commit('NO_SORTING')
             },
 
-            KICK_USER: async (ctx, {userID, id}) => {
+            KICK_USER: async (ctx, userID) => {
                 const status = await axios
                     .delete(`http://localhost:8082/api/v1/users/${userID}`
                     )
@@ -312,7 +266,7 @@ export default {
                     .catch(error => {
                         console.log("There was an error!", error);
                     });
-                ctx.commit('KICK_USER', {status, id})
+                if (status === 202) ctx.dispatch('getUsers')
             },
 
             CHANGE_NAME: (ctx, id) => {
@@ -328,7 +282,6 @@ export default {
             },
 
             INPUT_CHANGE_LICENCE: (ctx, id) => {
-                console.log(id)
                 ctx.commit('INPUT_CHANGE_LICENCE', id)
             },
 
@@ -339,21 +292,33 @@ export default {
                         renewalDate: newRenewalDate + ' 00:00:00.000000'
                     }
                     const status = await ctx.dispatch('putRequest', obj)
-                    ctx.commit('UPDATE_RENEWAL_DATE', {status, newRenewalDate, id})
+                    if (status === 200) ctx.dispatch('getUsers')
 
                 }
             },
 
             UPDATE_RENEWAL_PRICE: async (ctx, {renewalPrice, newRole,  id}) => {
                 if(newRole === 'Customer' || (newRole === 'LifeTime') || (newRole === 'Support time') || (newRole === 'Moderator') || (newRole === 'Developer') || (newRole === 'Beta EN') || (newRole === 'F&F')) {
+                    const userId = ctx.state.users[id].userDTO.id
                     const obj = {
-                        userId: ctx.state.users[id].userDTO.id,
-                        renewalPrice: renewalPrice,
-                        role: newRole
+                        renewPrice: renewalPrice,
+                        majorRoleName: newRole
                     }
-                    const status = await ctx.dispatch('putRequest', obj)
-                    ctx.commit('UPDATE_RENEWAL_PRICE', {status, renewalPrice, newRole, id})
+                    const status = await ctx.dispatch('putRequestRenewalPrice', {obj, userId})
+                    if (status === 200) ctx.dispatch('getUsers')
                 }
-            }
+            },
+
+            async putRequestRenewalPrice(ctx, {obj, userId}) {
+                return await axios
+                    .put(`http://localhost:8082/api/v1/licences/${userId}`, obj
+                    )
+                    .then(response =>
+                        response.status
+                    )
+                    .catch(error => {
+                        console.log("There was an error!", error);
+                    });
+            },
         }
 }
