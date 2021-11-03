@@ -5,12 +5,38 @@
         <img src="@/assets/photo/root.png" alt="img" class="logo_image">
       </div>
 
-      <div class="sidebar_mainData_members">
-        <p>-</p>
+      <div
+          class="preloader"
+          v-if="preloader">
+      </div>
+      <div
+          v-else
+          class="sidebar_mainData_members"
+      >
+        <div class="mainData_header">Общее количество мемберов</div>
+        <div class="members_info">
+          <div class="countCustomer">
+            {{countCustomer}}
+          </div>
+          <div> вкл. </div>
+          <div class="countLifetime">
+            {{countLifetime}}
+          </div>
+          <div>
+            lifetime
+          </div>
+        </div>
+
       </div>
 
       <div class="sidebar_mainData_revenue">
-        <p>-</p>
+        <div class="mainData_header">
+          Выручка за {{nowDate}}
+        </div>
+        <div class="analytics_totalIncome">
+          <div class="totalIncome">{{analytics.totalIncome}}</div>
+          <img class="ruble"  src="../../assets/photo/icons/ruble.png" alt="">
+        </div>
       </div>
 
     </div>
@@ -24,7 +50,7 @@
           active-class="page_active page"
           :exact="link.exact"
       >
-        <img :src=" require('../../assets/photo/icons/'+link.image)" alt="img" class="icons" >
+        <img :src=" require('../../assets/photo/icons/' + link.image)" alt="img" class="icons" >
         {{link.title}}
       </router-link>
 
@@ -35,23 +61,39 @@
 </template>
 
 <script>
+import {mapGetters,mapActions} from 'vuex'
+
 export default {
+
   props: ['value'],
   name: "Sidebar",
-  data: () =>({
-    links:[
-      {title:'Аналитика', url:'/', image: 'free-icon-google-analytics-732035.png', exact: true},
-      {title:'Управление дропами', url:'/managing', image: 'free-icon-money-493417.png'},
-      {title:'Управление пользователями', url:'/user', image: 'free-icon-user-634011.png'},
-      {title:'Управление лицензиями', url:'/license', image: 'door-key.png'},
-    ]
-  }),
+  computed: {
+    ...mapGetters('sideBar',
+        [
+          'links',
+          'analytics',
+          'nowDate',
+          'countCustomer',
+          'countLifetime'
+        ]
+    ),
+    ...mapGetters('userManagement', [
+        'preloader'
+    ])
+  },
+  methods: {
+    ...mapActions('sideBar', ['postAnalytics'])
+  },
+
+  beforeMount() {
+    this.postAnalytics()
+  },
 
 }
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');*/
 .sidebar{
   background: #080D16;
   height: 100%;
@@ -75,24 +117,21 @@ export default {
   border-radius: 10px;
   padding: 1.5vh;
   margin: 6vh 3vh 2vh 3vh;
+  display: flex;
+  flex-direction: column;
+
 }
 .sidebar_mainData_revenue{
   background-color: #161E29;
   border-radius: 10px;
   padding: 1.5vh;
   margin: 2vh 3vh 2vh 3vh;
+  display: flex;
+  flex-direction: column;
 }
 .page_active{
-  /*margin: 0.3vh;*/
-  /*background-color: #161E29;*/
-  /*padding: 3vh 1.5vh 3vh 3vh;*/
-  /*display: flex;*/
-  /*justify-content: flex-start;*/
-  /*flex-direction: row;*/
-  /*align-items: center;*/
   border-right-style: solid;
   border-color: #6E7F99 ;
-  /*color: #EBEBEB;*/
 }
 .page{
   margin: 0.3vh;
@@ -118,11 +157,58 @@ export default {
   width: 128px;
   margin-left: 1.75vh;
 }
-/*.sidebar{*/
-/*  background: #080D16;*/
-/*  height: 100%;*/
-/*  position: fixed;*/
-/*  z-index: 100;*/
-/*  width: 20%;*/
-/*}*/
+.totalIncome{
+  font-style: normal;
+  font-weight: 1000;
+  font-size: 40px;
+  line-height: 35px;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+}
+.analytics_totalIncome {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.ruble{
+  height: 40px;
+}
+.mainData_header{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.01em;
+  color: #CCCCCC;
+  margin-bottom: 5px;
+}
+.members_info{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+.countCustomer{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 40px;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+  margin-right: 5px;
+}
+.countLifetime{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+  margin: 0 5px 0 5px;
+}
+.preloader{
+  height: 40px;
+}
 </style>

@@ -10,6 +10,7 @@ export default {
         preloader: true,
         renewalDate: null,
         inputId: null,
+        members: null,
         sorts: {
             previousButton : 'byRenewDate',
             sortIsActive: false,
@@ -81,7 +82,6 @@ export default {
                         console.log(error);
                     });
                 ctx.dispatch('PROCESSING', users)
-
             },
 
             PROCESSING: (ctx, users) => {
@@ -143,6 +143,8 @@ export default {
                     }
                 }
                 ctx.commit('UPDATE_USERS', users)
+                ctx.dispatch('sideBar/COUNTING_MEMBERS', users, {root: true})
+
             },
 
             HANDLE_CLICK(ctx, id) {
@@ -160,7 +162,7 @@ export default {
                 if (mm < 10) mm = '0' + mm;
 
                 let yy = ctx.state.renewalDate.getFullYear();
-                ctx.state.renewalDate = yy + '-' + mm + '-' + mm + ' 20:45:10.000000'
+                ctx.state.renewalDate = yy + '-' + mm + '-' + dd + ' 20:45:10.000000'
 
                 const obj = {
                     userId: ctx.state.users[id].userDTO.id,
