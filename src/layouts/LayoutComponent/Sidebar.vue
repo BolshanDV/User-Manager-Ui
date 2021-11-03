@@ -1,44 +1,41 @@
+<script src="../../store/modules/sideBar.js"></script>
 <template>
   <div class="sidebar">
     <div class="sidebar_mainData ">
       <div class="logo">
         <img src="@/assets/photo/root.png" alt="img" class="logo_image">
       </div>
-
-      <div
-          class="preloader"
-          v-if="preloader">
-      </div>
-      <div
-          v-else
-          class="sidebar_mainData_members"
-      >
-        <div class="mainData_header">Общее количество мемберов</div>
-        <div class="members_info">
-          <div class="countCustomer">
-            {{countCustomer}}
+      <transition name="fade">
+        <div v-show="!preloader">
+          <div
+              class="sidebar_mainData_members"
+          >
+            <div class="mainData_header">Общее количество мемберов</div>
+            <div class="members_info">
+              <div class="countCustomer">
+                {{countCustomer}}
+              </div>
+              <div>вкл.</div>
+              <div class="countLifetime">
+                {{countLifetime}}
+              </div>
+              <div>
+                lifetime
+              </div>
+            </div>
           </div>
-          <div> вкл. </div>
-          <div class="countLifetime">
-            {{countLifetime}}
-          </div>
-          <div>
-            lifetime
+          <div class="sidebar_mainData_revenue"
+          >
+            <div class="mainData_header">
+              Выручка за {{nowDate}}
+            </div>
+            <div class="analytics_totalIncome">
+              <div class="totalIncome">{{analytics.totalIncome}}</div>
+              <img class="ruble"  src="../../assets/photo/icons/ruble.png" alt="">
+            </div>
           </div>
         </div>
-
-      </div>
-
-      <div class="sidebar_mainData_revenue">
-        <div class="mainData_header">
-          Выручка за {{nowDate}}
-        </div>
-        <div class="analytics_totalIncome">
-          <div class="totalIncome">{{analytics.totalIncome}}</div>
-          <img class="ruble"  src="../../assets/photo/icons/ruble.png" alt="">
-        </div>
-      </div>
-
+      </transition>
     </div>
     <div class="sidebar_menu " >
       <router-link
@@ -62,9 +59,7 @@
 
 <script>
 import {mapGetters,mapActions} from 'vuex'
-
 export default {
-
   props: ['value'],
   name: "Sidebar",
   computed: {
@@ -93,7 +88,7 @@ export default {
 </script>
 
 <style scoped>
-/*@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 .sidebar{
   background: #080D16;
   height: 100%;
@@ -110,13 +105,14 @@ export default {
   justify-content: space-between;
   margin: 0 0 4vh 0 ;
   min-width: 120px;
+  min-height: 350px;
 
 }
 .sidebar_mainData_members{
   background-color: #161E29;
   border-radius: 10px;
-  padding: 1.5vh;
-  margin: 6vh 3vh 2vh 3vh;
+  padding: 2vh;
+  margin: 6vh 3vh 4vh 3vh;
   display: flex;
   flex-direction: column;
 
@@ -124,7 +120,7 @@ export default {
 .sidebar_mainData_revenue{
   background-color: #161E29;
   border-radius: 10px;
-  padding: 1.5vh;
+  padding: 2vh;
   margin: 2vh 3vh 2vh 3vh;
   display: flex;
   flex-direction: column;
@@ -208,7 +204,10 @@ export default {
   color: #FFFFFF;
   margin: 0 5px 0 5px;
 }
-.preloader{
-  height: 40px;
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
 }
 </style>

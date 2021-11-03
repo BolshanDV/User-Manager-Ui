@@ -3,153 +3,159 @@
     <div v-if="preloader"  >
       <Preloader />
     </div>
-    <div
-        v-else
-        v-for="(user, index) in allUsers"
-        :key="user.userDTO.id"
-        class="color user_management_table_section"
+    <transition-group
+        name="slide-fade"
     >
-      <div class="table_block">
-        <div
-            class="user_management_table_element waves-effect waves-light"
-        >
-          <div class="user_management_table_element_content item1 ">
-            <div class="text_element">
-              {{ user.userDTO.discordUsername }}
-            </div>
-          </div>
-          <div class="user_management_table_element_content item5">
-            <div
-                class="text_element"
-                :class="user.roleStyle"
-            >
-              {{ user.licenceTypeDTO.role }}
-            </div>
-            <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
-          </div>
-          <div class="user_management_table_element_content item2 "
-               @click="INPUT_CHANGE_LICENCE(index)"
+      <div
+          v-show="!preloader"
+          v-for="(user, index) in allUsers"
+          :key="user.userDTO.id"
+          class="color user_management_table_section"
+      >
+        <div class="table_block">
+          <div
+              class="user_management_table_element waves-effect waves-light"
           >
-            <div class="text_element">
-              {{ user.licenceTypeDTO.renewalPrice}}
-              <img class="ruble_img" src="../../assets/photo/icons/ruble.png" alt="">
-              <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
-            </div>
-          </div>
-          <div class="user_management_table_element_content item3">
-            <div class="text_element">
-              {{ user.licenceDTO.licenceKey }}
-            </div>
-          </div>
-          <div class="user_management_table_element_content item2"
-               @click="INPUT_CHANGE_RENEWAL_DATE(index)"
-          >
-            <div
-                class="text_element"
-            >
-              {{ user.licenceDTO.renewalDate}}
-              <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
-            </div>
-          </div>
-          <div class="user_management_table_element_content item4">
-            <div
-                class="text_element"
-                :class="user.keyBindStyle"
-            >
-              {{ user.licenceDTO.keyBind}}
-            </div>
-          </div>
-          <div class="user_management_table_element_content" >
-            <div class="item6">
-              <div
-                  :class="user.cartBindStyle"
-              >
-                {{ user.billingDTO.cartBind }}
+            <div class="user_management_table_element_content item1 ">
+              <div class="text_element">
+                {{ user.userDTO.discordUsername }}
               </div>
             </div>
-            <div
-                @click="HANDLE_CLICK(index)"
-                :class="{rotate: user.flag}"
-            >
-              <img  class="arrow"
-                    src="../../assets/photo/icons/arrow.png" alt="">
+            <div class="user_management_table_element_content item5">
+              <div
+                  class="text_element"
+                  :class="user.roleStyle"
+              >
+                {{ user.licenceTypeDTO.role }}
+              </div>
+              <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
             </div>
+            <div class="user_management_table_element_content item2 "
+                 @click="INPUT_CHANGE_LICENCE(index)"
+            >
+              <div class="text_element">
+                {{ user.licenceTypeDTO.renewalPrice}}
+                <img class="ruble_img" src="../../assets/photo/icons/ruble.png" alt="">
+                <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
+              </div>
+            </div>
+            <div class="user_management_table_element_content item3">
+              <div class="text_element">
+                {{ user.licenceDTO.licenceKey }}
+              </div>
+            </div>
+            <div class="user_management_table_element_content item2"
+                 @click="INPUT_CHANGE_RENEWAL_DATE(index)"
+            >
+              <div
+                  class="text_element"
+              >
+                {{ user.licenceDTO.renewalDate}}
+                <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
+              </div>
+            </div>
+            <div class="user_management_table_element_content item4">
+              <div
+                  class="text_element"
+                  :class="user.keyBindStyle"
+              >
+                {{ user.licenceDTO.keyBind}}
+              </div>
+            </div>
+            <div class="user_management_table_element_content" >
+              <div class="item6">
+                <div
+                    :class="user.cartBindStyle"
+                >
+                  {{ user.billingDTO.cartBind }}
+                </div>
+              </div>
+              <div
+                  @click="HANDLE_CLICK(index)"
+                  :class="{rotate: user.flag}"
+              >
+                <img  class="arrow"
+                      src="../../assets/photo/icons/arrow.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div
+              class="input_section"
+          >
+                <inputField
+                    :id="index"
+                    :inputFlagRenewal="user.inputFlagRenewal"
+                    :inputFlagLicence="user.inputFlagLicence"
+                    v-if="(user.inputFlagRenewal) || (user.inputFlagLicence)"
+                />
+
           </div>
         </div>
         <div
-            class="input_section"
-        >
-          <inputField
-              :id="index"
-              :inputFlagRenewal="user.inputFlagRenewal"
-              :inputFlagLicence="user.inputFlagLicence"
-              v-if="(user.inputFlagRenewal) || (user.inputFlagLicence)"
-          />
-        </div>
-      </div>
-      <div
-          v-show="user.flag"
-          class="element_content_show_container"
-      >
-        <div class="element_content_show">
-          <div class="element_content_show_parameter">
-            <div class="text_element">Discord id: </div>
-            <div class="text_show">
-              {{user.userDTO.discordId}}
-            </div>
-            <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
-          </div>
-          <div class="element_content_show_parameter">
-            <div class="text_element">Email: </div>
-            <div class="text_show">
-              {{user.userDTO.discordEmail}}
-            </div>
-          </div>
-          <div class="element_content_show_parameter">
-            <div class="text_element">Creation date:</div>
-            <div class="text_show">
-              {{user.userDTO.creationDate}}
-            </div>
-          </div>
-          <div class="element_content_show_parameter">
-            <div class="text_element">Payment id: </div>
-            <div class="text_show">
-              {{user.billingDTO.paymentId}}
-            </div>
-          </div>
-          <div class="element_content_show_parameter">
-            <div class="text_element">CartDate: </div>
-            <div class="text_show">
-              {{user.billingDTO.cartDate}}
-            </div>
-          </div>
-          <div class="element_content_show_parameter">
-            <div class="text_element">CartEnding: </div>
-            <div class="text_show">
-              {{user.billingDTO.cartEnding}}
-            </div>
-          </div>
-        </div>
-        <div class="element_content_show_container button">
-          <button class="waves-effect waves-light btn"
-                  @click="KICK_USER(user.userDTO.id)"
-                  @mouseover="CHANGE_NAME(index)"
-                  @mouseleave="CHANGE_NAME_RETURN(index)"
+              v-show="user.flag"
+              class="element_content_show_container"
           >
-            <div class="text_element"
-            >
-              {{user.kickUserText}}
+            <div class="element_content_show">
+              <div class="element_content_show_parameter">
+                <div class="text_element">Discord id: </div>
+                <div class="text_show">
+                  {{user.userDTO.discordId}}
+                </div>
+                <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
+              </div>
+              <div class="element_content_show_parameter">
+                <div class="text_element">Email: </div>
+                <div class="text_show">
+                  {{user.userDTO.discordEmail}}
+                </div>
+              </div>
+              <div class="element_content_show_parameter">
+                <div class="text_element">Creation date:</div>
+                <div class="text_show">
+                  {{user.userDTO.creationDate}}
+                </div>
+              </div>
+              <div class="element_content_show_parameter">
+                <div class="text_element">Payment id: </div>
+                <div class="text_show">
+                  {{user.billingDTO.paymentId}}
+                </div>
+              </div>
+              <div class="element_content_show_parameter">
+                <div class="text_element">CartDate: </div>
+                <div class="text_show">
+                  {{user.billingDTO.cartDate}}
+                </div>
+              </div>
+              <div class="element_content_show_parameter">
+                <div class="text_element">CartEnding: </div>
+                <div class="text_show">
+                  {{user.billingDTO.cartEnding}}
+                </div>
+              </div>
             </div>
-          </button>
-          <button class="waves-effect waves-light btn "
-                  @click="FREE_MONTH(index)"
-          >
-            <div class="text_element">Add Free Month</div>
-          </button>
-        </div>
+            <div class="element_content_show_container button">
+              <button class="waves-effect waves-light btn"
+                      @click="KICK_USER(user.userDTO.id)"
+                      @mouseover="CHANGE_NAME(index)"
+                      @mouseleave="CHANGE_NAME_RETURN(index)"
+              >
+                <div class="text_element"
+                >
+                  {{user.kickUserText}}
+                </div>
+              </button>
+              <button class="waves-effect waves-light btn "
+                      @click="FREE_MONTH(index)"
+              >
+                <div class="text_element">Add Free Month</div>
+              </button>
+            </div>
 
+          </div>
       </div>
-    </div>
+    </transition-group>
+
   </div>
 </template>
 
@@ -348,4 +354,16 @@ name: "TableElement",
   flex-direction: row;
   justify-content: center;
 }
+.slide-fade-enter-active {
+  transition: all .9s ease;
+}
+.slide-fade-leave-active {
+  transition: all .9s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+  /* .slide-fade-leave-active до версии 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
 </style>
