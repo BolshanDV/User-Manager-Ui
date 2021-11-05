@@ -34,7 +34,7 @@ name: "ManagingDrops"
 .managingDrops_flex{
   display: flex;
   flex-direction: row;
-  background-color: #161E29;
+  /*background-color: #161E29;*/
   align-items: center;
   align-content: center;
   justify-content: center;

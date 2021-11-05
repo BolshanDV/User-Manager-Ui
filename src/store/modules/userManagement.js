@@ -153,7 +153,7 @@ export default {
 
             async FREE_MONTH(ctx, id) {
                 ctx.state.renewalDate = new Date((ctx.state.users[id].licenceDTO.renewalDate))
-                ctx.state.renewalDate.setMonth(ctx.state.renewalDate.getMonth() + 1)
+                ctx.state.renewalDate.setMonth(ctx.state.renewalDate.getMonth())
 
                 let dd = ctx.state.renewalDate.getDate();
                 if (dd < 10) dd = '0' + dd;
@@ -300,7 +300,7 @@ export default {
             },
 
             UPDATE_RENEWAL_PRICE: async (ctx, {renewalPrice, newRole,  id}) => {
-                if(newRole === 'Customer' || (newRole === 'LifeTime') || (newRole === 'Support time') || (newRole === 'Moderator') || (newRole === 'Developer') || (newRole === 'Beta EN') || (newRole === 'F&F')) {
+                if(newRole === 'Customer' || (newRole === 'Lifetime') || (newRole === 'Support time') || (newRole === 'Moderator') || (newRole === 'Developer') || (newRole === 'Beta EN') || (newRole === 'Friends & Family')) {
                     const userId = ctx.state.users[id].userDTO.id
                     const obj = {
                         renewPrice: renewalPrice,

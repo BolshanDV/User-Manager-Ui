@@ -59,12 +59,14 @@ name: "NewLayout",
   min-width: 1200px;
   width: 100%;
   background-color: #161E29;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  background-image: url("../assets/photo/background2.png"), url("../assets/photo/background1.png");
 }
 .container_flex{
   background-color: #161E29;
   display: flex;
   background-size: contain;
-  background-color: #161E29;
 }
 .fullWidth{
   margin-left: 0;

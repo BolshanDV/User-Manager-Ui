@@ -3,7 +3,7 @@
     <div class="user_management_flex" >
         <div class="head">Управление пользователями</div>
       <div
-          @click="noSorting"
+          @click="NO_SORTING"
           class="sorting_btn">
         <div class="btn_color waves-effect waves-light z-depth-5">
           No sorting
@@ -31,9 +31,6 @@ export default {
   },
   methods: {
     ...mapActions('userManagement',['NO_SORTING']),
-    noSorting() {
-      this.NO_SORTING()
-    }
   },
 }
 </script>

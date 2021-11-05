@@ -2,15 +2,23 @@
   <div @click="$emit('click')">
     <div class="navbar_flex">
       <div class="navbar_user"><a>User</a></div>
-      <div class="navbar_exit"><p class="waves-effect waves-light btn">Выйти</p></div>
+      <div class="navbar_exit"
+           @click="AUTHORIZATION"
+      >
+        <p class="waves-effect waves-light btn">Выйти</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-name: "Navbar"
-}
+import {mapActions} from 'vuex'
+  export default {
+    name: "Navbar",
+    methods: {
+       ...mapActions('navbar', ['AUTHORIZATION'])
+     }
+  }
 </script>
 <style scoped>
 .navbar_flex{

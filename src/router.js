@@ -8,39 +8,42 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes: [
         {
-            path:'/',
-            name:'Analytics',
+            path: '/',
+            name: 'Analytics',
             meta: {
                 title: 'Analytics'
             },
             component: () => import('./components/analyticsPart/Analytics')
         },
         {
-            path:'/license',
-            name:'LicenseManagement',
-            meta : {
+            path: '/license',
+            name: 'LicenseManagement',
+            meta: {
                 layout:'layout',
                 title : 'License Management'
             },
             component: () => import('./components/licenseManagementPart/LicenseManagement')
         },
         {
-            path:'/managing',
-            name:'ManagingDrops',
-            meta : {
-                layout:'layout',
+            path: '/managing',
+            name: 'ManagingDrops',
+            meta: {
+                layout: 'layout',
                 title: 'Managing Drops'
             },
             component: () => import('./components/managingDropsPart/ManagingDrops.vue')
         },
         {
-            path:'/user',
+            path: '/user',
             name:'userManagementPart',
             meta : {
                 layout : 'layout',
                 title: 'User Management'
             },
             component: () => import('./components/userManagementPart/UserManagement.vue')
+        },
+        {
+            path: ''
         }
     ]
 })
