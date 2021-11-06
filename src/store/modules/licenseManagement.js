@@ -3,6 +3,7 @@ import axios from "axios";
 export default {
     namespaced: true,
     state:{
+        latestLicences: [],
         prices:[2500, 2000, 1500, 1000, 0],
         licenseFlag: false,
         selectedLicense: 'License type',
@@ -24,7 +25,12 @@ export default {
 
         renewalDate(state) {
             return state.renewalDate
+        },
+
+        latestLicences(state) {
+            return state.latestLicences
         }
+
 
 
     },
@@ -37,6 +43,10 @@ export default {
         SELECTED_LICENSE: (state, id) => {
             state.selectedLicense = state.prices[id]
             state.licenseFlag = !state.licenseFlag
+        },
+
+        UPDATE_LICENCES: (state, latestAdd) => {
+            state.latestLicences = latestAdd
         }
 
     },
@@ -72,17 +82,13 @@ export default {
                 });
         },
 
-        GET_LICENCE_REQUEST: async () => {
-            const licences = await axios
-                .get('http://localhost:8082/api/v1/licences/')
-                .then(resObj => {
-                    return resObj.data;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-            console.log(licences)
-        },
+        LATEST_ADDITION: (ctx, users) => {
+            let latestAdd = users.slice().reverse()
+            latestAdd = latestAdd.slice(0,10)
+            ctx.commit('UPDATE_LICENCES', latestAdd)
+            console.log(latestAdd)
+
+        }
 
 
 

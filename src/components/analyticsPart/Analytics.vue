@@ -87,7 +87,6 @@
 <script>
 import RevenueChart from "../../assets/charts/RevenueChart";
 import CalendarRevenue from "../../assets/alendars/CalendarRevenue";
-import {mapActions} from 'vuex'
 export default {
   name: "Analytics",
   data() {
@@ -99,11 +98,7 @@ export default {
     RevenueChart, CalendarRevenue
   },
 
-  beforeMount() {
-      this.getUsers()
-  },
   methods:{
-    ...mapActions('userManagement', ['getUsers']),
     addDateInf(data) {
       this.calendar = data.calendar
     }

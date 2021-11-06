@@ -21,20 +21,24 @@
             </div>
 
           </div>
-          <div
-              v-if="licenseFlag"
-              class="fade"
+          <transition name="slide-fade"
           >
-            <hr>
             <div
-                v-for="(price, index) in prices"
-                :key="index"
-                class="main_text drop_down_menu"
-                @click="SELECTED_LICENSE(index)"
+                v-if="licenseFlag"
+                class="fade"
             >
+              <hr>
+              <div
+                  v-for="(price, index) in prices"
+                  :key="index"
+                  class="main_text drop_down_menu"
+                  @click="SELECTED_LICENSE(index)"
+              >
                 <div>Renewal - {{ price }}</div>
+              </div>
             </div>
-          </div>
+          </transition>
+
         </div>
         <div class="main_text">Дата следующей оплаты</div>
         <div class="input_date">
@@ -60,17 +64,54 @@
       <div class="text_header">Недавно созданные</div>
       <div
           class="color user_management_table_section"
+          v-for="(latestLicence, index) in latestLicences"
+          :key="index"
       >
         <div class="table_block">
           <div
               class="user_management_table_element waves-effect waves-light"
           >
-            <div class="user_management_table_element_content item1 ">
+            <div class="user_management_table_element_content item3">
               <div class="text_element">
-                HI
+                {{ latestLicence.licenceDTO.licenceKey }}
               </div>
             </div>
-        </div>
+            <div class="user_management_table_element_content item4">
+              <div class="text_element"
+                   :class="latestLicence.keyBindStyle"
+              >
+                {{ latestLicence.licenceDTO.keyBind}}
+              </div>
+            </div>
+            <div class="user_management_table_element_content item4">
+              <div class="text_element">
+                Create
+              </div>
+            </div>
+            <div class="user_management_table_element_content">
+              <div class="text_element"
+                   @click="INPUT_CHANGE_RENEWAL_DATE(latestLicence.userDTO.id)"
+              >
+                {{ latestLicence.licenceDTO.renewalDate}}
+                <img src="../../assets/photo/icons/pencil.png" alt="" class="delete">
+                <div
+                    @click="KICK_USER(latestLicence.userDTO.id)"
+                >
+                  <img
+                      src="../../assets/photo/icons/delete.png"
+                      class="delete"
+                  >
+                </div>
+
+              </div>
+            </div>
+        </div >
+          <inputField
+              class="inputRenewal"
+              :id="latestLicence.userDTO.id"
+              :inputFlagRenewal="latestLicence.inputFlagRenewal"
+              v-if="latestLicence.inputFlagRenewal"
+          />
       </div>
     </div>
     </div>
@@ -78,21 +119,23 @@
 </template>
 
 <script>
+import inputField from '../inputField'
 import {mapGetters,mapActions} from 'vuex'
 export default {
   name : "LicenseManagement",
+  components: {
+    inputField
+  },
   data: () => ({
     renewalDate: ''
   }),
   computed:{
-    ...mapGetters('licenseManagement', ['prices', 'licenseFlag', 'selectedLicense'])
+    ...mapGetters('licenseManagement', ['prices', 'licenseFlag', 'selectedLicense', 'latestLicences'])
   },
   methods:{
-    ...mapActions('licenseManagement', ['LICENSE_FLAG', 'SELECTED_LICENSE', 'CREATE_LICENCE', 'GET_LICENCE_REQUEST'])
+    ...mapActions('licenseManagement', ['LICENSE_FLAG', 'SELECTED_LICENSE', 'CREATE_LICENCE', 'LATEST_ADDITION']),
+    ...mapActions('userManagement', ['KICK_USER', 'INPUT_CHANGE_RENEWAL_DATE'])
   },
-  beforeMount() {
-      this.GET_LICENCE_REQUEST()
-  }
 }
 </script>
 
@@ -137,6 +180,9 @@ export default {
     background: #101722;
     border-radius: 5px;
     padding: 20px;
+  }
+  .item3{
+    width: 220px;
   }
   .text_header{
     font-weight: 500;
@@ -224,7 +270,7 @@ export default {
   }
   .user_management_table_element_content{
     height: 100%;
-    width: 16vh;
+    min-width: 16vh;
     display: flex;
     flex-direction: row;
     align-content: center;
@@ -242,5 +288,46 @@ export default {
   .color{
     background-color: #161E29;
     border-radius: 3px;
+  }
+  .text_element{
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+    font-style: normal;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .delete{
+    width: 14px;
+    height: 15px;
+    margin: 0 10px 0 10px;
+  }
+  .item4{
+    width: 87px ;
+  }
+  .unbinded{
+    color: #FF0000;
+  }
+  .binded{
+    color: #2BD6A2;
+  }
+  .inputRenewal{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .slide-fade-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter, .slide-fade-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
   }
 </style>

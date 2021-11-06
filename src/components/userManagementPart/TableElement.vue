@@ -31,7 +31,7 @@
               <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
             </div>
             <div class="user_management_table_element_content item2 "
-                 @click="INPUT_CHANGE_LICENCE(index)"
+                 @click="INPUT_CHANGE_LICENCE(user.userDTO.id)"
             >
               <div class="text_element">
                 {{ user.licenceTypeDTO.renewalPrice}}
@@ -45,7 +45,7 @@
               </div>
             </div>
             <div class="user_management_table_element_content item2"
-                 @click="INPUT_CHANGE_RENEWAL_DATE(index)"
+                 @click="INPUT_CHANGE_RENEWAL_DATE(user.userDTO.id)"
             >
               <div
                   class="text_element"
@@ -83,7 +83,7 @@
               class="input_section"
           >
                 <inputField
-                    :id="index"
+                    :id="user.userDTO.id"
                     :inputFlagRenewal="user.inputFlagRenewal"
                     :inputFlagLicence="user.inputFlagLicence"
                     v-if="(user.inputFlagRenewal) || (user.inputFlagLicence)"
@@ -174,8 +174,7 @@ name: "TableElement",
   },
   methods:{
     ...mapActions('userManagement',
-        ['getUsers',
-          'HANDLE_CLICK',
+        ['HANDLE_CLICK',
           'FREE_MONTH',
           'KICK_USER',
           'CHANGE_NAME',
@@ -183,10 +182,6 @@ name: "TableElement",
           'INPUT_CHANGE_RENEWAL_DATE',
           'INPUT_CHANGE_LICENCE'
         ]),
-  },
-
-  beforeMount() {
-    this.getUsers()
   },
 }
 </script>
@@ -360,10 +355,12 @@ name: "TableElement",
 .slide-fade-leave-active {
   transition: all .9s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
-.slide-fade-enter, .slide-fade-leave-to
-  /* .slide-fade-leave-active до версии 2.1.8 */ {
-  transform: translateX(10px);
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateX(30px);
   opacity: 0;
+}
+.slide-fade-move {
+  transition: transform 3s;
 }
 
 </style>

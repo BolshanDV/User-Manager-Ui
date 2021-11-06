@@ -8,6 +8,7 @@
 
 <script>
 import Layout from "@/layouts/Layout";
+import {mapActions} from 'vuex'
 export default {
   name: 'App',
   computed:{
@@ -18,6 +19,12 @@ export default {
   components:{
     Layout
   },
+  methods: {
+    ...mapActions('userManagement', ['getUsers'])
+  },
+  created() {
+    this.getUsers()
+  }
 }
 </script>
 

@@ -62,12 +62,15 @@ export default {
             state.users[id].kickUserText = 'KICK USER'
         },
 
-        INPUT_CHANGE_RENEWAL_DATE: (state, id) => {
-            state.users[id].inputFlagRenewal = !state.users[id].inputFlagRenewal;
+        INPUT_CHANGE_RENEWAL_DATE: (state, userId) => {
+            const index = state.users.findIndex(item => item.userDTO.id === userId);
+            state.users[index].inputFlagRenewal = !state.users[index].inputFlagRenewal;
+
         },
 
-        INPUT_CHANGE_LICENCE: (state, id) => {
-            state.users[id].inputFlagLicence = !state.users[id].inputFlagLicence;
+        INPUT_CHANGE_LICENCE: (state, userId) => {
+            const index = state.users.findIndex(item => item.userDTO.id === userId);
+            state.users[index].inputFlagLicence = !state.users[index].inputFlagLicence;
         },
     },
 
@@ -144,6 +147,7 @@ export default {
                 }
                 ctx.commit('UPDATE_USERS', users)
                 ctx.dispatch('sideBar/COUNTING_MEMBERS', users, {root: true})
+                ctx.dispatch('licenseManagement/LATEST_ADDITION', users, {root: true})
 
             },
 
@@ -153,7 +157,7 @@ export default {
 
             async FREE_MONTH(ctx, id) {
                 ctx.state.renewalDate = new Date((ctx.state.users[id].licenceDTO.renewalDate))
-                ctx.state.renewalDate.setMonth(ctx.state.renewalDate.getMonth())
+                ctx.state.renewalDate.setMonth(ctx.state.renewalDate.getMonth() + 1)
 
                 let dd = ctx.state.renewalDate.getDate();
                 if (dd < 10) dd = '0' + dd;
@@ -259,6 +263,7 @@ export default {
             },
 
             KICK_USER: async (ctx, userID) => {
+                console.log(userID)
                 const status = await axios
                     .delete(`http://localhost:8082/api/v1/users/${userID}`
                     )
@@ -279,18 +284,19 @@ export default {
                 ctx.commit('CHANGE_NAME_RETURN', id)
             },
 
-            INPUT_CHANGE_RENEWAL_DATE: (ctx, id) => {
-                ctx.commit('INPUT_CHANGE_RENEWAL_DATE', id)
+            INPUT_CHANGE_RENEWAL_DATE: (ctx, userId) => {
+                ctx.commit('INPUT_CHANGE_RENEWAL_DATE', userId)
             },
 
-            INPUT_CHANGE_LICENCE: (ctx, id) => {
-                ctx.commit('INPUT_CHANGE_LICENCE', id)
+            INPUT_CHANGE_LICENCE: (ctx, userId) => {
+                ctx.commit('INPUT_CHANGE_LICENCE', userId)
             },
 
             UPDATE_RENEWAL_DATE: async (ctx, {newRenewalDate, id}) => {
+                console.log(id)
                 if (newRenewalDate.length === 10) {
                     const obj = {
-                        userId: ctx.state.users[id].userDTO.id,
+                        userId: id,
                         renewalDate: newRenewalDate + ' 00:00:00.000000'
                     }
                     const status = await ctx.dispatch('putRequest', obj)
@@ -301,7 +307,7 @@ export default {
 
             UPDATE_RENEWAL_PRICE: async (ctx, {renewalPrice, newRole,  id}) => {
                 if(newRole === 'Customer' || (newRole === 'Lifetime') || (newRole === 'Support time') || (newRole === 'Moderator') || (newRole === 'Developer') || (newRole === 'Beta EN') || (newRole === 'Friends & Family')) {
-                    const userId = ctx.state.users[id].userDTO.id
+                    const userId = id
                     const obj = {
                         renewPrice: renewalPrice,
                         majorRoleName: newRole
