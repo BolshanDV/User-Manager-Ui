@@ -73,7 +73,9 @@ export default {
 
         CREATE_LICENCE_REQUEST: async (ctx, obj) => {
             return await axios
-                .post('http:localhost:8082/api/v1/licences/', obj)
+                .post('http:localhost:8082/api/v1/licences/', obj, {
+                    withCredentials: true
+                })
                 .then(response =>
                     response.status
                 )

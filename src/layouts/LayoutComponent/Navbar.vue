@@ -1,11 +1,11 @@
 <template>
   <div @click="$emit('click')">
     <div class="navbar_flex">
-      <div class="navbar_user"><a>User</a></div>
-      <div class="navbar_exit"
-           @click="AUTHORIZATION"
-      >
-        <p class="waves-effect waves-light btn">Выйти</p>
+      <div class="navbar_exit">
+        <a class="waves-effect waves-light btn" href="http://localhost:8082/api/v1/logout">Выйти</a>
+      </div>
+      <div class="navbar_exit">
+        <a class="waves-effect waves-light btn" href="http://localhost:8082/api/v1/oauth2/authorization/discord">Войти</a>
       </div>
     </div>
   </div>

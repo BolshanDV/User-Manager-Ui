@@ -77,7 +77,9 @@ export default {
         actions: {
             async getUsers(ctx) {
                 const users = await axios
-                    .get('http://localhost:8082/api/v1/users/details')
+                    .get('http://localhost:8082/api/v1/users/details', {
+                        withCredentials: true
+                    })
                     .then(resObj => {
                         return resObj.data;
                     })
@@ -182,7 +184,9 @@ export default {
 
             async putRequest(ctx, obj) {
                 return await axios
-                    .put(`http://localhost:8082/api/v1/billings/`, obj
+                    .put(`http://localhost:8082/api/v1/billings/`, obj, {
+                        withCredentials: true
+                        }
                     )
                     .then(response =>
                         response.status
