@@ -9,7 +9,10 @@
     </div>
 
     <div class="work_space">
-      <router-view />
+      <transition name="fade">
+        <router-view />
+      </transition>
+
     </div>
   </div>
 </div>
@@ -49,24 +52,37 @@ name: "NewLayout",
   flex-direction: column;
   justify-content: center;
   float: top;
-  /*height: 100%;*/
+  height: 100%;
   margin-left: 245px;
   margin-top: 50px;
-  background-size: cover;
+  background-size: contain;
   padding-top: 3vh;
   min-width: 1200px;
+  min-height: 500px;
   width: 100%;
   background-color: #161E29;
   background-attachment: scroll;
   background-repeat: no-repeat;
   background-image: url("../assets/photo/background2.png"), url("../assets/photo/background1.png");
+
 }
 .container_flex{
   background-color: #161E29;
   display: flex;
   background-size: contain;
 }
-.fullWidth{
-  margin-left: 0;
+.fade-enter-active,
+.fade-leave-active {
+  transition-property: opacity;
+  transition-duration: 0.35s;
+}
+
+.fade-enter-active {
+  transition-delay: 0.35s;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>

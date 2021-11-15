@@ -7,17 +7,20 @@
 </template>
 
 <script>
-import Layout from "@/layouts/Layout";
+import mainLayout from "./layouts/Layout";
+import emptyLayout from "./layouts/emptyLayout";
 import {mapActions} from 'vuex'
 export default {
   name: 'App',
   computed:{
     layout(){
-      return'layout'
+      console.log(this.$route.meta)
+      return (this.$route.meta.layout) + 'Layout'
     }
   },
   components:{
-    Layout
+    mainLayout,
+    emptyLayout
   },
   methods: {
     ...mapActions('userManagement', ['getUsers'])

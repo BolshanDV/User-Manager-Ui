@@ -8,7 +8,7 @@ export default {
         countCustomer: '',
         countLifetime: '',
         links:[
-            {title:'Аналитика', url:'/', image: 'free-icon-google-analytics-732035.png', exact: true},
+            {title:'Аналитика', url:'/analytics', image: 'free-icon-google-analytics-732035.png', exact: true},
             {title:'Управление дропами', url:'/managing', image: 'free-icon-money-493417.png'},
             {title:'Управление пользователями', url:'/user', image: 'free-icon-user-634011.png'},
             {title:'Управление лицензиями', url:'/license', image: 'door-key.png'},
