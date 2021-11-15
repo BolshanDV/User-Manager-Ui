@@ -1,16 +1,14 @@
 <template>
 <div class="all_element">
   <div class="navbar">
-    <Navbar @click="isOpen = !isOpen"  />
+    <Navbar/>
   </div>
   <div class ="container_flex">
     <div class="sidebar">
-      <Sidebar
-          v-show="isOpen"
-      />
+      <Sidebar/>
     </div>
 
-    <div class="work_space" :class="{fullWidth: !isOpen}">
+    <div class="work_space">
       <router-view />
     </div>
   </div>

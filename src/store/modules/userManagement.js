@@ -28,8 +28,6 @@ export default {
         preloader(state) {
             return state.preloader
         },
-
-
     },
     mutations: {
         UPDATE_USERS(state, users) {
@@ -72,21 +70,25 @@ export default {
             const index = state.users.findIndex(item => item.userDTO.id === userId);
             state.users[index].inputFlagLicence = !state.users[index].inputFlagLicence;
         },
+
     },
 
         actions: {
             async getUsers(ctx) {
-                const users = await axios
+                const response = await axios
                     .get('http://localhost:8082/api/v1/users/details', {
                         withCredentials: true
                     })
                     .then(resObj => {
-                        return resObj.data;
+                        return {
+                            objects: resObj.data,
+                            status: resObj.status
+                        };
                     })
                     .catch(error => {
                         console.log(error);
                     });
-                ctx.dispatch('PROCESSING', users)
+                ctx.dispatch('PROCESSING', response.objects)
             },
 
             PROCESSING: (ctx, users) => {
@@ -269,8 +271,9 @@ export default {
             KICK_USER: async (ctx, userID) => {
                 console.log(userID)
                 const status = await axios
-                    .delete(`http://localhost:8082/api/v1/users/${userID}`
-                    )
+                    .delete(`http://localhost:8082/api/v1/users/${userID}`,{
+                        withCredentials: true
+                    })
                     .then(response =>
                         response.status
                     )
@@ -323,7 +326,9 @@ export default {
 
             async putRequestRenewalPrice(ctx, {obj, userId}) {
                 return await axios
-                    .put(`http://localhost:8082/api/v1/licences/${userId}`, obj
+                    .put(`http://localhost:8082/api/v1/licences/${userId}`, obj,{
+                        withCredentials: true
+                    }
                     )
                     .then(response =>
                         response.status
