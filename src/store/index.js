@@ -1,23 +1,23 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import userManagement from "./modules/userManagement";
-import titleCategory from './modules/titleCategory';
-import sideBar from "./modules/sideBar";
-import licenseManagement from "./modules/licenseManagement";
-import navBar from './modules/navBar'
+import userManagementStore from "./modules/userManagementStore";
+import titleCategory from './modules/titleCategoryStore/titleCategory';
+import sideBar from "./modules/sideBarStore/sideBar";
+import navBar from './modules/navBarStore/navBar'
 import customersChart from "./modules/chart/customerChart";
 import calendar from "./modules/Calendar/calendar";
+import licenseManagement from "./modules/licenseManagementStore"
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     modules:{
-        userManagement,
+        userManagement: userManagementStore,
         titleCategory,
-        sideBar,
-        licenseManagement,
+        sideBar ,
         navBar,
         customersChart,
-        calendar
+        calendar,
+        licenseManagement: licenseManagement
     }
 })

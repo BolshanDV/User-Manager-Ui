@@ -1,4 +1,4 @@
-<script src="../../store/modules/sideBar.js"></script>
+<script src="../../store/modules/sideBarStore/sideBar.js"></script>
 <template>
   <div class="sidebar">
     <div class="sidebar_mainData ">

@@ -33,7 +33,7 @@ img{
   position: absolute;
 }
 .title{
-  font-weight: 400;
+  font-weight: 300;
   font-size: 45px;
   line-height: 45px;
   margin-top: 20px;
