@@ -30,9 +30,6 @@ export default {
         latestLicences(state) {
             return state.latestLicences
         }
-
-
-
     },
 
     mutations: {
@@ -48,7 +45,6 @@ export default {
         UPDATE_LICENCES: (state, latestAdd) => {
             state.latestLicences = latestAdd
         }
-
     },
 
     actions: {

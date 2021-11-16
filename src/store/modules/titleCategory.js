@@ -4,37 +4,45 @@ export default {
         titles: [
             {
                 category: 'Discord tag',
-                class: 'user_management_table_element_content item1'
+                class: 'item1'
             },
             {
                 category: 'Role',
-                class: 'user_management_table_element_content item5',
+                class: 'item2',
                 sortType: 'byRole',
                 img: 'UserMRevers.png'
             },
             {
                 category: 'Licence type',
-                class: 'user_management_table_element_content item2',
+                class: 'item3',
                 sortType: 'byLicence',
                 img: 'UserMRevers.png'
             },
             {
                 category: 'License key',
-                class: 'user_management_table_element_content item3'
+                class: 'item4'
             },
             {
                 category: 'Renewal date',
-                class: 'user_management_table_element_content item2',
+                class: 'item5',
                 sortType: 'byRenewDate',
                 img: 'UserMRevers.png'
             },
             {
                 category: 'Key bind',
-                class: 'user_management_table_element_content item4'
+                class: 'item6'
+            },
+            {
+                category: 'Payment status',
+                class: 'item7'
             },
             {
                 category: 'Card bind',
-                class:'user_management_table_element_content item6'
+                class:'item8'
+            },
+            {
+                category: '',
+                class:'item9'
             },
         ],
     },

@@ -1,0 +1,33 @@
+.unbinded{
+    color: #FF0000;
+}
+.binded{
+    color: #2BD6A2;
+}
+.customer{
+    color: #D45DE8;
+}
+.lifeTime{
+    color: #F1A0FF;
+}
+.FF{
+    color: #FF4343;
+}
+.developer{
+    color: rgba(0,224,255,0.96)
+}
+.supportTeam{
+    color: rgba(255,162,0,0.96);
+}
+.en{
+    color: rgba(99,0,219,0.96);
+}
+.moderator{
+    color: rgba(175,255,159,0.62);
+}
+.successful{
+    color: #2BD6A2;
+}
+.notSuccessful{
+    color: #FF0000;
+}

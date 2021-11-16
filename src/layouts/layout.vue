@@ -34,6 +34,7 @@ name: "NewLayout",
 </script>
 
 <style scoped>
+
 .all_element{
   display: flex;
   flex-direction: column;
@@ -41,6 +42,7 @@ name: "NewLayout",
   justify-content: flex-start;
   background: #161E29;
   height: 100%;
+  min-width: 1100px;
 }
 .navbar{
   width: 100%;
@@ -60,25 +62,10 @@ name: "NewLayout",
   min-width: 1100px;
   min-height: 900px;
   width: 100%;
-  background-color: #161E29;
+  background: #161E29;
 }
 .container_flex{
-  /*background-color: #161E29;*/
   display: flex;
   background-size: contain;
-}
-.fade-enter-active,
-.fade-leave-active {
-  transition-property: opacity;
-  transition-duration: 0.35s;
-}
-
-.fade-enter-active {
-  transition-delay: 0.35s;
-}
-
-.fade-enter,
-.fade-leave-active {
-  opacity: 0;
 }
 </style>

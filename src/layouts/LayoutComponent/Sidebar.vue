@@ -87,7 +87,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 .sidebar{
   background: #080D16;
   height: 100%;
@@ -152,7 +151,7 @@ export default {
   margin-left: 1.75vh;
 }
 .totalIncome{
-  font-weight: 500;
+  font-weight: 400;
   font-size: 45px;
   line-height: 53px;
 }
@@ -166,8 +165,6 @@ export default {
 .mainData_header{
   color: #CCCCCC;
   margin-bottom: 5px;
-  font-size: 14px;
-  line-height: 16px;
 }
 .members_info{
   display: flex;
@@ -176,19 +173,11 @@ export default {
   align-items: baseline;
 }
 .countCustomer{
-  font-weight: 500;
+  font-weight: 400;
   font-size: 45px;
   line-height: 55px;
 }
 .countLifetime{
-  font-size: 14px;
-  line-height: 16px;
   margin: 0 5px 0 5px;
-}
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
-  opacity: 0;
 }
 </style>

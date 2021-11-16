@@ -1,0 +1,26 @@
+.fade-enter-active,
+.fade-leave-active {
+    transition-property: opacity;
+    transition-duration: 0.3s;
+}
+.fade-enter-active {
+    transition-delay: 0.3s;
+}
+.fade-enter,
+.fade-leave-active {
+    opacity: 0;
+}
+
+.slide-fade-enter-active {
+    transition: all .5s ease;
+}
+.slide-fade-leave-active {
+    transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to {
+    transform: translateX(30px);
+    opacity: 0;
+}
+.slide-fade-move {
+    transition: transform 1.75s;
+}

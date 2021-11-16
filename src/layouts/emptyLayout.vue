@@ -43,7 +43,6 @@ name: "EmptyLayout"
   top: 27vh;
   background: radial-gradient(circle farthest-corner at 100px 55px, #2e014a, #002634);
   border-radius: 48%;
-  /*background-color: rgba(6,30,49,0.95);*/
   animation: wave 50s linear infinite;
 }
 .wave_two{

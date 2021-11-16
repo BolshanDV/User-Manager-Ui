@@ -37,7 +37,6 @@ export default {
 
 <style scoped>
 .user_management_flex{
-  /*margin: 0 2vh 5vh 2vh;*/
   background: #0D121A;
   border-radius: 10px;
   padding: 0 10px 10px 10px;
@@ -83,8 +82,8 @@ export default {
   color: #C4C4C4;
   background-color: #161E29;
   padding: 5px;
-  width: 100px;
-  height: 35px;
+  width: 170px;
+  height: 40px;
   display: flex;
   flex-direction: row;
   justify-content: center;

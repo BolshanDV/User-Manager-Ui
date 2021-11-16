@@ -46,7 +46,7 @@ import {mapGetters, mapActions} from 'vuex'
 .waves-effect{
   background-color: #B41210;
   border-radius: 7px;
-  width: 132px;
+  width: 150px;
   height: 43px;
 }
 nav{

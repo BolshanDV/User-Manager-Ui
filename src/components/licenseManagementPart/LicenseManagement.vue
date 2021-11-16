@@ -70,24 +70,24 @@
           <div
               class="user_management_table_element waves-effect waves-light"
           >
-            <div class="user_management_table_element_content item3">
+            <div class="user_management_table_element_content item4">
               <div class="text_element">
                 {{ latestLicence.licenceDTO.licenceKey }}
               </div>
             </div>
-            <div class="user_management_table_element_content item4">
+            <div class="user_management_table_element_content item6">
               <div class="text_element"
                    :class="latestLicence.keyBindStyle"
               >
                 {{ latestLicence.licenceDTO.keyBind}}
               </div>
             </div>
-            <div class="user_management_table_element_content item4">
+            <div class="user_management_table_element_content item5">
               <div class="text_element">
                 Create
               </div>
             </div>
-            <div class="user_management_table_element_content item5" >
+            <div class="user_management_table_element_content item10" >
               <div class="text_element"
                    @click="INPUT_CHANGE_RENEWAL_DATE(latestLicence.userDTO.id)"
               >
@@ -179,12 +179,6 @@ export default {
     border-radius: 5px;
     padding: 20px;
   }
-  .item3{
-    width: 200px;
-  }
-  .item5{
-    width: 150px;
-  }
   .text_header{
     font-weight: 500;
     font-size: 18px;
@@ -207,11 +201,6 @@ export default {
     justify-content: flex-start;
     align-items: flex-start;
     padding: 15px;
-  }
-  .arrow{
-    width: 18px;
-    height: 13px;
-    /*margin-left: 100px;*/
   }
   .input_date{
     background: #161E29;
@@ -251,72 +240,18 @@ export default {
   .fade{
     width: 100%;
   }
-  .user_management_table_element{
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border-radius: 3px;
-    align-items: center;
-    margin: 0.5vh;
-    width: auto;
-  }
-  .user_management_table_element_content{
-    height: 100%;
-    min-width: 16vh;
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    min-height: 10px;
-  }
-  .user_management_table_section{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 10px 1vh 10px 1vh;
-  }
   .color{
     background-color: #161E29;
     border-radius: 3px;
-  }
-  .text_element{
-    font-size: 14px;
-    line-height: 16px;
-    font-style: normal;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
   }
   .delete{
     width: 14px;
     height: 15px;
     margin: 0 10px 0 10px;
   }
-  .item4{
-    width: 50px ;
-  }
-  .unbinded{
-    color: #FF0000;
-  }
-  .binded{
-    color: #2BD6A2;
-  }
   .inputRenewal{
     display: flex;
     flex-direction: row;
     justify-content: center;
-  }
-  .slide-fade-enter-active {
-    transition: all .2s ease;
-  }
-  .slide-fade-leave-active {
-    transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
-  .slide-fade-enter, .slide-fade-leave-to {
-    transform: translateX(10px);
-    opacity: 0;
   }
 </style>

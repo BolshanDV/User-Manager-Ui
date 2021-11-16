@@ -89,6 +89,7 @@ export default {
                         console.log(error);
                     });
                 ctx.dispatch('PROCESSING', response.objects)
+                console.log(response)
 
             },
 
@@ -128,6 +129,23 @@ export default {
                         } else {
                             user.billingDTO.cartBind = "Unbinded"
                             Vue.set(user, 'cartBindStyle', 'unbinded')
+                        }
+                        switch (user.paymentDTO.paymentState) {
+                            case "succeeded": {
+                                user.paymentDTO.paymentState = "Successful"
+                                Vue.set(user, 'paymentStateStyle', 'successful ')
+                                break
+                            }
+                            case 'canceled' : {
+                                user.paymentDTO.paymentState = "Failed"
+                                Vue.set(user,'paymentStateStyle', "notSuccessful")
+                                break
+                            }
+                            case null : {
+                                user.paymentDTO.paymentState = "Failed"
+                                Vue.set(user,'paymentStateStyle', "notSuccessful")
+                                break
+                            }
                         }
                         switch (user.licenceTypeDTO.role){
                             case "Customer":  Vue.set(user, 'roleStyle', 'customer')

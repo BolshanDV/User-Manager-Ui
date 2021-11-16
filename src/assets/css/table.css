@@ -1,0 +1,33 @@
+.user_management_table_element{
+    height: 38px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 3px;
+    align-items: center;
+    margin: 5px;
+    /*width: auto;*/
+}
+.user_management_table_element_content{
+    height: 100%;
+    width: 16vh;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 5px;
+    min-height: 10px;
+}
+.text_element{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.user_management_table_section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 5px 10px 5px;
+}

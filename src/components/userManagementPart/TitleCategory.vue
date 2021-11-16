@@ -3,6 +3,7 @@
     <div
       v-for="title in titles"
       :key="title.category"
+      class="user_management_table_element_content"
       :class="[title.class]"
       @click="SORT_HANDLER(title.sortType)"
     >
@@ -41,36 +42,13 @@ name: "TitleCategory",
   min-height: 10px;
   border-radius: 3px;
   margin: 5px 0 0 5px;
-
-}
-/*p{*/
-/*  font-weight: 500;*/
-/*  font-size: 14px;*/
-/*  line-height: 16px;*/
-/*  letter-spacing: 0.01em;*/
-/*  color: #FFFFFF;*/
-/*}*/
-.item1{
-  width: 120px;
-}
-.item2{
-  width: 120px;
-}
-.item3{
-  width: 220px;
-}
-.item4{
-  width: 87px ;
-}
-.item5{
-  width: 84px;
-}
-.item6{
-  width: 126px;
 }
 img{
   width: 16px;
   height: 16px;
   margin: 14px 0 14px 5px;
+}
+p{
+  font-weight: 500;
 }
 </style>

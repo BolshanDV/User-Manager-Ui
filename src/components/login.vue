@@ -31,15 +31,11 @@ img{
   align-content: center;
   align-items: center;
   position: absolute;
-
 }
 .title{
-  /*font-style: normal;*/
-  /*font-weight: 100;*/
-  /*font-size: 45px;*/
-  /*line-height: 45px;*/
-  /*letter-spacing: 0.01em;*/
-  /*color: #FFFFFF;*/
+  font-weight: 400;
+  font-size: 45px;
+  line-height: 45px;
   margin-top: 20px;
 }
 .item{
@@ -54,8 +50,5 @@ img{
   justify-content: center;
   flex-direction: row;
   align-items: center;
-}
-a{
-  color: white;
 }
 </style>

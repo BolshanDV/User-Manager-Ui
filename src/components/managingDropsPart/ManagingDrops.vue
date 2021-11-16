@@ -73,8 +73,6 @@ name: "ManagingDrops"
   margin-bottom: 6%;
   border-radius: 10px;
   padding: 2vh;
-
-
 }
 .managingDrops_column_chart{
   height: 70vh;
@@ -87,18 +85,7 @@ name: "ManagingDrops"
   align-items: center;
   align-content: center;
   justify-content: center;
-
 }
-/*p{*/
-/*  margin-top: 0;*/
-/*  font-family: Roboto,serif;*/
-/*  font-style: normal;*/
-/*  font-weight: 500;*/
-/*  font-size: 2vh;*/
-/*  line-height: 3vh;*/
-/*  letter-spacing: 0.01em;*/
-/*  color: #FFFFFF;*/
-/*}*/
 .managingDrops_column_chart_payment{
   height: 100%;
   width: 50%;
