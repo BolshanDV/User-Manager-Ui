@@ -34,12 +34,12 @@ img{
 
 }
 .title{
-  font-style: normal;
-  font-weight: 100;
-  font-size: 45px;
-  line-height: 45px;
-  letter-spacing: 0.01em;
-  color: #FFFFFF;
+  /*font-style: normal;*/
+  /*font-weight: 100;*/
+  /*font-size: 45px;*/
+  /*line-height: 45px;*/
+  /*letter-spacing: 0.01em;*/
+  /*color: #FFFFFF;*/
   margin-top: 20px;
 }
 .item{

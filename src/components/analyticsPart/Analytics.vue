@@ -29,6 +29,9 @@
       <div class="element_Analytics_Row_One">
         <div class="element_Analytics_head">
           <p>Соотношение пользователей</p>
+          <customers
+              v-if="!preloader"
+          />
         </div>
       </div>
 
@@ -86,7 +89,9 @@
 
 <script>
 import RevenueChart from "../../assets/charts/RevenueChart";
-import CalendarRevenue from "../../assets/alendars/CalendarRevenue";
+import CalendarRevenue from "../../assets/calendars/CalendarRevenue";
+import customers from "../../assets/charts/customers";
+import {mapGetters} from 'vuex'
 export default {
   name: "Analytics",
   data() {
@@ -95,9 +100,13 @@ export default {
     };
   },
   components:{
-    RevenueChart, CalendarRevenue
+    RevenueChart,
+    CalendarRevenue,
+    customers
   },
-
+  computed:{
+    ...mapGetters('userManagement', ['preloader'])
+  },
   methods:{
     addDateInf(data) {
       this.calendar = data.calendar
@@ -107,7 +116,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 .analytics_Section{
   display: flex;
   flex-direction: column;
@@ -144,14 +152,8 @@ export default {
 .element_Analytics_Row_Two{
   width: 70% ;
   height: 60vh;
-  /*margin: 3vh;*/
   background: #0D121A;
   border-radius: 10px;
-}
-.element_Analytics_head{
-  font-size: 16px;
-  line-height: 19px;
-  color: #FFFFFF;
 }
 .element_Analytics_head{
   margin: 0 3vh 3vh 3vh;
@@ -166,7 +168,7 @@ export default {
   width: 100%;
 }
 .element_Analytics_section_chart{
-  width: 70%;
+  width: 65%;
   height: 89%;
   border-radius: 10px;
   background: #080D16;
@@ -183,5 +185,8 @@ export default {
   align-items: center;
   align-content: center;
   justify-content: center;
+}
+p{
+  margin: 25px 0 20px 15px;
 }
 </style>

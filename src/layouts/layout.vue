@@ -40,7 +40,7 @@ name: "NewLayout",
   width: 100%;
   justify-content: flex-start;
   background: #161E29;
-  height: 100vh;
+  height: 100%;
 }
 .navbar{
   width: 100%;
@@ -53,21 +53,17 @@ name: "NewLayout",
   justify-content: center;
   float: top;
   height: 100%;
-  margin-left: 245px;
+  margin-left: 260px;
   margin-top: 50px;
-  background-size: contain;
-  padding-top: 3vh;
-  min-width: 1200px;
-  min-height: 500px;
+  background-size: cover;
+  padding: 60px 30px 20px 30px;
+  min-width: 1100px;
+  min-height: 900px;
   width: 100%;
   background-color: #161E29;
-  background-attachment: scroll;
-  background-repeat: no-repeat;
-  background-image: url("../assets/photo/background2.png"), url("../assets/photo/background1.png");
-
 }
 .container_flex{
-  background-color: #161E29;
+  /*background-color: #161E29;*/
   display: flex;
   background-size: contain;
 }

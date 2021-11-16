@@ -10,16 +10,16 @@
           <div
               class="sidebar_mainData_members"
           >
-            <div class="mainData_header">Общее количество мемберов</div>
+            <div class="mainData_header">Количество мемберов</div>
             <div class="members_info">
               <div class="countCustomer">
                 {{countCustomer}}
               </div>
-              <div>вкл.</div>
+              <div class="mainData_header">вкл.</div>
               <div class="countLifetime">
                 {{countLifetime}}
               </div>
-              <div>
+              <div class="mainData_header">
                 lifetime
               </div>
             </div>
@@ -30,8 +30,7 @@
               Выручка за {{nowDate}}
             </div>
             <div class="analytics_totalIncome">
-              <div class="totalIncome">{{analytics.totalIncome}}</div>
-              <img class="ruble"  src="../../assets/photo/icons/ruble.png" alt="">
+              <div class="totalIncome">{{analytics.totalIncome}}₽</div>
             </div>
           </div>
         </div>
@@ -48,7 +47,7 @@
           :exact="link.exact"
       >
         <img :src=" require('../../assets/photo/icons/' + link.image)" alt="img" class="icons" >
-        {{link.title}}
+        <div>{{link.title}}</div>
       </router-link>
 
     </div>
@@ -88,20 +87,19 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 .sidebar{
   background: #080D16;
   height: 100%;
   position: fixed;
   z-index: 100;
-  width:245px;
+  width:255px;
   min-width: 200px;
 }
 .sidebar_mainData{
   display: flex;
   flex-direction: column;
   color: white;
-  font-family: 'Roboto', sans-serif;
   justify-content: space-between;
   margin: 0 0 4vh 0 ;
   min-width: 120px;
@@ -154,12 +152,9 @@ export default {
   margin-left: 1.75vh;
 }
 .totalIncome{
-  font-style: normal;
-  font-weight: 1000;
-  font-size: 40px;
-  line-height: 35px;
-  letter-spacing: 0.01em;
-  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 45px;
+  line-height: 53px;
 }
 .analytics_totalIncome {
   display: flex;
@@ -168,17 +163,11 @@ export default {
   align-items: center;
   margin-top: 10px;
 }
-.ruble{
-  height: 40px;
-}
 .mainData_header{
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 12px;
-  letter-spacing: 0.01em;
   color: #CCCCCC;
   margin-bottom: 5px;
+  font-size: 14px;
+  line-height: 16px;
 }
 .members_info{
   display: flex;
@@ -187,21 +176,13 @@ export default {
   align-items: baseline;
 }
 .countCustomer{
-  font-style: normal;
   font-weight: 500;
-  font-size: 40px;
-  line-height: 40px;
-  letter-spacing: 0.01em;
-  color: #FFFFFF;
-  margin-right: 5px;
+  font-size: 45px;
+  line-height: 55px;
 }
 .countLifetime{
-  font-style: normal;
-  font-weight: normal;
   font-size: 14px;
   line-height: 16px;
-  letter-spacing: 0.01em;
-  color: #FFFFFF;
   margin: 0 5px 0 5px;
 }
 .fade-enter-active, .fade-leave-active {

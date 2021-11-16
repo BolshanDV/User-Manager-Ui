@@ -17,9 +17,8 @@
               Renewal - {{selectedLicense}}
             </div>
             <div>
-              <img src="../../assets/photo/icons/arrow1.png" class="arrow" alt="">
+              <img src="../../assets/photo/icons/arrow.png" class="arrow" alt="">
             </div>
-
           </div>
           <transition name="slide-fade"
           >
@@ -88,7 +87,7 @@
                 Create
               </div>
             </div>
-            <div class="user_management_table_element_content">
+            <div class="user_management_table_element_content item5" >
               <div class="text_element"
                    @click="INPUT_CHANGE_RENEWAL_DATE(latestLicence.userDTO.id)"
               >
@@ -150,8 +149,8 @@ export default {
     justify-content: center;
   }
   .license_create{
-    min-height: 30%;
-    width: 33%;
+    min-height: 30vh;
+    min-width: 33vh;
     background: #0D121A;
     border-radius: 10px;
     padding: 2vh;
@@ -160,11 +159,10 @@ export default {
     flex-direction: column;
     justify-content: flex-start;
     align-content: flex-start;
-
   }
   .license_recently{
-    height: 100%;
-    width: 58%;
+    width: 800px;
+    min-height: 500px;
     background: #0D121A;
     border-radius: 10px;
     padding: 2vh;
@@ -182,21 +180,21 @@ export default {
     padding: 20px;
   }
   .item3{
-    width: 220px;
+    width: 200px;
+  }
+  .item5{
+    width: 150px;
   }
   .text_header{
     font-weight: 500;
     font-size: 18px;
     line-height: 21px;
-    letter-spacing: 0.01em;
-    color: #FFFFFF;
     margin: 10px 0 15px 0
   }
   .main_text{
     font-weight: 500;
     font-size: 14px;
     line-height: 16px;
-    letter-spacing: 0.01em;
     color: #FFFFFF;
   }
   .type_license{
@@ -213,7 +211,7 @@ export default {
   .arrow{
     width: 18px;
     height: 13px;
-    margin-left: 100px;
+    /*margin-left: 100px;*/
   }
   .input_date{
     background: #161E29;
@@ -235,15 +233,10 @@ export default {
   .type_license_item{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
+    align-content: center;
     height: 30px;
     margin: 10px 0 10px 0;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 18px;
-    letter-spacing: 0.01em;
-    color: #FFFFFF;
   }
   .drop_down_menu{
     padding: 10px 0 10px 0;
@@ -275,26 +268,22 @@ export default {
     flex-direction: row;
     align-content: center;
     align-items: center;
-    justify-content: flex-start;
-    margin-left: 5px;
+    justify-content: center;
     min-height: 10px;
   }
   .user_management_table_section{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 0.5vh 1vh 0.5vh 1vh;
+    margin: 10px 1vh 10px 1vh;
   }
   .color{
     background-color: #161E29;
     border-radius: 3px;
   }
   .text_element{
-    font-weight: normal;
     font-size: 14px;
     line-height: 16px;
-    letter-spacing: 0.01em;
-    color: #FFFFFF;
     font-style: normal;
     display: flex;
     flex-direction: row;
@@ -307,7 +296,7 @@ export default {
     margin: 0 10px 0 10px;
   }
   .item4{
-    width: 87px ;
+    width: 50px ;
   }
   .unbinded{
     color: #FF0000;
@@ -321,10 +310,10 @@ export default {
     justify-content: center;
   }
   .slide-fade-enter-active {
-    transition: all .3s ease;
+    transition: all .2s ease;
   }
   .slide-fade-leave-active {
-    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
   }
   .slide-fade-enter, .slide-fade-leave-to {
     transform: translateX(10px);

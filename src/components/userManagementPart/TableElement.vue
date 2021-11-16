@@ -3,9 +3,7 @@
     <div v-if="preloader"  >
       <Preloader />
     </div>
-    <transition-group
-        name="slide-fade"
-    >
+    <transition-group name="slide-fade">
       <div
           v-show="!preloader"
           v-for="(user, index) in allUsers"
@@ -28,14 +26,13 @@
               >
                 {{ user.licenceTypeDTO.role }}
               </div>
-              <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
+<!--              <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">-->
             </div>
             <div class="user_management_table_element_content item2 "
                  @click="INPUT_CHANGE_LICENCE(user.userDTO.id)"
             >
               <div class="text_element">
-                {{ user.licenceTypeDTO.renewalPrice}}
-                <img class="ruble_img" src="../../assets/photo/icons/ruble.png" alt="">
+                {{ user.licenceTypeDTO.renewalPrice}} ₽
                 <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
               </div>
             </div>
@@ -101,7 +98,7 @@
                 <div class="text_show">
                   {{user.userDTO.discordId}}
                 </div>
-                <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">
+<!--                <img class="pencil_img" src="../../assets/photo/icons/pencil.png" alt="">-->
               </div>
               <div class="element_content_show_parameter">
                 <div class="text_element">Email: </div>
@@ -135,7 +132,7 @@
               </div>
             </div>
             <div class="element_content_show_container button">
-              <button class="waves-effect waves-light btn"
+              <div class="waves-effect waves-light btn1"
                       @click="KICK_USER(user.userDTO.id)"
                       @mouseover="CHANGE_NAME(index)"
                       @mouseleave="CHANGE_NAME_RETURN(index)"
@@ -144,12 +141,12 @@
                 >
                   {{user.kickUserText}}
                 </div>
-              </button>
-              <button class="waves-effect waves-light btn "
+              </div>
+              <div class="waves-effect waves-light btn1 "
                       @click="FREE_MONTH(index)"
               >
                 <div class="text_element">Add Free Month</div>
-              </button>
+              </div>
             </div>
 
           </div>
@@ -194,8 +191,8 @@ name: "TableElement",
   justify-content: space-between;
   border-radius: 3px;
   align-items: center;
-  margin: 0.5vh;
-  width: auto;
+  margin: 5px;
+  /*width: auto;*/
 }
 .user_management_table_element_content{
   height: 100%;
@@ -209,12 +206,6 @@ name: "TableElement",
   min-height: 10px;
 }
 .text_element{
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: 0.01em;
-  color: #FFFFFF;
-  font-style: normal;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -226,13 +217,13 @@ name: "TableElement",
   border-radius: 3px;
 }
 .item1{
-  width: 100px;
+  width: 120px;
 }
 .item2{
   width: 120px;
 }
 .item3{
-  width: 200px;
+  width: 220px;
 }
 .item4{
   width: 87px ;
@@ -247,14 +238,13 @@ name: "TableElement",
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0.5vh 1vh 0.5vh 1vh;
+  margin: 0 5px 10px 5px;
 }
 .element_content_show{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 0 2vh 0 2vh;
   width: 65%;
 }
 .element_content_show_parameter{
@@ -265,10 +255,6 @@ name: "TableElement",
   align-content: center;
 }
 .text_show{
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: 0.01em;
   color: #C4C4C4;
   margin-left: 10px;
 }
@@ -276,34 +262,36 @@ name: "TableElement",
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  padding-bottom:1vh ;
+  padding: 1vh ;
+
 }
-.btn{
+.btn1{
   text-align: center;
   height: 40px;
   margin-left: 3vh;
+  width: 190px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #1F2A39;
 }
 .waves-effect{
-  background: #1F2A39;
   border-radius: 3px;
 }
 .button{
   align-items: flex-end;
   justify-content: flex-end;
 }
-.ruble_img{
-  width: 18px;
-  height: 18px;
-}
 .pencil_img{
   margin-left: 10px;
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
 }
 .arrow{
   margin: 0 12px 0 12px;
-  width: 12px;
-  height: 12px;
+  width: 15px;
+  height: 10px;
   transform: rotate(-90deg);
 }
 .unbinded{
@@ -334,7 +322,6 @@ name: "TableElement",
   color: rgba(175,255,159,0.62);
 }
 .waves-effect{
-  background: #161E29;
   transition-duration: 10s;
 }
 .rotate{
@@ -350,17 +337,17 @@ name: "TableElement",
   justify-content: center;
 }
 .slide-fade-enter-active {
-  transition: all .9s ease;
+  transition: all .5s ease;
 }
 .slide-fade-leave-active {
-  transition: all .9s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 .slide-fade-enter, .slide-fade-leave-to {
   transform: translateX(30px);
   opacity: 0;
 }
 .slide-fade-move {
-  transition: transform 3s;
+  transition: transform 1.75s;
 }
 
 </style>

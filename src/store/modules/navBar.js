@@ -40,7 +40,6 @@ export default {
                     console.log("There was an error!", error);
                 });
             ctx.commit('AUTHORIZED', discordUser)
-            console.log(discordUser)
         }
     }
 }

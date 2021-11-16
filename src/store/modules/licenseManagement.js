@@ -88,7 +88,6 @@ export default {
             let latestAdd = users.slice().reverse()
             latestAdd = latestAdd.slice(0,10)
             ctx.commit('UPDATE_LICENCES', latestAdd)
-            console.log(latestAdd)
 
         }
 

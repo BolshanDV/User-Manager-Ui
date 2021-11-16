@@ -1,25 +1,31 @@
 <template>
   <div class="managingDrops_flex">
     <div class="managingDrops_column">
+      <p>To be continued...</p>
+    </div>
+    <div v-if="false">
+      <div class="managingDrops_column">
 
-      <div class="managingDrops_column_create">
-        <p>Создание дропа</p>
+        <div class="managingDrops_column_create">
+          <p>Создание дропа</p>
+
+        </div>
+        <div class="managingDrops_column_chart">
+          <div class="managingDrops_column_chart_payment">
+            <p>Успешные оплаты</p>
+          </div>
+          <div class="managingDrops_column_chart_key">
+            <p>Привязанные ключи</p>
+          </div>
+        </div>
 
       </div>
-      <div class="managingDrops_column_chart">
-        <div class="managingDrops_column_chart_payment">
-          <p>Успешные оплаты</p>
-        </div>
-        <div class="managingDrops_column_chart_key">
-          <p>Привязанные ключи</p>
-        </div>
+      <div class="managingDrops">
+        <p>Управление дропами</p>
+
       </div>
-
     </div>
-    <div class="managingDrops">
-      <p>Управление дропами</p>
 
-    </div>
 
   </div>
 </template>
@@ -34,7 +40,6 @@ name: "ManagingDrops"
 .managingDrops_flex{
   display: flex;
   flex-direction: row;
-  /*background-color: #161E29;*/
   align-items: center;
   align-content: center;
   justify-content: center;
@@ -51,6 +56,8 @@ name: "ManagingDrops"
   align-items: center;
   align-content: center;
   justify-content: flex-start;
+
+  margin-top: 20vh;
 }
 .managingDrops{
   height: 100vh;
@@ -82,16 +89,16 @@ name: "ManagingDrops"
   justify-content: center;
 
 }
-p{
-  margin-top: 0;
-  font-family: Roboto,serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 2vh;
-  line-height: 3vh;
-  letter-spacing: 0.01em;
-  color: #FFFFFF;
-}
+/*p{*/
+/*  margin-top: 0;*/
+/*  font-family: Roboto,serif;*/
+/*  font-style: normal;*/
+/*  font-weight: 500;*/
+/*  font-size: 2vh;*/
+/*  line-height: 3vh;*/
+/*  letter-spacing: 0.01em;*/
+/*  color: #FFFFFF;*/
+/*}*/
 .managingDrops_column_chart_payment{
   height: 100%;
   width: 50%;
@@ -100,7 +107,5 @@ p{
 .managingDrops_column_chart_key{
   height: 100%;
   width: 50%;
-
-
 }
 </style>

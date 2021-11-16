@@ -24,8 +24,6 @@ name: "EmptyLayout"
   justify-content: center;
   align-content: center;
   background-color: #101722;
-  /*background-attachment: scroll;*/
-  /*background-repeat: no-repeat;*/
   color: #FFFFFF;
   overflow: hidden;
 }
@@ -43,14 +41,15 @@ name: "EmptyLayout"
 .wave_one{
   left: -80vh;
   top: 27vh;
-  background: radial-gradient(circle farthest-corner at 100px 55px, #1D002E, #001C25);
+  background: radial-gradient(circle farthest-corner at 100px 55px, #2e014a, #002634);
   border-radius: 48%;
+  /*background-color: rgba(6,30,49,0.95);*/
   animation: wave 50s linear infinite;
 }
 .wave_two{
   left: 60vh;
   top: 70vh;
-  background: radial-gradient(circle farthest-corner at 100px 55px, #061b2e,#2e0009);
+  background: radial-gradient(circle farthest-corner at 100px 55px, rgba(4, 24, 40, 0.95), #2d0009);
   border-radius: 44%;
   animation: wave 40s linear infinite;
 }

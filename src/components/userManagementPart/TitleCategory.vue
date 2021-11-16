@@ -43,21 +43,21 @@ name: "TitleCategory",
   margin: 5px 0 0 5px;
 
 }
-p{
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: 0.01em;
-  color: #FFFFFF;
-}
+/*p{*/
+/*  font-weight: 500;*/
+/*  font-size: 14px;*/
+/*  line-height: 16px;*/
+/*  letter-spacing: 0.01em;*/
+/*  color: #FFFFFF;*/
+/*}*/
 .item1{
-  width: 100px;
+  width: 120px;
 }
 .item2{
   width: 120px;
 }
 .item3{
-  width: 200px;
+  width: 220px;
 }
 .item4{
   width: 87px ;

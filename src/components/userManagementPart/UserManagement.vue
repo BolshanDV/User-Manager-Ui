@@ -30,17 +30,17 @@ export default {
     TableElement
   },
   methods: {
-    ...mapActions('userManagement',['NO_SORTING']),
+    ...mapActions('userManagement', ['NO_SORTING']),
   },
 }
 </script>
 
 <style scoped>
 .user_management_flex{
-  margin: 0 2vh 5vh 2vh;
+  /*margin: 0 2vh 5vh 2vh;*/
   background: #0D121A;
   border-radius: 10px;
-  padding: 2vh;
+  padding: 0 10px 10px 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,13 +48,10 @@ export default {
   width: auto;
 }
 .head{
-  font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
-  letter-spacing: 0.01em;
-  color: #FFFFFF;
-  margin: 20px 0 0 50px;
+  margin: 20px 0 0 10px;
 }
 .user_management_table{
   background: #101722;
@@ -62,8 +59,8 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 0 1% 1% 1%;
-  min-width: 500px;
+  padding: 0 10px 10px 10px;
+  min-width: 1000px;
   width: auto;
 }
 .user_management_table_element{

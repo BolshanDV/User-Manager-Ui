@@ -7,15 +7,15 @@
 </template>
 
 <script>
-import mainLayout from "./layouts/Layout";
+import mainLayout from "./layouts/layout";
 import emptyLayout from "./layouts/emptyLayout";
 import {mapActions} from 'vuex'
 export default {
   name: 'App',
   computed:{
     layout(){
-      console.log(this.$route.meta)
-      return (this.$route.meta.layout) + 'Layout'
+      const component = (this.$route.meta.layout || 'empty') + 'Layout'
+      return component
     }
   },
   components:{
@@ -33,4 +33,14 @@ export default {
 
 <style>
 @import "~materialize-css/dist/css/materialize.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+.app{
+  font-family: 'Roboto',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+}
 </style>
