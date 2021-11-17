@@ -60,17 +60,19 @@ export default {
                 switch (user.paymentDTO.paymentState) {
                     case "succeeded": {
                         user.paymentDTO.paymentState = "Successful"
-                        Vue.set(user, 'paymentStateStyle', 'successful ')
+                        Vue.set(user.paymentDTO, 'paymentStateStyle', 'successful ')
                         break
                     }
                     case 'canceled' : {
                         user.paymentDTO.paymentState = "Failed"
-                        Vue.set(user,'paymentStateStyle', "notSuccessful")
+                        Vue.set(user.paymentDTO,'paymentStateStyle', "notSuccessful")
+                        Vue.set(user.paymentDTO,'paymentStateFailed', "")
                         break
                     }
                     case null : {
                         user.paymentDTO.paymentState = "Failed"
-                        Vue.set(user,'paymentStateStyle', "notSuccessful")
+                        Vue.set(user.paymentDTO,'paymentStateStyle', "notSuccessful")
+                        Vue.set(user.paymentDTO,'paymentStateFailed', "")
                         break
                     }
                 }
@@ -95,6 +97,7 @@ export default {
                 }
             }
         }
+        console.log(users)
         ctx.commit('UPDATE_USERS', users)
         ctx.dispatch('sideBar/COUNTING_MEMBERS', users, {root: true})
         ctx.dispatch('licenseManagement/LATEST_ADDITION', users, {root: true})

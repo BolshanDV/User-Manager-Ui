@@ -60,10 +60,22 @@
             </div>
             <div class="user_management_table_element_content item7">
               <div
+                  :data-tooltip=user.paymentDTO.comment
                   class="text_element"
-                  :class="user.paymentStateStyle"
+                  :class="user.paymentDTO.paymentStateStyle"
               >
-                {{ user.paymentDTO.paymentState}}
+                <div>
+                  <div>
+                    {{ user.paymentDTO.paymentState}}
+                    {{user.paymentDTO.paymentStateFailed}}
+                  </div>
+                </div>
+                <div
+                    v-if="user.paymentDTO.paymentState !== 'Successful'"
+                class="warning_img"
+                >
+                  <img src="../../assets/photo/icons/warning.png" alt="warning" class="warning">
+                </div>
               </div>
             </div>
             <div class="user_management_table_element_content" >
@@ -243,7 +255,7 @@ name: "TableElement",
   height: 14px;
 }
 .arrow{
-  margin: 0 12px 0 0px;
+  margin: 0 12px 0 0;
   width: 15px;
   height: 10px;
   transform: rotate(-90deg);
@@ -262,5 +274,44 @@ name: "TableElement",
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+.warning{
+  height: 14px;
+  width: 14px;
+  margin-left: 4px;
+}
+.warning_img{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start ;
+  align-content: baseline;
+}
+[data-tooltip] {
+  position: relative;
+  z-index: 1;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  width: 580px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-content: center;
+  background-color: rgba(22,30,41,0.95);
+  border-radius: 5px;
+  left: -600px;
+  top: -4px;
+  padding: 3px;
+  pointer-events: none;
+  opacity: 0;
+  transition: 1s;
+  z-index: 1;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+}
+[data-tooltip]:hover::after {
+  opacity: 1;
 }
 </style>
