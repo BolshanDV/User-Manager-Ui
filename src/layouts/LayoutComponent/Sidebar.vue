@@ -55,9 +55,9 @@
   </div>
 
 </template>
-
 <script>
 import {mapGetters,mapActions} from 'vuex'
+
 export default {
   props: ['value'],
   name: "Sidebar",

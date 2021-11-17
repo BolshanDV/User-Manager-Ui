@@ -1,5 +1,6 @@
 import axios from "axios";
 import Vue from "vue";
+import sorts from "./sorts";
 
 export default {
     async getUsers(ctx) {
@@ -144,7 +145,8 @@ export default {
     },
 
     SORT_HANDLER: async (ctx, sortType) => {
-        if ((sortType === 'byRenewDate') || (sortType === 'byLicence') || sortType === 'byRole') {
+        console.log(sortType)
+        if ((sortType === 'byRenewDate') || (sortType === 'byLicence') || (sortType === 'byRole') || (sortType === 'byKeyBind') || (sortType === 'byPaymentState') || (sortType === 'byCartBind')){
             let currentButton = sortType;
 
             if ((ctx.state.previousButton !== currentButton) && ctx.state.sorts.sortIsActive) {
@@ -158,16 +160,28 @@ export default {
 
                     if (!ctx.state.sorts[sort]) {
                         switch (sortType) {
-                            case "byRenewDate" : {
-                                sortedUsers = await ctx.dispatch('RENEWAL_DATE_SORT')
+                            case "byRenewDate": {
+                                sortedUsers = await sorts.SORT_BY_RENEWAL_DATE(ctx.state.users)
                                 break;
                             }
-                            case "byLicence" : {
-                                sortedUsers = await ctx.dispatch('PRICE_SORT')
+                            case "byLicence": {
+                                sortedUsers = await sorts.SORT_BY_RENEWAL_PRICE(ctx.state.users)
                                 break;
                             }
-                            case "byRole" : {
-                                sortedUsers = await ctx.dispatch('ROLE_SORT')
+                            case "byRole": {
+                                sortedUsers = await sorts.SORT_BY_ROLE(ctx.state.users)
+                                break;
+                            }
+                            case "byKeyBind": {
+                                sortedUsers = await sorts.SORT_BY_KEY_BINDED(ctx.state.users)
+                                break;
+                            }
+                            case "byPaymentState": {
+                                sortedUsers = await sorts.SORT_BY_PAYMENT_STATE(ctx.state.users)
+                                break;
+                            }
+                            case "byCartBind": {
+                                sortedUsers = await sorts.SORT_BY_CART_BIND(ctx.state.users)
                                 break;
                             }
                         }
@@ -179,34 +193,6 @@ export default {
                 ctx.state.sorts.previousButton = currentButton;
             }
         }
-    },
-
-    RENEWAL_DATE_SORT: async (ctx) => {
-        return ctx.state.users.slice().sort((a, b) => {
-            a = new Date(a.licenceDTO.renewalDate);
-            b = new Date(b.licenceDTO.renewalDate);
-            return b - a;
-        })
-    },
-
-    PRICE_SORT: async (ctx) => {
-        return ctx.state.users.slice().sort((a, b) => {
-            a = a.licenceTypeDTO.renewalPrice;
-            b = b.licenceTypeDTO.renewalPrice;
-            return b - a;
-        })
-    },
-
-    ROLE_SORT: async (ctx) => {
-        return ctx.state.users.slice().sort((a, b) => {
-            a = a.licenceTypeDTO.role.toLowerCase();
-            b = b.licenceTypeDTO.role.toLowerCase();
-            if (a < b) //сортируем строки по возрастанию
-                return 1
-            if (a > b)
-                return -1
-            return 0
-        })
     },
 
     NO_SORTING: ctx => {

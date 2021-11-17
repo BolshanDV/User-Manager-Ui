@@ -10,6 +10,9 @@ export default {
         sortIsActive: false,
         byRenewDate: false,
         byLicence: false,
-        byRole: false
+        byRole: false,
+        byKeyBind: false,
+        byPaymentState: false,
+        byCartBind: false
     }
 }

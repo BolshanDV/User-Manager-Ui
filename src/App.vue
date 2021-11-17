@@ -14,8 +14,7 @@ export default {
   name: 'App',
   computed:{
     layout(){
-      const component = (this.$route.meta.layout || 'empty') + 'Layout'
-      return component
+      return (this.$route.meta.layout || 'empty') + 'Layout'
     }
   },
   components:{
@@ -32,11 +31,10 @@ export default {
 </script>
 
 <style lang="css">
-@import "~materialize-css/dist/css/materialize.min.css";
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import "assets/css/transitions/transition.css";
-@import "assets/css/colorRoles.css";
-@import "assets/css/fonts/font.css";
-@import "assets/css/colums.css";
-@import "assets/css/table.css";
+  @import "~materialize-css/dist/css/materialize.min.css";
+  @import "assets/css/transitions/transition.css";
+  @import "assets/css/colorRoles.css";
+  @import "assets/css/fonts/font.css";
+  @import "assets/css/colums.css";
+  @import "assets/css/table.css";
 </style>

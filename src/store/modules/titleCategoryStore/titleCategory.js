@@ -30,15 +30,21 @@ export default {
             },
             {
                 category: 'Key bind',
-                class: 'item6'
+                class: 'item6',
+                sortType: 'byKeyBind',
+                img: 'UserMRevers.png'
             },
             {
                 category: 'Payment status',
-                class: 'item7'
+                class: 'item7',
+                sortType: 'byPaymentState',
+                img: 'UserMRevers.png'
             },
             {
                 category: 'Card bind',
-                class:'item8'
+                class:'item8',
+                sortType: 'byCartBind',
+                img: 'UserMRevers.png'
             },
             {
                 category: '',
