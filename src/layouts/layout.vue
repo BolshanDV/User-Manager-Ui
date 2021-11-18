@@ -58,7 +58,7 @@ name: "NewLayout",
   margin-left: 260px;
   margin-top: 50px;
   background-size: cover;
-  padding: 60px 30px 20px 30px;
+  padding: 60px 20px 20px 20px;
   min-width: 1100px;
   min-height: 900px;
   width: 100%;

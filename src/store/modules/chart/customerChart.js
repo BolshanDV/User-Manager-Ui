@@ -1,7 +1,7 @@
 export default {
     namespaced: true,
     state: {
-        renewalPriceChart: []
+        renewalPriceChart: [],
     },
 
     getters: {
@@ -36,7 +36,7 @@ export default {
                 }
             }
             ctx.commit('COUNT_CUSTOMERS',renewalPriceChart)
+        },
 
-        }
     }
 }

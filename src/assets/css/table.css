@@ -8,6 +8,16 @@
     margin: 5px;
     /*width: auto;*/
 }
+.user_management_table{
+    background: #101722;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0 10px 10px 10px;
+    min-width: 1000px;
+    width: auto;
+}
 .user_management_table_element_content{
     height: 100%;
     width: 16vh;

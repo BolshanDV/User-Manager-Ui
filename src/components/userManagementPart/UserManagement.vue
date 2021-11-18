@@ -39,28 +39,18 @@ export default {
 .user_management_flex{
   background: #0D121A;
   border-radius: 10px;
-  padding: 0 10px 10px 10px;
+  padding: 0 15px 15px 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  width: auto;
+  /*width: auto;*/
 }
 .head{
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
   margin: 20px 0 0 10px;
-}
-.user_management_table{
-  background: #101722;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 0 10px 10px 10px;
-  min-width: 1000px;
-  width: auto;
 }
 .user_management_table_element{
   height: 50px;

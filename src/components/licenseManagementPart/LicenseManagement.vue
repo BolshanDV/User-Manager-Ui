@@ -60,59 +60,70 @@
 
     </div>
     <div class="license_recently">
-      <div class="text_header">Недавно созданные</div>
-      <div
-          class="color user_management_table_section"
-          v-for="(latestLicence, index) in latestLicences"
-          :key="index"
-      >
-        <div class="table_block">
-          <div
-              class="user_management_table_element waves-effect waves-light"
-          >
-            <div class="user_management_table_element_content item4">
-              <div class="text_element">
-                {{ latestLicence.licenceDTO.licenceKey }}
-              </div>
-            </div>
-            <div class="user_management_table_element_content item6">
-              <div class="text_element"
-                   :class="latestLicence.keyBindStyle"
-              >
-                {{ latestLicence.licenceDTO.keyBind}}
-              </div>
-            </div>
-            <div class="user_management_table_element_content item5">
-              <div class="text_element">
-                Create
-              </div>
-            </div>
-            <div class="user_management_table_element_content item10" >
-              <div class="text_element"
-                   @click="INPUT_CHANGE_RENEWAL_DATE(latestLicence.userDTO.id)"
-              >
-                {{ latestLicence.licenceDTO.renewalDate}}
-                <img src="../../assets/photo/icons/pencil.png" alt="" class="delete">
-                <div
-                    @click="KICK_USER(latestLicence.userDTO.id)"
-                >
-                  <img
-                      src="../../assets/photo/icons/delete.png"
-                      class="delete"
-                  >
-                </div>
-
-              </div>
-            </div>
-        </div >
-          <inputField
-              class="inputRenewal"
-              :id="latestLicence.userDTO.id"
-              :inputFlagRenewal="latestLicence.inputFlagRenewal"
-              v-if="latestLicence.inputFlagRenewal"
-          />
+      <div v-if="preloader"  >
+        <Preloader />
       </div>
-    </div>
+      <transition name="slide-fade">
+        <div
+            v-show="!preloader"
+        >
+          <div class="text_header">Недавно созданные</div>
+          <div class="table_container">
+            <div
+                class="color user_management_table_section "
+                v-for="(latestLicence, index) in latestLicences"
+                :key="index"
+            >
+              <div class="table_block">
+                <div
+                    class="user_management_table_element waves-effect waves-light"
+                >
+                  <div class="user_management_table_element_content item4">
+                    <div class="text_element">
+                      {{ latestLicence.licenceDTO.licenceKey }}
+                    </div>
+                  </div>
+                  <div class="user_management_table_element_content item6">
+                    <div class="text_element"
+                         :class="latestLicence.keyBindStyle"
+                    >
+                      {{ latestLicence.licenceDTO.keyBind}}
+                    </div>
+                  </div>
+                  <div class="user_management_table_element_content item5">
+                    <div class="text_element">
+                      Create
+                    </div>
+                  </div>
+                  <div class="user_management_table_element_content item10" >
+                    <div class="text_element"
+                         @click="INPUT_CHANGE_RENEWAL_DATE(latestLicence.userDTO.id)"
+                    >
+                      {{ latestLicence.licenceDTO.renewalDate}}
+                      <img src="../../assets/photo/icons/pencil.png" alt="" class="delete">
+                      <div
+                          @click="KICK_USER(latestLicence.userDTO.id)"
+                      >
+                        <img
+                            src="../../assets/photo/icons/delete.png"
+                            class="delete"
+                        >
+                      </div>
+
+                    </div>
+                  </div>
+                </div >
+                <inputField
+                    class="inputRenewal"
+                    :id="latestLicence.userDTO.id"
+                    :inputFlagRenewal="latestLicence.inputFlagRenewal"
+                    v-if="latestLicence.inputFlagRenewal"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -129,7 +140,8 @@ export default {
     renewalDate: ''
   }),
   computed:{
-    ...mapGetters('licenseManagement', ['prices', 'licenseFlag', 'selectedLicense', 'latestLicences'])
+    ...mapGetters('licenseManagement', ['prices', 'licenseFlag', 'selectedLicense', 'latestLicences']),
+    ...mapGetters('userManagement', ['preloader'])
   },
   methods:{
     ...mapActions('licenseManagement', ['LICENSE_FLAG', 'SELECTED_LICENSE', 'CREATE_LICENCE', 'LATEST_ADDITION']),
@@ -165,7 +177,7 @@ export default {
     min-height: 500px;
     background: #0D121A;
     border-radius: 10px;
-    padding: 2vh;
+    padding: 20px;
   }
   .create_key{
     display: flex;
@@ -177,7 +189,7 @@ export default {
   .license_space{
     background: #101722;
     border-radius: 5px;
-    padding: 20px;
+    padding: 15px;
   }
   .text_header{
     font-weight: 500;
@@ -253,5 +265,10 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: center;
+  }
+  .table_container{
+    background: #101722;
+    border-radius: 5px;
+    padding: 15px 10px 10px 10px;
   }
 </style>

@@ -293,14 +293,14 @@ name: "TableElement",
 [data-tooltip]::after {
   content: attr(data-tooltip);
   position: absolute;
-  width: 580px;
+  width: 650px;
   display: flex;
   justify-content: center;
   flex-direction: row;
   align-content: center;
   background-color: rgba(22,30,41,0.95);
   border-radius: 5px;
-  left: -600px;
+  left: -680px;
   top: -4px;
   padding: 3px;
   pointer-events: none;
@@ -308,8 +308,9 @@ name: "TableElement",
   transition: 1s;
   z-index: 1;
   font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: 0.02em
 }
 [data-tooltip]:hover::after {
   opacity: 1;

@@ -10,15 +10,14 @@
 
         <div class="element_Analytics_section_chart">
           <RevenueChart
-          :calendar="calendar"
+              :key="componentKey"
           />
         </div>
 
         <div class="element_Analytics_section_menu">
-          <CalendarRevenue
-              :addDateInf = "addDateInf"
-            >
-          </CalendarRevenue>
+          <div>
+            <date-selection/>
+          </div>
         </div>
 
       </div>
@@ -89,9 +88,10 @@
 
 <script>
 import RevenueChart from "../../assets/charts/RevenueChart";
-import CalendarRevenue from "../../assets/calendars/CalendarRevenue";
+// import CalendarRevenue from "../../assets/calendars/CalendarRevenue";
+import dateSelection from "./dateSelection"
 import customers from "../../assets/charts/customers";
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 export default {
   name: "Analytics",
   data() {
@@ -101,17 +101,20 @@ export default {
   },
   components:{
     RevenueChart,
-    CalendarRevenue,
-    customers
+    // CalendarRevenue,
+    customers,
+    dateSelection
   },
   computed:{
-    ...mapGetters('userManagement', ['preloader'])
+    ...mapGetters('userManagement', ['preloader']),
+    ...mapGetters('calendar', ['componentKey'])
   },
   methods:{
-    addDateInf(data) {
-      this.calendar = data.calendar
-    }
-  }
+    ...mapActions('calendar',['WEEK_REVENUE'])
+  },
+  beforeMount() {
+    this.WEEK_REVENUE()
+  },
 }
 </script>
 
@@ -176,15 +179,17 @@ export default {
 }
 .element_Analytics_section_menu{
   width: 30% ;
+  min-width: 300px;
   height: 89%;
   border-radius: 10px;
   background: #080D16;
+  padding: 15px;
   margin: 0 3vh 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   align-content: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 p{
   margin: 25px 0 20px 15px;

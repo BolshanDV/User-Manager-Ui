@@ -6,16 +6,17 @@
 
 <script>
 import { Bar } from 'vue-chartjs'
+import {mapGetters} from 'vuex'
 export default {
   name: "AnalyticsRevenue",
   mixins: [Bar],
   mounted() {
     this.renderChart({
-          labels: ['1', '2', '3', 'Green', 'Purple', 'Orange'],
+          labels: this.calendarDateInterval.labels,
           datasets: [{
-            data: [10, 12, 3, 5, 2, 3],
+            data: this.calendarDateInterval.moneys,
             backgroundColor: '#2BD6A2',
-            borderColor: '#0D121A',
+            borderColor: '#1c283b',
             borderWidth: 1
           }]
         },
@@ -30,6 +31,11 @@ export default {
         barThickness: 10
       }]
     }
+  },
+  computed: {
+    ...mapGetters('calendar', ['calendarDateInterval'])
+  },
+  methods:{
   },
 }
 </script>
