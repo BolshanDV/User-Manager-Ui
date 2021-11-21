@@ -42,7 +42,7 @@ name: "NewLayout",
   justify-content: flex-start;
   background: #161E29;
   height: 100%;
-  min-width: 1100px;
+  min-width: 1200px;
 }
 .navbar{
   width: 100%;

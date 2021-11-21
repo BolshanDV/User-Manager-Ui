@@ -133,8 +133,8 @@ export default {
   .element_Analytics {
     height: 47vh;
     min-height: 440px;
-    min-width: 900px;
-    width: 88%;
+    min-width: 1100px;
+    width: 120vh;
     background: #0D121A;
     margin: 0 0 3vh 0;
     border-radius: 10px;
@@ -147,7 +147,7 @@ export default {
     justify-content: space-between;
     height: auto;
     min-height: 400px;
-    width: 88%;
+    width: 120vh;
     margin: 0 0 3vh 0;
     position: relative;
   }
@@ -161,8 +161,9 @@ export default {
 .chart_customer{
   background: #080D16;
   border-radius: 9px;
+  height: 40vh;
   /*width: 400px;*/
-  height: 300px;
+  /*height: 500px;*/
   padding: 30px;}
 .element_Analytics_Row_Two{
   width: 70% ;
@@ -176,13 +177,12 @@ export default {
   display: flex;
   flex-direction: row;
   align-content: center;
-  align-items: stretch;
+  align-items: center;
   justify-content: space-between;
-  height: 80%;
-  width: 100%;
 }
 .element_Analytics_section_chart{
   width: 80%;
+  min-width: 500px;
   height: 100%;
   border-radius: 10px;
   background: #080D16;
@@ -190,7 +190,7 @@ export default {
   padding: 10px;
 }
 .element_Analytics_section_menu{
-  width: 25% ;
+  width: 40vh ;
   min-width: 300px;
   height: 100%;
   border-radius: 10px;
