@@ -1,5 +1,5 @@
 <template>
-  <div class="section">
+  <div>
 
     <v-date-picker
         v-model="calendar"
@@ -36,18 +36,10 @@ export default {
 </script>
 
 <style scoped>
-.section{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.btn{
-  color: #CCCCCC;
-  width: 200px;
-  height: 40px;
-  margin-top: 10px;
-  background-color: #2e0009;
-  border-radius: 6px;
-}
+/*.section{*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*}*/
 </style>

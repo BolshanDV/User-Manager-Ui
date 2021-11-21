@@ -129,7 +129,7 @@ export default {
   margin: 0 0 5vh 0;
 }
 .element_Analytics {
-  height: 70vh;
+  height: 58vh;
   width: 98%;
   background: #0D121A;
   margin: 0 0 3vh 0;
@@ -167,12 +167,12 @@ export default {
   align-content: center;
   align-items: stretch;
   justify-content: space-between;
-  height: 95%;
+  height: 80%;
   width: 100%;
 }
 .element_Analytics_section_chart{
   width: 65%;
-  height: 89%;
+  height: 100%;
   border-radius: 10px;
   background: #080D16;
   margin: 0 3vh 0 3vh;
@@ -180,7 +180,7 @@ export default {
 .element_Analytics_section_menu{
   width: 30% ;
   min-width: 300px;
-  height: 89%;
+  height: 100%;
   border-radius: 10px;
   background: #080D16;
   padding: 15px;

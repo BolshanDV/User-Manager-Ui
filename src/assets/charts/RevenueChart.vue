@@ -15,7 +15,7 @@ export default {
           labels: this.calendarDateInterval.labels,
           datasets: [{
             data: this.calendarDateInterval.moneys,
-            backgroundColor: '#2BD6A2',
+            backgroundColor: '#5899db',
             borderColor: '#1c283b',
             borderWidth: 1
           }]
@@ -23,15 +23,21 @@ export default {
     )
 
   },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        barThickness: 10
-      }]
-    }
+  props: {
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      legend: {
+        display: false // отключает легенду, бесполезную когда на графике одна линия
+      },
+      scales: {
+        xAxes: [{
+          barThickness: 10
+        }]
+      },
+    },
   },
+
   computed: {
     ...mapGetters('calendar', ['calendarDateInterval'])
   },

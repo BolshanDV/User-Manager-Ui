@@ -30,7 +30,7 @@ export default {
   options: {
     responsive: true,
     maintainAspectRatio: false,
-    cutoutPercentage: 10
+    cutoutPercentage: 10,
   },
 
   computed: {

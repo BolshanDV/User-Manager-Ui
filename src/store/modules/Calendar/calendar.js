@@ -6,7 +6,9 @@ export default {
         componentKey: 0,
         calendarIntervalFlag: false,
         monthWeek: true,
-        calendarDateInterval: {}
+        calendarDateInterval: {},
+        totalIncome: null,
+        calendarEndStart: {}
     },
 
     getters:{
@@ -28,6 +30,14 @@ export default {
 
         calendarDateInterval(state) {
             return state.calendarDateInterval
+        },
+
+        totalIncome(state) {
+            return state.totalIncome
+        },
+
+        calendarEndStart(state) {
+            return state.calendarEndStart
         }
 
     },
@@ -49,30 +59,44 @@ export default {
         CALENDAR_DATE_INTERVAL: (state, obj) => {
             state.calendarDateInterval = obj
             state.componentKey++
-            console.log(state.calendarDateInterval)
         },
+
+        GET_TOTAL_INCOME: (state, totalIncome) => {
+            state.totalIncome = totalIncome
+        },
+
+        CALENDAR_END_START: (state, obj) => {
+            state.calendarEndStart = obj
+            console.log(state.calendarEndStart)
+        }
     },
 
     actions: {
+
         WEEK_REVENUE: async (ctx) => {
-            let lastWeek = new Date(moment().subtract(4, 'week').endOf('week').format())
+            let lastWeek = moment().subtract(7, 'days').startOf('day')
             let nowDate = new Date()
             const obj= {
                 startDate: await ctx.dispatch('sideBar/CREATURE_DATE', lastWeek, { root: true}),
-                endDate: await ctx.dispatch('sideBar/CREATURE_DATE', nowDate, { root: true}),
+                endDate: await ctx.dispatch('sideBar/CREATURE_DATE', nowDate, { root: true})
             }
-            console.log(obj)
             const revenueInterval = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
-            console.log('revenueInterval')
-            console.log(revenueInterval)
 
+            ctx.dispatch('CREATE_DATA_FOR_CHART', revenueInterval)
+            ctx.commit('CALENDAR_END_START', obj)
+            ctx.dispatch('GET_TOTAL_INCOME', revenueInterval.totalIncome)
+
+        },
+
+        CREATE_DATA_FOR_CHART: (ctx, revenueInterval) => {
             const convertedObj = () => {
                 const labels = [];
                 const moneys = [];
 
                 for (const oneDay of revenueInterval.incomeList) {
-                    labels.push(oneDay.date.split('-')[1] + '-' + oneDay.date.split('-')[2]);
-                    moneys.push(oneDay.oneDayIncome);
+                    labels.push(oneDay.date.split('-')[1] + '-' + oneDay.date.split('-')[2])
+                    moneys.push(oneDay.oneDayIncome)
+
                 }
 
                 return {
@@ -80,47 +104,12 @@ export default {
                     moneys: moneys
                 }
             }
-
-            console.log(convertedObj())
-
-            ctx.commit('CALENDAR_DATE_INTERVAL', convertedObj());
+            ctx.commit('CALENDAR_DATE_INTERVAL', convertedObj())
         },
-        // WEEK_REVENUE: (ctx) => {
-        //     let lastWeek = new Date(moment().subtract(2, 'week').endOf('week').format())
-        //     let nowDate = new Date()
-        //     const obj= {
-        //         start: lastWeek,
-        //         end: nowDate,
-        //     }
-        //     console.log('Мы тут')
-        //     ctx.dispatch('getDatesBetweenDates', obj)
-        // },
-        //  getDatesBetweenDates: async (ctx, calendar) => {
-        //      console.log(calendar)
-        //     const obj= {
-        //         startDate: new Date(calendar.start),
-        //         endDate: new Date(calendar.end)
-        //     }
-        //     let dates = []
-        //     const theDate = new Date(obj.startDate)
-        //     while (theDate < obj.endDate) {
-        //         dates = [...dates, new Date(theDate)]
-        //         theDate.setDate(theDate.getDate() + 1)
-        //     }
-        //     dates = [...dates, obj.endDate]
-        //     let dateFormat = []
-        //     for (const date of dates) {
-        //        dateFormat.push(new Intl.DateTimeFormat('en-GB').format(date))
-        //     }
-        //
-        //     ctx.commit('RECEPTION_DATE_FORMAT', dateFormat)
-        //
-        //     // const revenue = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
-        //     //  console.log(revenue)
-        // },
 
         CHANGE_CALENDAR_DATE: (ctx) => {
             ctx.commit('CHANGE_CALENDAR_DATE')
+
         },
 
         CHANGE_WW_MM: (ctx) => {
@@ -137,19 +126,38 @@ export default {
         },
 
         GET_DETAIL_PAYMENTS_ANALYTIC: async (ctx, calendar) => {
-            console.log(calendar)
 
             const obj = {
                 startDate: await ctx.dispatch('sideBar/CREATURE_DATE', calendar.start, { root: true}),
                 endDate: await ctx.dispatch('sideBar/CREATURE_DATE', calendar.end, { root: true})
             }
-            console.log(obj)
-            ctx.commit('CALENDAR_DATE_INTERVAL', obj)
 
+            ctx.commit('CALENDAR_END_START', obj)
             const revenueInterval = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
-            console.log(revenueInterval)
+
+            ctx.dispatch('CREATE_DATA_FOR_CHART', revenueInterval)
+            ctx.dispatch('GET_TOTAL_INCOME', revenueInterval.totalIncome)
+            ctx.dispatch('CHANGE_CALENDAR_DATE')
+        },
+
+        GET_TOTAL_INCOME: (ctx, totalIncome) => {
+            ctx.commit('GET_TOTAL_INCOME', totalIncome)
+        },
+
+        MONTH_REVENUE: async (ctx) => {
+            let month = moment().subtract(30, 'days').startOf('day')
+            let nowDate = new Date()
+
+            const obj= {
+                startDate: await ctx.dispatch('sideBar/CREATURE_DATE', month, { root: true}),
+                endDate: await ctx.dispatch('sideBar/CREATURE_DATE', nowDate, { root: true})
+            }
+            const revenueInterval = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
+
+            ctx.dispatch('CREATE_DATA_FOR_CHART', revenueInterval)
+            ctx.commit('CALENDAR_END_START', obj)
+            ctx.dispatch('GET_TOTAL_INCOME', revenueInterval.totalIncome)
 
         }
-
     }
 }

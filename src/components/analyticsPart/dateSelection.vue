@@ -2,48 +2,53 @@
   <div class="calendarParams">
     <div class="head_title">Выбор периода</div>
     <div class="calendarParams" >
-      <div class="choice_date">
+      <div
+          class="choice_date"
+          v-show="!calendarIntervalFlag"
+      >
         <div class="btn_interval"
-             @click="DOUBLE_FUNC_WEEK_REVENUE"
-             :class="{selected: monthWeek}"
-        >
+             @click="DOUBLE_FUNC_WEEK_REVENUE">
+<!--             :class="{selected: monthWeek}"-->
           Неделя
         </div>
-
         <div class="btn_interval"
-             @click="CHANGE_WW_MM"
-             :class="{ selected: !monthWeek }"
-        >
+             @click="MONTH_REVENUE">
+<!--             :class="{ selected: !monthWeek }"-->
           Месяц
         </div>
       </div>
-      <div class="choice_date">
-        <div class="calendar_interval"
+      <div class="choice_date"
+           v-show="!calendarIntervalFlag"
+      >
+        <div class="calendar_interval selected"
              @click="CHANGE_CALENDAR_DATE"
-             :class="{selectedMonth: calendarIntervalFlag}"
         >
-          <div v-show="!calendarIntervalFlag">Календарь</div>
-          <div v-show="calendarIntervalFlag"
-               class="calendarParams"
-          >
-            <div class="calendarParamsInterval">
-              <div class="item">{{ calendarDateInterval.startDate}}</div>
-              <div class="item">-</div>
-              <div class="item">{{calendarDateInterval.endDate}}</div>
-            </div>
-            <div class="calendarParamsInterval">SAVE</div>
+          <div class="calendarParamsInterval">
+            <div class="item">{{ calendarEndStart.startDate}}</div>
+            <div class="item">-</div>
+            <div class="item">{{calendarEndStart.endDate}}</div>
+            <div><img class="calendar" src="../../assets/photo/icons/calendar.png" alt=""></div>
           </div>
-
-
         </div>
       </div>
+        <div
+            class="payments_period"
+            v-show="!calendarIntervalFlag"
+        >
+            <div class="direction">
+              Выручка за указанный период:
+            </div>
+            <div class="total_income">
+              {{totalIncome}}₽
+            </div>
+        </div>
       <transition name="fade">
-      <CalendarRevenue
-          v-show="calendarIntervalFlag"
-          :key="componentKey"
-      />
+        <CalendarRevenue
+            v-show="calendarIntervalFlag"
+            :key="componentKey"
+        />
       </transition>
-      <div class="payments_period"></div>
+
 
     </div>
 
@@ -59,10 +64,10 @@ name: "dateSelection",
     CalendarRevenue
   },
   computed: {
-    ...mapGetters('calendar', ['calendarIntervalFlag', 'monthWeek', 'calendarDateInterval','componentKey'])
+    ...mapGetters('calendar', ['calendarIntervalFlag', 'monthWeek', 'calendarDateInterval', 'componentKey', 'totalIncome', 'calendarEndStart'])
   },
   methods: {
-    ...mapActions('calendar', ['CHANGE_CALENDAR_DATE', 'CHANGE_WW_MM', 'WEEK_REVENUE', 'DOUBLE_FUNC_WEEK_REVENUE'])
+    ...mapActions('calendar', ['CHANGE_CALENDAR_DATE', 'CHANGE_WW_MM', 'WEEK_REVENUE', 'DOUBLE_FUNC_WEEK_REVENUE', 'MONTH_REVENUE'])
 
   }
 }
@@ -75,7 +80,7 @@ name: "dateSelection",
   flex-direction: row;
   justify-content: flex-start;
   align-content: center;
-  margin: 10px;
+  margin: 10px 15px 20px 15px;
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
@@ -100,14 +105,14 @@ name: "dateSelection",
   justify-content: space-around;
   align-items: center;
   width: 270px;
-  height: 50px;
-  margin: 0 0 8px 0;
+  height: 45px;
+  margin: 0 0 15px 0;
   /*padding: 10px;*/
 }
 .btn_interval{
   border-radius: 3px;
   width: 17vh;
-  height: 45px;
+  height: 40px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -121,7 +126,7 @@ name: "dateSelection",
   justify-content: space-around;
   align-items: center;
   width: 265px;
-  height: 45px;
+  height: 40px;
   border-radius: 3px;
   margin: 3px ;
 }
@@ -132,9 +137,30 @@ name: "dateSelection",
   background-color: #5899db;
 }
 .payments_period{
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 50px;
 }
 .item{
   margin: 3px;
+}
+.total_income{
+  font-weight: 500;
+  font-size: 50px;
+  line-height: 57px;
+  margin-top: 15px;
+}
+.direction{
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #CCCCCC;
+}
+.calendar{
+  width: 18px;
+  height: 18px;
+  margin-left: 7px;
 }
 </style>
