@@ -1,7 +1,8 @@
+<template>
+  <canvas ref="canvas"></canvas>
+</template>
 
-  <div class="analyticsRevenue">
-    <canvas ref="canvas"></canvas>
-  </div>
+
 
 <script>
 import {mapGetters} from 'vuex'
@@ -24,15 +25,17 @@ export default {
             borderWidth: 4
           }]
         },
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutoutPercentage: 68,
+          legend:{
+            position: "right"
+          }
+        }
     )
 
   },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    cutoutPercentage: 10,
-  },
-
   computed: {
     ...mapGetters('customersChart', ['renewalPriceChart'])
   }
@@ -40,5 +43,8 @@ export default {
 </script>
 
 <style scoped>
-
+  cancas{
+    width: 500px;
+    height: 500px;
+  }
 </style>

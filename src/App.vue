@@ -32,9 +32,9 @@ export default {
 
 <style lang="css">
   @import "~materialize-css/dist/css/materialize.min.css";
-  @import "assets/css/transitions/transition.css";
-  @import "assets/css/colorRoles.css";
-  @import "assets/css/fonts/font.css";
-  @import "assets/css/colums.css";
-  @import "assets/css/table.css";
+  @import "assets/style/transitions/transition.css";
+  @import "assets/style/colorRoles.css";
+  @import "assets/style/fonts/font.css";
+  @import "assets/style/colums.css";
+  @import "assets/style/table.css";
 </style>

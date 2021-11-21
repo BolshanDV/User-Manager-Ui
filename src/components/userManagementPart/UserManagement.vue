@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="center_flex" >
     <div class="user_management_flex" >
         <div class="head">Управление пользователями</div>
       <div
@@ -42,10 +42,12 @@ export default {
   padding: 0 15px 15px 15px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-content: center;
-  /*width: auto;*/
+  width: 88%;
+  min-width: 1000px;
 }
+
 .head{
   font-weight: 500;
   font-size: 18px;
@@ -79,5 +81,11 @@ export default {
   justify-content: center;
   align-items: center;
   border-radius: 5px;
+}
+.center_flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;;
 }
 </style>

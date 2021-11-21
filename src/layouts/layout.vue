@@ -52,10 +52,11 @@ name: "NewLayout",
 .work_space{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-content: center;
   float: top;
   height: 100%;
-  margin-left: 260px;
+  margin-left: 275px;
   margin-top: 50px;
   background-size: cover;
   padding: 60px 20px 20px 20px;

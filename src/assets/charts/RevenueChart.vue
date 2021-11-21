@@ -20,24 +20,21 @@ export default {
             borderWidth: 1
           }]
         },
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          legend: {
+            display: false
+          },
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
     )
 
   },
-  props: {
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      legend: {
-        display: false // отключает легенду, бесполезную когда на графике одна линия
-      },
-      scales: {
-        xAxes: [{
-          barThickness: 10
-        }]
-      },
-    },
-  },
-
   computed: {
     ...mapGetters('calendar', ['calendarDateInterval'])
   },
@@ -47,5 +44,8 @@ export default {
 </script>
 
 <style scoped>
-
+canvas{
+  height: 35vh;
+  width: auto;
+}
 </style>

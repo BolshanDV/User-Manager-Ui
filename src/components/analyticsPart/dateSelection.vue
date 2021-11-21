@@ -2,32 +2,34 @@
   <div class="calendarParams">
     <div class="head_title">Выбор периода</div>
     <div class="calendarParams" >
-      <div
-          class="choice_date"
-          v-show="!calendarIntervalFlag"
-      >
-        <div class="btn_interval"
-             @click="DOUBLE_FUNC_WEEK_REVENUE">
-<!--             :class="{selected: monthWeek}"-->
-          Неделя
-        </div>
-        <div class="btn_interval"
-             @click="MONTH_REVENUE">
-<!--             :class="{ selected: !monthWeek }"-->
-          Месяц
-        </div>
-      </div>
-      <div class="choice_date"
-           v-show="!calendarIntervalFlag"
-      >
-        <div class="calendar_interval selected"
-             @click="CHANGE_CALENDAR_DATE"
+      <div>
+        <div
+            class="choice_date"
+            v-show="!calendarIntervalFlag"
         >
-          <div class="calendarParamsInterval">
-            <div class="item">{{ calendarEndStart.startDate}}</div>
-            <div class="item">-</div>
-            <div class="item">{{calendarEndStart.endDate}}</div>
-            <div><img class="calendar" src="../../assets/photo/icons/calendar.png" alt=""></div>
+          <div class="btn_interval"
+               @click="DOUBLE_FUNC_WEEK_REVENUE">
+            <!--             :class="{selected: monthWeek}"-->
+            Неделя
+          </div>
+          <div class="btn_interval"
+               @click="MONTH_REVENUE">
+            <!--             :class="{ selected: !monthWeek }"-->
+            Месяц
+          </div>
+        </div>
+        <div class="choice_date"
+             v-show="!calendarIntervalFlag"
+        >
+          <div class="calendar_interval selected"
+               @click="CHANGE_CALENDAR_DATE"
+          >
+            <div class="calendarParamsInterval">
+              <div class="item">{{ calendarEndStart.startDate}}</div>
+              <div class="item">-</div>
+              <div class="item">{{calendarEndStart.endDate}}</div>
+              <div><img class="calendar" src="../../assets/photo/icons/calendar.png" alt=""></div>
+            </div>
           </div>
         </div>
       </div>
@@ -88,8 +90,9 @@ name: "dateSelection",
 .calendarParams{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-content: center;
+  height: auto;
 }
 .calendarParamsInterval{
   display: flex;
@@ -107,7 +110,6 @@ name: "dateSelection",
   width: 270px;
   height: 45px;
   margin: 0 0 15px 0;
-  /*padding: 10px;*/
 }
 .btn_interval{
   border-radius: 3px;
@@ -140,8 +142,8 @@ name: "dateSelection",
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
-  margin-top: 50px;
+  align-items: center;
+  margin-top: 25%;
 }
 .item{
   margin: 3px;

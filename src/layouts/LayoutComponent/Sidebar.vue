@@ -92,7 +92,7 @@ export default {
   height: 100%;
   position: fixed;
   z-index: 100;
-  width:255px;
+  width:270px;
   min-width: 200px;
 }
 .sidebar_mainData{

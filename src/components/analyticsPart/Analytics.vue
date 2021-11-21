@@ -28,10 +28,12 @@
       <div class="element_Analytics_Row_One">
         <div class="element_Analytics_head">
           <p>Соотношение пользователей</p>
-          <customers
-              v-if="!preloader"
-          />
         </div>
+          <div class="chart_customer">
+            <customers
+                v-if="!preloader"
+            />
+          </div>
       </div>
 
       <div class="element_Analytics_Row_Two">
@@ -119,42 +121,51 @@ export default {
 </script>
 
 <style scoped>
-.analytics_Section{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  flex-flow: column nowrap;
-  align-items: center;
-  margin: 0 0 5vh 0;
-}
-.element_Analytics {
-  height: 58vh;
-  width: 98%;
-  background: #0D121A;
-  margin: 0 0 3vh 0;
-  border-radius: 10px;
-}
+  .analytics_Section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    flex-flow: column nowrap;
+    align-items: center;
+    /*margin: 0 0 5vh 0;*/
+  }
+  .element_Analytics {
+    height: 47vh;
+    min-height: 440px;
+    min-width: 900px;
+    width: 88%;
+    background: #0D121A;
+    margin: 0 0 3vh 0;
+    border-radius: 10px;
+  }
   .element_Analytics_Row {
   display: flex;
   flex-direction: row;
   align-content: center;
   align-items: stretch;
     justify-content: space-between;
-    height: 30%;
-    width: 98%;
-    margin: 3vh ;
-}
+    height: auto;
+    min-height: 400px;
+    width: 88%;
+    margin: 0 0 3vh 0;
+    position: relative;
+  }
 .element_Analytics_Row_One {
-  width: 40%;
-  height: 60vh;
   background: #0D121A;
   border-radius: 10px;
-  margin-right: 3vh;
+  margin-right: 20px;
+  width: 37%;
+  padding: 20px;
 }
+.chart_customer{
+  background: #080D16;
+  border-radius: 9px;
+  /*width: 400px;*/
+  height: 300px;
+  padding: 30px;}
 .element_Analytics_Row_Two{
   width: 70% ;
-  height: 60vh;
   background: #0D121A;
   border-radius: 10px;
 }
@@ -171,14 +182,15 @@ export default {
   width: 100%;
 }
 .element_Analytics_section_chart{
-  width: 65%;
+  width: 80%;
   height: 100%;
   border-radius: 10px;
   background: #080D16;
   margin: 0 3vh 0 3vh;
+  padding: 10px;
 }
 .element_Analytics_section_menu{
-  width: 30% ;
+  width: 25% ;
   min-width: 300px;
   height: 100%;
   border-radius: 10px;
@@ -192,6 +204,8 @@ export default {
   justify-content: flex-start;
 }
 p{
-  margin: 25px 0 20px 15px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
 }
 </style>
