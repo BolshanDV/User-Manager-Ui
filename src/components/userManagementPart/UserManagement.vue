@@ -45,7 +45,7 @@ export default {
   justify-content: flex-start;
   align-content: center;
   width: 88%;
-  min-width: 1000px;
+  min-width: 1100px;
 }
 
 .head{

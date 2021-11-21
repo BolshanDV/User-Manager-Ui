@@ -152,7 +152,6 @@ name: "dateSelection",
   font-weight: 500;
   font-size: 50px;
   line-height: 57px;
-  margin-top: 15px;
 }
 .direction{
   font-weight: 500;
