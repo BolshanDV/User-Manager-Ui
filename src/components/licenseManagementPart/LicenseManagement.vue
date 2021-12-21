@@ -16,7 +16,7 @@
             <div>
               Renewal - {{selectedLicense}}
             </div>
-            <div>
+            <div class="arrow_right">
               <img src="../../assets/photo/icons/arrow.png" class="arrow" alt="">
             </div>
           </div>
@@ -37,7 +37,6 @@
               </div>
             </div>
           </transition>
-
         </div>
         <div class="main_text">Дата следующей оплаты</div>
         <div class="input_date">
@@ -152,7 +151,7 @@ export default {
 
 <style scoped>
   .license_flex{
-    height: 150vh;
+    /*height: 150vh;*/
     display: flex;
     flex-direction: row;
     margin: 0 0 5vh 0;
@@ -162,11 +161,12 @@ export default {
   }
   .license_create{
     min-height: 30vh;
-    min-width: 33vh;
+    width: 25vw;
+    min-width: 300px;
     background: #0D121A;
     border-radius: 10px;
     padding: 2vh;
-    margin-right: 4vh;
+    margin-right: 3vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -233,9 +233,10 @@ export default {
   }
   .type_license_item{
     display: flex;
+    width: 100%;
     flex-direction: row;
     justify-content: space-between;
-    align-content: center;
+    align-items: center;
     height: 30px;
     margin: 10px 0 10px 0;
   }
@@ -270,5 +271,12 @@ export default {
     background: #101722;
     border-radius: 5px;
     padding: 15px 10px 10px 10px;
+  }
+  .arrow_right{
+    float: right;
+  }
+  .arrow{
+    width: 16px;
+    height: 12px;
   }
 </style>

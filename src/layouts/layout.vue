@@ -55,7 +55,6 @@ name: "NewLayout",
   justify-content: flex-start;
   align-content: center;
   float: top;
-  height: 100%;
   margin-left: 275px;
   margin-top: 50px;
   background-size: cover;
@@ -63,6 +62,7 @@ name: "NewLayout",
   min-width: 1100px;
   min-height: 900px;
   width: 100%;
+
   background: #161E29;
 }
 .container_flex{

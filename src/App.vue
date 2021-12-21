@@ -12,6 +12,14 @@ import emptyLayout from "./layouts/emptyLayout";
 import {mapActions} from 'vuex'
 export default {
   name: 'App',
+  head: {
+    link: [
+      {
+        rel: "icon",
+        href: ('../public/logo.ico')
+      },
+    ]
+  },
   computed:{
     layout(){
       return (this.$route.meta.layout || 'empty') + 'Layout'

@@ -15,9 +15,7 @@
         </div>
 
         <div class="element_Analytics_section_menu">
-          <div>
             <date-selection/>
-          </div>
         </div>
 
       </div>
@@ -51,9 +49,13 @@
 
       <div class="element_Analytics_section">
         <div class="element_Analytics_section_chart">
+          <RevenueChart
+              :key="componentKey"
+          />
         </div>
 
         <div class="element_Analytics_section_menu">
+          <date-selection/>
         </div>
       </div>
     </div>
@@ -65,8 +67,12 @@
 
       <div class="element_Analytics_section">
         <div class="element_Analytics_section_chart">
+          <RevenueChart
+              :key="componentKey"
+          />
         </div>
         <div class="element_Analytics_section_menu">
+          <date-selection/>
         </div>
       </div>
     </div>
@@ -78,8 +84,12 @@
 
       <div class="element_Analytics_section">
         <div class="element_Analytics_section_chart">
+          <RevenueChart
+              :key="componentKey"
+          />
         </div>
         <div class="element_Analytics_section_menu">
+          <date-selection/>
         </div>
       </div>
     </div>
