@@ -22,5 +22,5 @@
     opacity: 0;
 }
 .slide-fade-move {
-    transition: transform 1.75s;
+    transition: transform 0.9s;
 }

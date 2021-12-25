@@ -5,6 +5,8 @@ export default {
     renewalDate: null,
     inputId: null,
     members: null,
+    search: '',
+    usersSearch: [],
     sorts: {
         previousButton: 'byRenewDate',
         sortIsActive: false,

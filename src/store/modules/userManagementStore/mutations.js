@@ -3,6 +3,7 @@ export default {
         state.users = users
         state.firstUsers = users
         state.preloader = false
+        state.usersSearch = users
     },
 
     HANDLE_CLICK(state, id) {
@@ -39,4 +40,13 @@ export default {
         const index = state.users.findIndex(item => item.userDTO.id === userId);
         state.users[index].inputFlagLicence = !state.users[index].inputFlagLicence;
     },
+
+    FILTERED_NAME: (state, search) => {
+        if (search === '') {
+            state.usersSearch = state.users
+        } else {
+            state.usersSearch = state.users.filter(item => item.userDTO.discordUsername.toLowerCase().indexOf(search.toLowerCase()) !== -1)
+        }
+
+    }
 }

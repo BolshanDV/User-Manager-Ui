@@ -270,4 +270,8 @@ export default {
                 console.log("There was an error!", error);
             });
     },
+
+    FILTERED_NAME: (ctx, search) => {
+        ctx.commit('FILTERED_NAME', search)
+    }
 }

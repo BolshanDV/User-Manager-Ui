@@ -2,13 +2,19 @@
   <div class="center_flex" >
     <div class="user_management_flex" >
         <div class="head">Управление пользователями</div>
-      <div
-          @click="NO_SORTING"
-          class="sorting_btn">
-        <div class="btn_color waves-effect waves-light z-depth-5">
-          No sorting
+      <div class="search">
+        <div class="search_input" >
+          <input type="text" placeholder="Найти пользователя" v-model="search">
+        </div>
+        <div
+            @click="NO_SORTING"
+            class="sorting_btn">
+          <div class="btn_color waves-effect waves-light z-depth-5">
+            No sorting
+          </div>
         </div>
       </div>
+
         <div class="user_management_table">
           <TitleCategory class="user_management_table_element" />
           <TableElement>
@@ -25,13 +31,21 @@ import {mapActions} from 'vuex'
 
 export default {
   name: "UserManagement",
+  data: () => ({
+    search: ''
+  }),
   components:{
     TitleCategory,
     TableElement
   },
   methods: {
-    ...mapActions('userManagement', ['NO_SORTING']),
+    ...mapActions('userManagement', ['NO_SORTING', 'FILTERED_NAME']),
   },
+  watch: {
+    search: function () {
+      this.FILTERED_NAME(this.search)
+    }
+  }
 }
 </script>
 
@@ -87,5 +101,20 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;;
+}
+.search{
+  margin: 10px;
+  width: 100%;
+  float: right;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+input{
+  color: #C4C4C4;
+}
+.search_input{
+  margin-right: 20px;
+  width: 300px;
 }
 </style>

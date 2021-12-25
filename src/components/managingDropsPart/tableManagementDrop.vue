@@ -18,12 +18,11 @@
             <div
                 v-show="!preloader"
             >
-              <div class="text_header">Недавно созданные</div>
+
+
               <div class="table_container">
                 <div
                     class="color user_management_table_section "
-                    v-for="(latestLicence, index) in latestLicences"
-                    :key="index"
                 >
                   <div class="table_block">
                     <div
@@ -31,14 +30,12 @@
                     >
                       <div class="user_management_table_element_content item4">
                         <div class="text_element">
-                          {{ latestLicence.licenceDTO.licenceKey }}
                         </div>
                       </div>
                       <div class="user_management_table_element_content item6">
                         <div class="text_element"
-                             :class="latestLicence.keyBindStyle"
+
                         >
-                          {{ latestLicence.licenceDTO.keyBind}}
                         </div>
                       </div>
                       <div class="user_management_table_element_content item5">
@@ -47,29 +44,9 @@
                         </div>
                       </div>
                       <div class="user_management_table_element_content item10" >
-                        <div class="text_element"
-                             @click="INPUT_CHANGE_RENEWAL_DATE(latestLicence.userDTO.id)"
-                        >
-                          {{ latestLicence.licenceDTO.renewalDate}}
-                          <img src="../../assets/photo/icons/pencil.png" alt="" class="delete">
-                          <div
-                              @click="KICK_USER(latestLicence.userDTO.id)"
-                          >
-                            <img
-                                src="../../assets/photo/icons/delete.png"
-                                class="delete"
-                            >
-                          </div>
 
-                        </div>
                       </div>
                     </div >
-                    <inputField
-                        class="inputRenewal"
-                        :id="latestLicence.userDTO.id"
-                        :inputFlagRenewal="latestLicence.inputFlagRenewal"
-                        v-if="latestLicence.inputFlagRenewal"
-                    />
                   </div>
                 </div>
               </div>
@@ -78,6 +55,7 @@
         </div>
 
       </div>
+      <div></div>
 
     </div>
   </div>
@@ -85,8 +63,14 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
-  name: "tableManagementDrop"
+  name: "tableManagementDrop",
+  computed: {
+    ...mapGetters(
+        'userManagement',['preloader'],
+    )
+  }
 }
 </script>
 
@@ -114,5 +98,12 @@ header{
 }
 .margin_table{
   margin-top: 10px;
+}
+.title_table{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
 }
 </style>
