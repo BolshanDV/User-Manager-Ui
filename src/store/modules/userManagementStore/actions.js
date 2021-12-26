@@ -103,8 +103,9 @@ export default {
         ctx.dispatch('customersChart/COUNT_CUSTOMERS', users, {root: true})
     },
 
-    HANDLE_CLICK(ctx, id) {
-        ctx.commit('HANDLE_CLICK', id)
+    HANDLE_CLICK(ctx, userID) {
+        console.log(userID)
+        ctx.commit('HANDLE_CLICK', userID)
     },
 
     async FREE_MONTH(ctx, id) {
@@ -163,27 +164,27 @@ export default {
                     if (!ctx.state.sorts[sort]) {
                         switch (sortType) {
                             case "byRenewDate": {
-                                sortedUsers = await sorts.SORT_BY_RENEWAL_DATE(ctx.state.users)
+                                sortedUsers = await sorts.SORT_BY_RENEWAL_DATE(ctx.state.usersSearch)
                                 break;
                             }
                             case "byLicence": {
-                                sortedUsers = await sorts.SORT_BY_RENEWAL_PRICE(ctx.state.users)
+                                sortedUsers = await sorts.SORT_BY_RENEWAL_PRICE(ctx.state.usersSearch)
                                 break;
                             }
                             case "byRole": {
-                                sortedUsers = await sorts.SORT_BY_ROLE(ctx.state.users)
+                                sortedUsers = await sorts.SORT_BY_ROLE(ctx.state.usersSearch)
                                 break;
                             }
                             case "byKeyBind": {
-                                sortedUsers = await sorts.SORT_BY_KEY_BINDED(ctx.state.users)
+                                sortedUsers = await sorts.SORT_BY_KEY_BINDED(ctx.state.usersSearch)
                                 break;
                             }
                             case "byPaymentState": {
-                                sortedUsers = await sorts.SORT_BY_PAYMENT_STATE(ctx.state.users)
+                                sortedUsers = await sorts.SORT_BY_PAYMENT_STATE(ctx.state.usersSearch)
                                 break;
                             }
                             case "byCartBind": {
-                                sortedUsers = await sorts.SORT_BY_CART_BIND(ctx.state.users)
+                                sortedUsers = await sorts.SORT_BY_CART_BIND(ctx.state.usersSearch)
                                 break;
                             }
                         }

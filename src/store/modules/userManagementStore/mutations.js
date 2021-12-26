@@ -7,19 +7,20 @@ export default {
     },
 
     HANDLE_CLICK(state, id) {
-        state.users[id].flag = !state.users[id].flag;
+        state.usersSearch[id].flag = !state.usersSearch[id].flag;
     },
 
     SORTED_USERS: (state, sortedUsers) => {
-        state.users = sortedUsers
+        state.usersSearch = sortedUsers
     },
 
     NO_SORTING: state => {
-        state.sorts.sortIsActive = false;
-        state.sorts.byLicence = false;
-        state.sorts.byRenewDate = false;
+        state.sorts.sortIsActive = false
+        state.sorts.byLicence = false
+        state.sorts.byRenewDate = false
         state.sorts.byRole = false
-        state.users = state.firstUsers
+        state.search = ''
+        state.usersSearch = state.firstUsers
     },
 
     SHOW_POPUP: (state) => {
