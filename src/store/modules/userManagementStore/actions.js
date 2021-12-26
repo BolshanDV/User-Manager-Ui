@@ -202,7 +202,6 @@ export default {
     },
 
     KICK_USER: async (ctx, userID) => {
-        console.log(userID)
         const status = await axios
             .delete(`http://localhost:8082/api/v1/users/${userID}`,{
                 withCredentials: true
@@ -214,6 +213,7 @@ export default {
                 console.log("There was an error!", error);
             });
         if (status === 202) ctx.dispatch('getUsers')
+        ctx.commit('SHOW_POPUP')
     },
 
     CHANGE_NAME: (ctx, id) => {
@@ -273,5 +273,10 @@ export default {
 
     FILTERED_NAME: (ctx, search) => {
         ctx.commit('FILTERED_NAME', search)
-    }
+    },
+
+    SHOW_POPUP: (ctx, userId) => {
+        ctx.commit('SHOW_POPUP')
+        ctx.commit('CHANGE_ID_KICK_USER', userId)
+    },
 }

@@ -1,5 +1,7 @@
 <template>
   <div class="center_flex" >
+    <pop-up
+    v-if="popUpFlag"/>
     <div class="user_management_flex" >
         <div class="head">Управление пользователями</div>
       <div class="search">
@@ -27,7 +29,8 @@
 <script>
 import TitleCategory from "./TitleCategory";
 import TableElement from "./TableElement";
-import {mapActions} from 'vuex'
+import popUp from '../popUp'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: "UserManagement",
@@ -36,7 +39,11 @@ export default {
   }),
   components:{
     TitleCategory,
-    TableElement
+    TableElement,
+    popUp
+  },
+  computed:{
+    ...mapGetters('userManagement', ['popUpFlag'])
   },
   methods: {
     ...mapActions('userManagement', ['NO_SORTING', 'FILTERED_NAME']),

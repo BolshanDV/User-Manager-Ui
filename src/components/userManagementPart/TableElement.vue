@@ -152,13 +152,11 @@
             </div>
             <div class="element_content_show_container button">
               <div class="waves-effect waves-light btn1"
-                      @click="KICK_USER(user.userDTO.id)"
-                      @mouseover="CHANGE_NAME(index)"
-                      @mouseleave="CHANGE_NAME_RETURN(index)"
+                      @click="SHOW_POPUP(user.userDTO.id)"
               >
                 <div class="text_element"
                 >
-                  {{user.kickUserText}}
+                  Kick user
                 </div>
               </div>
               <div class="waves-effect waves-light btn1 "
@@ -196,7 +194,8 @@ name: "TableElement",
           'CHANGE_NAME',
           'CHANGE_NAME_RETURN',
           'INPUT_CHANGE_RENEWAL_DATE',
-          'INPUT_CHANGE_LICENCE'
+          'INPUT_CHANGE_LICENCE',
+          'SHOW_POPUP'
         ]),
   },
 }

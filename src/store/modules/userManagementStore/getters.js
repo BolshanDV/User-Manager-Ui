@@ -11,4 +11,12 @@ export default {
         return state.search
     },
 
+    popUpFlag(state) {
+        return state.popUpFlag
+    },
+
+    idKickUser(state) {
+        return state.idKickUser
+    }
+
 }

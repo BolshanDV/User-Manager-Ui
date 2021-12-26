@@ -7,6 +7,8 @@ export default {
     members: null,
     search: '',
     usersSearch: [],
+    popUpFlag: false,
+    idKickUser: null,
     sorts: {
         previousButton: 'byRenewDate',
         sortIsActive: false,

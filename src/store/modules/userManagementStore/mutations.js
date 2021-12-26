@@ -22,12 +22,12 @@ export default {
         state.users = state.firstUsers
     },
 
-    CHANGE_NAME: (state, id) => {
-        state.users[id].kickUserText = 'Are you sure?'
+    SHOW_POPUP: (state) => {
+        state.popUpFlag = !state.popUpFlag
     },
 
-    CHANGE_NAME_RETURN: (state, id) => {
-        state.users[id].kickUserText = 'KICK USER'
+    CHANGE_ID_KICK_USER: (state, userId) => {
+        state.idKickUser = userId
     },
 
     INPUT_CHANGE_RENEWAL_DATE: (state, userId) => {
