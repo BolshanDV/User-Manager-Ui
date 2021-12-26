@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import CalendarRevenue from '../../assets/calendars/CalendarRevenue'
+import CalendarRevenue from '../../assets/calendars/calendarRevenue'
 import {mapGetters, mapActions} from 'vuex'
 export default {
 name: "dateSelection",

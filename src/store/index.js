@@ -5,7 +5,7 @@ import titleCategory from './modules/titleCategoryStore/titleCategory';
 import sideBar from "./modules/sideBarStore/sideBar";
 import navBar from './modules/navBarStore/navBar'
 import customersChart from "./modules/chart/customerChart";
-import calendar from "./modules/Calendar/calendar";
+import calendar from "./modules/calendar/calendarRevenue";
 import licenseManagement from "./modules/licenseManagementStore"
 
 Vue.use(Vuex);

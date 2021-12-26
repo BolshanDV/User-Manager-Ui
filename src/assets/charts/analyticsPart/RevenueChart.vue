@@ -45,7 +45,7 @@ export default {
 
 <style scoped>
 canvas{
-  height: 40vh;
-  width: auto;
+  height: 350px;
+  width: 600px;
 }
 </style>
