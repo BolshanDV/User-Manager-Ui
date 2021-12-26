@@ -33,12 +33,9 @@ export default {
           }
         }
     )
-
   },
   computed: {
-    ...mapGetters('calendar', ['calendarDateInterval'])
-  },
-  methods:{
+    ...mapGetters('calendarRevenue', ['calendarDateInterval'])
   },
 }
 </script>

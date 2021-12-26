@@ -24,7 +24,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions('calendar', ['OUTPUT_INTERVAL'])
+    ...mapActions('calendarDeductions', ['OUTPUT_INTERVAL'])
   },
   watch: {
     calendar: function (){

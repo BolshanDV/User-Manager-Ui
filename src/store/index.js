@@ -5,7 +5,8 @@ import titleCategory from './modules/titleCategoryStore/titleCategory';
 import sideBar from "./modules/sideBarStore/sideBar";
 import navBar from './modules/navBarStore/navBar'
 import customersChart from "./modules/chart/customerChart";
-import calendar from "./modules/calendar/calendarRevenue";
+import calendarRevenue from "./modules/calendar/calendar";
+import calendarDeductions from "./modules/calendar/calendar";
 import licenseManagement from "./modules/licenseManagementStore"
 
 Vue.use(Vuex);
@@ -17,7 +18,8 @@ export default new Vuex.Store({
         sideBar ,
         navBar,
         customersChart,
-        calendar,
+        calendarRevenue,
+        calendarDeductions,
         licenseManagement: licenseManagement
-    }
+    },
 })

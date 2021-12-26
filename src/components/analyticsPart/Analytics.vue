@@ -68,7 +68,7 @@
 
               </div>
               <div class="element_Analytics_section_menu">
-                <date-selection/>
+                <dateS/>
               </div>
             </div>
 
@@ -139,6 +139,7 @@
 import RevenueChart from "../../assets/charts/analyticsPart/RevenueChart";
 // import CalendarRevenue from "../../assets/calendars/CalendarRevenue";
 import dateSelection from "./dateSelection"
+import dateS from "./cD"
 import customers from "../../assets/charts/analyticsPart/customers";
 import deductionsChart from '../../assets/charts/analyticsPart/deductionsChart'
 import Preloader from '../../components/preloader'
@@ -156,14 +157,15 @@ export default {
     customers,
     dateSelection,
     deductionsChart,
-    Preloader
+    Preloader,
+    dateS
   },
   computed:{
     ...mapGetters('userManagement', ['preloader']),
-    ...mapGetters('calendar', ['componentKey'])
+    ...mapGetters('calendarRevenue', ['componentKey'])
   },
   methods:{
-    ...mapActions('calendar',['WEEK_REVENUE'])
+    ...mapActions('calendarRevenue',['WEEK_REVENUE'])
   },
   beforeMount() {
     this.WEEK_REVENUE()

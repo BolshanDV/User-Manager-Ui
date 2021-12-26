@@ -1,7 +1,7 @@
 import moment from "moment/moment";
 export default {
     namespaced: true,
-    state: {
+    state: () => ({
         dateFormat: [],
         componentKey: 0,
         calendarIntervalFlag: false,
@@ -9,9 +9,9 @@ export default {
         calendarDateInterval: {},
         totalIncome: null,
         calendarEndStart: {}
-    },
+    }),
 
-    getters:{
+    getters: {
         dateFormat(state) {
             return state.dateFormat
         },
@@ -43,6 +43,7 @@ export default {
     },
 
     mutations: {
+
         RECEPTION_DATE_FORMAT: (state, dateFormat ) => {
             state.dateFormat = dateFormat
             state.componentKey ++
@@ -74,6 +75,7 @@ export default {
     actions: {
 
         WEEK_REVENUE: async (ctx) => {
+            console.log('hi')
             let lastWeek = moment().subtract(7, 'days').startOf('day')
             let nowDate = new Date()
             const obj= {

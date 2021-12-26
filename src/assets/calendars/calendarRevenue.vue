@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <v-date-picker
         v-model="calendar"
         :value = "null"
@@ -18,13 +17,14 @@
 import {mapActions} from 'vuex'
 export default {
   name: "CalendarRevenue",
-   data() {
+   data: function() {
      return {
        calendar: new Date(),
+       text: '1'
      };
    },
   methods: {
-    ...mapActions('calendar', ['OUTPUT_INTERVAL'])
+    ...mapActions('calendarRevenue', ['OUTPUT_INTERVAL'])
   },
   watch: {
     calendar: function (){
