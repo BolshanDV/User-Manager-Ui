@@ -1,4 +1,6 @@
 import moment from "moment/moment";
+import objectCreator from "./objectCreator";
+
 export default {
     namespaced: true,
     state: () => ({
@@ -68,20 +70,17 @@ export default {
 
         CALENDAR_END_START: (state, obj) => {
             state.calendarEndStart = obj
-            console.log(state.calendarEndStart)
         }
     },
 
     actions: {
 
         WEEK_REVENUE: async (ctx) => {
-            console.log('hi')
             let lastWeek = moment().subtract(7, 'days').startOf('day')
             let nowDate = new Date()
-            const obj= {
-                startDate: await ctx.dispatch('sideBar/CREATURE_DATE', lastWeek, { root: true}),
-                endDate: await ctx.dispatch('sideBar/CREATURE_DATE', nowDate, { root: true})
-            }
+
+            const obj= await objectCreator.CREATURE_DATE_INTERVAL_FOR_API(lastWeek, nowDate)
+
             const revenueInterval = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
 
             ctx.dispatch('CREATE_DATA_FOR_CHART', revenueInterval)
@@ -128,11 +127,7 @@ export default {
         },
 
         GET_DETAIL_PAYMENTS_ANALYTIC: async (ctx, calendar) => {
-
-            const obj = {
-                startDate: await ctx.dispatch('sideBar/CREATURE_DATE', calendar.start, { root: true}),
-                endDate: await ctx.dispatch('sideBar/CREATURE_DATE', calendar.end, { root: true})
-            }
+            const obj= await objectCreator.CREATURE_DATE_INTERVAL_FOR_API(calendar.start, calendar.end)
 
             ctx.commit('CALENDAR_END_START', obj)
             const revenueInterval = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
@@ -150,16 +145,16 @@ export default {
             let month = moment().subtract(30, 'days').startOf('day')
             let nowDate = new Date()
 
-            const obj= {
-                startDate: await ctx.dispatch('sideBar/CREATURE_DATE', month, { root: true}),
-                endDate: await ctx.dispatch('sideBar/CREATURE_DATE', nowDate, { root: true})
-            }
+            const obj= await objectCreator.CREATURE_DATE_INTERVAL_FOR_API(month, nowDate)
+
             const revenueInterval = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
 
             ctx.dispatch('CREATE_DATA_FOR_CHART', revenueInterval)
             ctx.commit('CALENDAR_END_START', obj)
             ctx.dispatch('GET_TOTAL_INCOME', revenueInterval.totalIncome)
 
-        }
+        },
+
+
     }
 }

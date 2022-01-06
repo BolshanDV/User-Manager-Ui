@@ -1,4 +1,5 @@
 import axios from "axios";
+import dateIntervalFilter from "./dateIntervalFilter";
 
 export default {
     namespaced: true,
@@ -51,25 +52,10 @@ export default {
 
      actions: {
 
-        CREATURE_DATE: async (ctx, date) => {
-
-            let newDate = new Date(date)
-            let dd = newDate.getDate();
-            if (dd < 10) dd = '0' + dd;
-
-            let mm = newDate.getMonth() - 1;
-            if (mm < 10) mm = '0' + mm;
-
-            let yy = newDate.getFullYear();
-            newDate = yy + '-' + mm + '-' + dd
-
-            return newDate
-        },
-
          async postAnalytics(ctx) {
              let now = new Date()
 
-             now = await ctx.dispatch('CREATURE_DATE', now)
+             now = await dateIntervalFilter.CREATURE_DATE(now)
 
              const obj = {
                  startDate: now,

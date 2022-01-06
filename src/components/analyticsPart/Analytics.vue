@@ -51,9 +51,7 @@
             <div class="element_Analytics_section">
               <div class="chart_customer_deductions_column">
                 <div class="chart_customer_deductions">
-                  <deductionsChart
-                    v-if="!preloader"
-                />
+
                 </div>
                 <div>
                   <div class="color_info">
@@ -68,7 +66,7 @@
 
               </div>
               <div class="element_Analytics_section_menu">
-                <dateS/>
+
               </div>
             </div>
 
@@ -139,10 +137,9 @@
 import RevenueChart from "../../assets/charts/analyticsPart/RevenueChart";
 // import CalendarRevenue from "../../assets/calendars/CalendarRevenue";
 import dateSelection from "./dateSelection"
-import dateS from "./cD"
 import customers from "../../assets/charts/analyticsPart/customers";
-import deductionsChart from '../../assets/charts/analyticsPart/deductionsChart'
 import Preloader from '../../components/preloader'
+import calendarHandler from "../../mixins/calendarHandler";
 import {mapGetters, mapActions} from 'vuex'
 export default {
   name: "Analytics",
@@ -151,14 +148,13 @@ export default {
       calendar:''
     };
   },
+  mixins: [calendarHandler],
   components:{
     RevenueChart,
     // CalendarRevenue,
     customers,
     dateSelection,
-    deductionsChart,
     Preloader,
-    dateS
   },
   computed:{
     ...mapGetters('userManagement', ['preloader']),
