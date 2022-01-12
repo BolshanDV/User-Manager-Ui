@@ -8,6 +8,7 @@ import customersChart from "./modules/chart/customerChart";
 import calendarRevenue from "./modules/calendar/calendar";
 import calendarDeductions from "./modules/calendar/calendar";
 import licenseManagement from "./modules/licenseManagementStore"
+import managingDropsStore from './modules/managingDropsStore'
 
 Vue.use(Vuex);
 
@@ -20,6 +21,7 @@ export default new Vuex.Store({
         customersChart,
         calendarRevenue,
         calendarDeductions,
+        managingDropsStore,
         licenseManagement: licenseManagement
     },
 })

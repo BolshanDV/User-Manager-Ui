@@ -14,7 +14,7 @@
                @click="LICENSE_FLAG"
           >
             <div>
-              Renewal - {{selectedLicense}}
+              {{selectedLicense.nameRole}}
             </div>
             <div class="arrow_right">
               <img src="../../assets/photo/icons/arrow.png" class="arrow" alt="">
@@ -33,7 +33,7 @@
                   class="main_text drop_down_menu"
                   @click="SELECTED_LICENSE(index)"
               >
-                <div>Renewal - {{ price }}</div>
+                <div>{{price.nameRole}}</div>
               </div>
             </div>
           </transition>

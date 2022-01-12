@@ -1,4 +1,5 @@
 import axios from "axios";
+import dateIntervalFilter from '../sideBarStore/dateIntervalFilter';
 
 export default {
     LICENSE_FLAG: (ctx) => {
@@ -10,10 +11,10 @@ export default {
     },
 
     CREATE_LICENCE: async ({dispatch}, {renewalDate, selectedLicense}) => {
-        renewalDate = await dispatch('sideBar/CREATURE_DATE', renewalDate, { root: true })
+        renewalDate = await dateIntervalFilter.CREATURE_DATE(renewalDate)
         const obj = {
-            renewalDate:  renewalDate + ' 17:00:00.000000',
-            licenceTypeId : selectedLicense
+            renewalDate:  renewalDate + ' 00:00:00.000000',
+            licenceTypeId : selectedLicense.idRole
         }
         const status = await dispatch('CREATE_LICENCE_REQUEST', obj)
         if (status === 202) dispatch('userManagement/getUsers')
@@ -37,6 +38,6 @@ export default {
         let latestAdd = users.slice().reverse()
         latestAdd = latestAdd.slice(0,10)
         ctx.commit('UPDATE_LICENCES', latestAdd)
-    }
+    },
 
 }

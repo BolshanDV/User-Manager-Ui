@@ -12,14 +12,12 @@ export default {
   mixins: [Doughnut],
   mounted() {
     this.renderChart({
-          labels: ['3000', '2500', '2000', '1500'],
+          labels: ['10000', '5000'],
           datasets: [{
             data: this.renewalPriceChart,
             backgroundColor: [
               '#82D7EA',
               '#9FFFE2',
-              '#3C57E3',
-              '#2FA4FF',
             ],
             borderColor: '#080D16',
             borderWidth: 4

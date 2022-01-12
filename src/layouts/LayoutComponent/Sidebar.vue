@@ -13,7 +13,7 @@
             <div class="mainData_header">Количество мемберов</div>
             <div class="members_info">
               <div class="countCustomer">
-                {{countCustomer}}
+                {{CountMember}}
               </div>
               <div class="mainData_header">вкл.</div>
               <div class="countLifetime">
@@ -67,7 +67,7 @@ export default {
           'links',
           'analytics',
           'nowDate',
-          'countCustomer',
+          'CountMember',
           'countLifetime'
         ]
     ),

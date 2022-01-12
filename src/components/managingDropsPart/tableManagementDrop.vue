@@ -18,8 +18,6 @@
             <div
                 v-show="!preloader"
             >
-
-
               <div class="table_container">
                 <div
                     class="color user_management_table_section "

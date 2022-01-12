@@ -6,7 +6,7 @@ export default {
     state: {
         analytics: [],
         nowDate: [],
-        countCustomer: '',
+        CountMember: '',
         countLifetime: '',
         links:[
             {title:'Аналитика', url:'/analytics', image: 'free-icon-google-analytics-732035.png', exact: true},
@@ -29,8 +29,8 @@ export default {
             return state.nowDate
         },
 
-        countCustomer(state) {
-            return state.countCustomer
+        CountMember(state) {
+            return state.CountMember
         },
 
         countLifetime(state) {
@@ -44,9 +44,9 @@ export default {
             state.nowDate = now
         },
 
-        UPDATE_MEMBERS: (state, {newCountCustomer, newCountLifetime}) => {
+        UPDATE_MEMBERS: (state, {newCountMember, newCountLifetime}) => {
             state.countLifetime = newCountLifetime
-            state.countCustomer = newCountCustomer
+            state.CountMember = newCountMember
         }
     },
 
@@ -82,12 +82,12 @@ export default {
          },
 
          COUNTING_MEMBERS: ({commit}, users) => {
-             let newCountCustomer = 0
+             let newCountMember = 0
              let newCountLifetime = 0
              for (const user of users) {
                  switch (user.licenceTypeDTO.role){
-                     case "Customer": {
-                         newCountCustomer++
+                     case "Member": {
+                         newCountMember++
                          break;
                      }
                      case "Lifetime": {
@@ -96,7 +96,7 @@ export default {
                      }
                  }
              }
-             commit('UPDATE_MEMBERS', {newCountCustomer, newCountLifetime})
+             commit('UPDATE_MEMBERS', {newCountMember, newCountLifetime})
          }
      }
 }

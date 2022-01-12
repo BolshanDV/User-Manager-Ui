@@ -4,7 +4,8 @@
     <div class="create_section_main">
       <div>Количество слотов</div>
       <div class="input_style">
-        <input type="number">
+        <input v-model="quantity"
+               type="number">
       </div>
       <div>Тип лицензии для дропа</div>
       <div class="type_license input_date">
@@ -12,7 +13,7 @@
              @click="LICENSE_FLAG"
         >
           <div>
-            Renewal - {{selectedLicense}}
+            {{selectedLicense.nameRole}}
           </div>
           <div>
             <img src="../../assets/photo/icons/arrow.png" class="arrow" alt="">
@@ -31,20 +32,24 @@
                 class="main_text drop_down_menu"
                 @click="SELECTED_LICENSE(index)"
             >
-              <div>Renewal - {{ price }}</div>
+              <div>{{price.nameRole}}</div>
             </div>
           </div>
         </transition>
       </div>
       <div>Пароль для дропа</div>
       <div class="input_style">
-        <input type="text">
+        <input
+            v-model="password"
+            type="text">
       </div>
       <div class="checkbox_item">
         <div>Автоматически рестокать неоплаченные слоты</div>
         <div class="switch">
           <label>
-            <input type="checkbox">
+            <input type="checkbox"
+              v-model="autoRestock"
+            >
             <span class="lever"></span>
           </label>
         </div>
@@ -53,7 +58,9 @@
         <div>Удалить дроп автоматически после sold out’а</div>
         <div class="switch">
           <label>
-            <input type="checkbox">
+            <input type="checkbox"
+                   v-model="deleteAfterSoldOut"
+            >
             <span class="lever"></span>
           </label>
         </div>
@@ -62,14 +69,20 @@
         <div>Привязка ключей к аккаунтам</div>
         <div class="switch right1">
           <label>
-            <input type="checkbox">
+            <input type="checkbox"
+                   v-model="mustBind"
+            >
             <span class="lever"></span>
           </label>
         </div>
       </div>
       <div class="button_creation ">
-        <div class="btn_drop waves-light waves-effect">Создать дроп</div>
-
+        <div class="btn_drop waves-light waves-effect"
+          @click="CREATE_DROP({quantity, password, selectedLicense, autoRestock, deleteAfterSoldOut, mustBind})"
+        >Создать дроп</div>
+        <div class="btn_drop waves-light waves-effect"
+             @click="GET_INF"
+        >INF</div>
       </div>
     </div>
 
@@ -82,12 +95,20 @@
 import {mapGetters, mapActions} from 'vuex'
 export default {
   name: "creatingDrop",
+  data: () =>({
+    quantity: null,
+    password: null,
+    autoRestock: false,
+    deleteAfterSoldOut: false,
+    mustBind: false
+  }),
   computed:{
     ...mapGetters('licenseManagement', ['prices', 'licenseFlag', 'selectedLicense']),
     ...mapGetters('userManagement', ['preloader'])
   },
   methods:{
     ...mapActions('licenseManagement', ['LICENSE_FLAG', 'SELECTED_LICENSE', 'CREATE_LICENCE', 'LATEST_ADDITION']),
+    ...mapActions('managingDropsStore', ['CREATE_DROP', 'GET_INF'])
   },
 }
 </script>

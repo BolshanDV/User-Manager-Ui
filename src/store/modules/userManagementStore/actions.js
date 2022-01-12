@@ -18,6 +18,7 @@ export default {
                 console.log(error);
             });
         ctx.dispatch('PROCESSING', response.objects)
+
     },
 
     PROCESSING: (ctx, users) => {

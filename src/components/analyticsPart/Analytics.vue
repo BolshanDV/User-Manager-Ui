@@ -139,7 +139,6 @@ import RevenueChart from "../../assets/charts/analyticsPart/RevenueChart";
 import dateSelection from "./dateSelection"
 import customers from "../../assets/charts/analyticsPart/customers";
 import Preloader from '../../components/preloader'
-import calendarHandler from "../../mixins/calendarHandler";
 import {mapGetters, mapActions} from 'vuex'
 export default {
   name: "Analytics",
@@ -148,7 +147,6 @@ export default {
       calendar:''
     };
   },
-  mixins: [calendarHandler],
   components:{
     RevenueChart,
     // CalendarRevenue,
