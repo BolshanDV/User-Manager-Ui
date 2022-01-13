@@ -1,5 +1,6 @@
 import dateIntervalFilter from '../sideBarStore/dateIntervalFilter';
 import axios from "axios";
+// import Vue from "vue";
 
 export default {
 
@@ -33,19 +34,18 @@ export default {
             });
     },
 
-    GET_INF: async (ctx) => {
-        const response =  await ctx.dispatch('DROP_ANALYTICS')
-        console.log(response)
+    CALL_FUNC_FOR_DROP_ANALYTICS: async (ctx) => {
+        let response =  await ctx.dispatch('GET_DROP_ANALYTICS')
+        ctx.commit('DROP_ANALYTICS', response)
     },
 
-    DROP_ANALYTICS: async () => {
+    GET_DROP_ANALYTICS: async () => {
         return await axios
             .get(`http://localhost:8082/api/v1/drop/?password=sinda`, {
                 withCredentials: true
             })
-            .then(response => {
-                response.status
-            }
+            .then(response =>
+                response.data
             )
             .catch(error => {
                 console.log("There was an error!", error);

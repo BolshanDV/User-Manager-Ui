@@ -32,17 +32,17 @@ name: "TitleCategory",
 </script>
 
 <style scoped>
-.user_management_table_element_content{
-  height: 100%;
-  width: 16vh;
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: flex-start;
-  min-height: 10px;
-  border-radius: 3px;
-  margin: 5px 0 0 5px;
-}
+/*.user_management_table_element_content{*/
+/*  height: 100%;*/
+/*  width: 16vh;*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  align-content: center;*/
+/*  justify-content: flex-start;*/
+/*  min-height: 10px;*/
+/*  border-radius: 3px;*/
+/*  margin: 5px 0 0 5px;*/
+/*}*/
 img{
   width: 16px;
   height: 16px;

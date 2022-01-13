@@ -81,7 +81,7 @@
           @click="CREATE_DROP({quantity, password, selectedLicense, autoRestock, deleteAfterSoldOut, mustBind})"
         >Создать дроп</div>
         <div class="btn_drop waves-light waves-effect"
-             @click="GET_INF"
+             @click="CALL_FUNC_FOR_DROP_ANALYTICS"
         >INF</div>
       </div>
     </div>
@@ -108,7 +108,7 @@ export default {
   },
   methods:{
     ...mapActions('licenseManagement', ['LICENSE_FLAG', 'SELECTED_LICENSE', 'CREATE_LICENCE', 'LATEST_ADDITION']),
-    ...mapActions('managingDropsStore', ['CREATE_DROP', 'GET_INF'])
+    ...mapActions('managingDropsStore', ['CREATE_DROP', 'CALL_FUNC_FOR_DROP_ANALYTICS'])
   },
 }
 </script>

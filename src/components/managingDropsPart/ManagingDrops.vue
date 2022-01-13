@@ -39,13 +39,9 @@ name: "ManagingDrops",
   margin-right: 20px;
 }
 .second_section{
-  background: #0D121A;
-  border-radius: 10px;
   width: 60%;
   display: flex;
   flex-direction: column;
-  padding: 15px;
-  height: 80vh;
 }
 .analytics{
   background: #0D121A;
