@@ -4,8 +4,8 @@
 .binded{
     color: #2BD6A2;
 }
-.customer{
-    color: #D45DE8;
+.member{
+    color: #a50980;
 }
 .lifeTime{
     color: #F1A0FF;
@@ -30,4 +30,7 @@
 }
 .notSuccessful{
     color: #FF0000;
+}
+.owner{
+    color: #ebc545;
 }

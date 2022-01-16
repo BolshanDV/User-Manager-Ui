@@ -78,12 +78,12 @@ export default {
                     }
                 }
                 switch (user.licenceTypeDTO.role){
-                    case "Customer":  Vue.set(user, 'roleStyle', 'customer')
+                    case "Member":  Vue.set(user, 'roleStyle', 'member')
                         break;
                     case "Lifetime" : Vue.set(user, 'roleStyle', 'lifeTime')
                         break;
-                    case "Friends & Family" : {
-                        user.licenceTypeDTO.role = "F&F"
+                    case "F&F" : {
+                        // user.licenceTypeDTO.role = "F&F"
                         Vue.set(user, 'roleStyle', 'FF')
                         break;
                     }
@@ -94,6 +94,8 @@ export default {
                     case "Beta EN" :  Vue.set(user, 'roleStyle', 'en')
                         break;
                     case "Moderator" : Vue.set(user, 'roleStyle', 'moderator')
+                        break;
+                    case "Owner" : Vue.set(user, 'roleStyle', 'owner')
                         break;
                 }
             }

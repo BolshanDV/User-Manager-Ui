@@ -17,6 +17,10 @@ export default {
 
     linkedKeysChart(state) {
         return state.linkedKeysChart
+    },
+
+    dropList(state) {
+        return state.dropList
     }
 
 

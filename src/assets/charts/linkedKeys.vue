@@ -34,7 +34,7 @@ export default {
               beginAtZero: true
             },
             xAxes: [{
-              barThickness: 44,
+              barThickness: 40,
               display: false
             }],
             yAxes: [{

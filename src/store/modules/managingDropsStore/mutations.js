@@ -13,6 +13,9 @@ export default {
 
     LINKED_KEYS_FOR_CHART: (state, obj) => {
         state.linkedKeysChart = obj
-        console.log(state.linkedKeysChart)
+    },
+
+    DROP_LIST_DATA: (state, obj) => {
+        state.dropList = obj
     }
 }

@@ -80,9 +80,7 @@
         <div class="btn_drop waves-light waves-effect"
           @click="CREATE_DROP({quantity, password, selectedLicense, autoRestock, deleteAfterSoldOut, mustBind})"
         >Создать дроп</div>
-        <div class="btn_drop waves-light waves-effect"
-             @click="CALL_FUNC_FOR_DROP_ANALYTICS"
-        >INF</div>
+
       </div>
     </div>
 

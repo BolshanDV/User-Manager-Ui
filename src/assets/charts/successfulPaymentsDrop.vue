@@ -28,7 +28,7 @@ name: "successful_payments_drop",
           },
           scales: {
             xAxes: [{
-              barThickness: 44,
+              barThickness: 40,
               display: false
             }],
             yAxes: [{

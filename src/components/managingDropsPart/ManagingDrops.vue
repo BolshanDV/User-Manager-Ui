@@ -42,9 +42,9 @@ name: "ManagingDrops",
   padding-bottom: 20px;
 }
 .first_section{
-  width: 40%;
+  /*width: 40%;*/
   margin-right: 20px;
-  min-width: 450px;
+  min-width: 400px;
 }
 .second_section{
   width: 60%;
@@ -55,7 +55,7 @@ name: "ManagingDrops",
   background: #0D121A;
   border-radius: 10px;
   padding: 15px 10px;
-  min-width: 450px;
+  min-width: 400px;
 }
 input{
   color: #C4C4C4;

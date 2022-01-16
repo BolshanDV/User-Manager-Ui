@@ -6,9 +6,14 @@
       </header>
       <div class="table_section_drop">
         <div class="menu_drop">
-          <div class="menu_drop_section">1</div>
-          <div class="menu_drop_section">2</div>
-          <div class="menu_drop_section">3</div>
+          <div
+              v-for="dropListItem in dropList"
+              :key="dropListItem.password"
+              class="menu_drop_section"
+              @click="GET_DATA_DROP_INFO(dropListItem)"
+          >
+            {{dropListItem.creationDate}}
+          </div>
         </div>
         <div class=" margin_table">
           <div class="license_recently">
@@ -55,8 +60,13 @@
                         </div>
                       </div>
                       <div class="user_management_table_element_content item2" >
-                        <div class="text_element unbinded">
-                          Delete
+                        <div class="text_element unbinded"
+                             @click="DELETE_LICENCE(dropAnalytic.id)"
+                        >
+                          <img
+                              src="../../assets/photo/icons/delete.png"
+                              class="delete"
+                          >
                         </div>
                       </div>
                     </div >
@@ -74,12 +84,15 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 export default {
   name: "tableManagementDrop",
   computed: {
     ...mapGetters('userManagement',['preloader']),
-    ...mapGetters('managingDropsStore', ['dropAnalytics', 'titleBlockDrop'])
+    ...mapGetters('managingDropsStore', ['dropAnalytics', 'titleBlockDrop', 'dropList'])
+  },
+  methods: {
+    ...mapActions('managingDropsStore', ['DELETE_LICENCE', 'GET_DATA_DROP_INFO'])
   }
 }
 </script>
@@ -113,11 +126,15 @@ main_section_title{
 .menu_drop{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /*justify-content: center;*/
   align-items: center;
+  /*width: 100%;*/
   background: #101722;
   border-radius: 5px;
-  padding: 8px;
+  padding: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none
 }
 .menu_drop_section{
   display: flex;
@@ -125,11 +142,17 @@ main_section_title{
   flex-direction: row;
   align-items: center;
   padding: 2px;
-  width: 60px;
+  min-width: 100px;
+  scroll-snap-align: start;
 }
 .second_section{
   background: #0D121A;
   border-radius: 10px;
   padding: 12px;
+}
+.delete{
+  width: 14px;
+  height: 15px;
+  margin: 0 10px 0 10px;
 }
 </style>
