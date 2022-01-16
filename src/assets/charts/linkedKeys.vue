@@ -4,14 +4,18 @@
 
 <script>
 import { Bar } from 'vue-chartjs'
+import {mapGetters} from "vuex";
 export default {
   name: "successful_payments_drop",
   mixins: [Bar],
+  computed: {
+    ...mapGetters('managingDropsStore', ['linkedKeysChart'])
+  },
   mounted() {
     this.renderChart({
           labels: ['Успешных', 'Неуспешных'],
           datasets: [{
-            data: [10, 14],
+            data: [this.linkedKeysChart.keyBindTrue, this.linkedKeysChart.keyBindFalse],
             backgroundColor: [
               '#2BD6A2',
               '#B41210'
@@ -26,6 +30,9 @@ export default {
             display: false
           },
           scales: {
+            y: {
+              beginAtZero: true
+            },
             xAxes: [{
               barThickness: 44,
               display: false
@@ -33,7 +40,7 @@ export default {
             yAxes: [{
               ticks: {
                 beginAtZero: true,
-                display: false
+                // display: false
               }
             }]
           }

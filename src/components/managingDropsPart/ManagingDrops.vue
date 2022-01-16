@@ -18,6 +18,7 @@
 import creatingDrop from './creatingDrop'
 import dropAnalytics from './dropAnalytics'
 import tableManagementDrop from './tableManagementDrop'
+import {mapActions} from 'vuex'
 export default {
 name: "ManagingDrops",
   components:{
@@ -25,6 +26,12 @@ name: "ManagingDrops",
     dropAnalytics,
     tableManagementDrop
   },
+  methods:{
+    ...mapActions('managingDropsStore', ['CALL_FUNC_FOR_DROP_ANALYTICS'])
+  },
+  beforeMount() {
+    this.CALL_FUNC_FOR_DROP_ANALYTICS()
+  }
 }
 </script>
 
@@ -37,6 +44,7 @@ name: "ManagingDrops",
 .first_section{
   width: 40%;
   margin-right: 20px;
+  min-width: 450px;
 }
 .second_section{
   width: 60%;
@@ -46,7 +54,8 @@ name: "ManagingDrops",
 .analytics{
   background: #0D121A;
   border-radius: 10px;
-  padding: 20px 15px;
+  padding: 15px 10px;
+  min-width: 450px;
 }
 input{
   color: #C4C4C4;

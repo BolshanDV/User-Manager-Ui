@@ -27,9 +27,11 @@ export default {
             display: false
           },
           scales: {
-            y: {
-              beginAtZero: true
-            }
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+              }
+            }]
           }
         }
     )

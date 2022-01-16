@@ -3,30 +3,34 @@
   <div class="successful_payments">
     Успешные оплаты
     <div class="successful_payments_chart">
-      <successful_payments_drop/>
+      <successful_payments_drop
+        :key="key_update"
+      />
     </div>
     <div class="color_info">
       <div class="tiffany_color"></div>
-      <div>Успешных оплат - </div>
+      <div>Успешных оплат - {{chart_data_payments.successful}}</div>
     </div>
     <div class="color_info">
       <div class="tiffany_color red_color"></div>
-      <div>Неуспешных оплат - </div>
+      <div>Неуспешных оплат - {{chart_data_payments.unsuccessful}}</div>
     </div>
 
   </div>
   <div class="linked_keys">
     Привязанные ключи
     <div class="successful_payments_chart">
-      <linkedKeys/>
+      <linkedKeys
+          :key="key_update"
+      />
     </div>
     <div class="color_info">
       <div class="tiffany_color"></div>
-      <div>Привязаны -  </div>
+      <div>Привязаны - {{ linkedKeysChart.keyBindTrue }}</div>
     </div>
     <div class="color_info">
       <div class="tiffany_color red_color"></div>
-      <div>Не привязаны - </div>
+      <div>Не привязаны - {{ linkedKeysChart.keyBindFalse }}</div>
     </div>
   </div>
 </div>
@@ -35,11 +39,15 @@
 <script>
 import successful_payments_drop from '../../assets/charts/successfulPaymentsDrop'
 import linkedKeys from '../../assets/charts/linkedKeys'
+import {mapGetters} from "vuex";
 export default {
 name: "dropAnalytics",
   components:{
     successful_payments_drop,
     linkedKeys
+  },
+  computed: {
+    ...mapGetters('managingDropsStore', ['chart_data_payments', 'key_update', 'linkedKeysChart'])
   }
 }
 </script>
@@ -68,7 +76,7 @@ name: "dropAnalytics",
   height: 14px;
   background: #2BD6A2;
   border: 2px solid #0D121A;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 .red_color{
   background: #B41210;

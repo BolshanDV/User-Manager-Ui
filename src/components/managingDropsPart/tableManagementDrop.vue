@@ -64,12 +64,8 @@
                 </div>
               </transition-group>
             </div>
-
           </div>
-
         </div>
-        <div></div>
-
       </div>
     </div>
 

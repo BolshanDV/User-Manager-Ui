@@ -4,6 +4,7 @@
 
 <script>
 import { Bar } from 'vue-chartjs'
+import {mapGetters} from 'vuex'
 export default {
 name: "successful_payments_drop",
   mixins: [Bar],
@@ -11,7 +12,7 @@ name: "successful_payments_drop",
     this.renderChart({
           labels: ['Успешных', 'Неуспешных'],
           datasets: [{
-            data: [5, 3],
+            data: [this.chart_data_payments.successful, this.chart_data_payments.unsuccessful],
             backgroundColor: [
               '#2BD6A2',
               '#B41210'
@@ -33,7 +34,7 @@ name: "successful_payments_drop",
             yAxes: [{
               ticks: {
                 beginAtZero: true,
-                display: false
+                // display: false
               }
             }]
           }
@@ -41,6 +42,9 @@ name: "successful_payments_drop",
     )
 
   },
+  computed: {
+    ...mapGetters('managingDropsStore', ['chart_data_payments'])
+  }
 }
 </script>
 

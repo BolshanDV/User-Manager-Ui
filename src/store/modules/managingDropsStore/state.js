@@ -17,5 +17,8 @@ export default{
             category: 'Actions',
             class: 'item2'
         }
-    ]
+    ],
+    chart_data_payments: [],
+    key_update: 0,
+    linkedKeysChart: 0
 }

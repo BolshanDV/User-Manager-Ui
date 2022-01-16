@@ -36,7 +36,10 @@ export default {
 
     CALL_FUNC_FOR_DROP_ANALYTICS: async (ctx) => {
         let response =  await ctx.dispatch('GET_DROP_ANALYTICS')
+        console.log(response)
         ctx.commit('DROP_ANALYTICS', response)
+        ctx.dispatch('DATA_SUCFUL_PAYMENTS_CHART')
+        ctx.commit('SUMM_KEY')
     },
 
     GET_DROP_ANALYTICS: async () => {
@@ -50,6 +53,38 @@ export default {
             .catch(error => {
                 console.log("There was an error!", error);
             });
+    },
+
+    DATA_SUCFUL_PAYMENTS_CHART: (ctx) => {
+        const obj_payments = {
+            successful: ctx.state.dropAnalytics.licences.length,
+            unsuccessful: ctx.state.dropAnalytics.canceledPayments
+        }
+
+        let keyBindFalseCounter = 0
+        let keyBindTrueCounter = 0
+
+        for (let item of ctx.state.dropAnalytics.licences) {
+            switch (item.keyBind) {
+                case false: {
+                    keyBindFalseCounter++
+                    break
+                }
+                case true: {
+                    keyBindTrueCounter++
+                    break
+                }
+            }
+        }
+
+        const obj_keyBind = {
+            keyBindFalse: keyBindFalseCounter,
+            keyBindTrue: keyBindTrueCounter
+        }
+        console.log(obj_keyBind)
+        ctx.commit('LINKED_KEYS_FOR_CHART', obj_keyBind)
+        ctx.commit('CHART_PAYMENTS', obj_payments)
+
     }
 
 }

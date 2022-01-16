@@ -29,7 +29,10 @@ export default {
           cutoutPercentage: 68,
           legend:{
             position: "right"
-          }
+          },
+          y: {
+            beginAtZero: true
+          },
         }
     )
 
