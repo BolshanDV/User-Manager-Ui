@@ -1,9 +1,7 @@
 <template>
   <div>
     <div class="second_section">
-      <header>
-        Управление дропами
-      </header>
+      <header>Управление дропами</header>
       <div class="table_section_drop">
         <div class="menu_drop">
           <div
@@ -15,11 +13,8 @@
             {{dropListItem.creationDate}}
           </div>
         </div>
-        <div class=" margin_table">
+        <div class="margin_table">
           <div class="license_recently">
-            <div v-if="preloader">
-              <Preloader />
-            </div>
             <div class="user_management_table">
               <div class="user_management_table_element">
                 <div
@@ -31,13 +26,12 @@
                   {{titleBlockDropItem.category}}
                 </div>
               </div>
-
-              <transition-group name="slide-fade">
+              <transition-group name="slide-fade" class="scroll" tag="div">
                 <div
                     v-show="!preloader"
-                    v-for="dropAnalytic in dropAnalytics"
+                    v-for="dropAnalytic in dropAnalytics.licences"
                     :key="dropAnalytic.id"
-                    class="color user_management_table_section"
+                    class="color user_management_table_section scroll_item"
                 >
                   <div class="table_block">
                     <div
@@ -56,7 +50,8 @@
                       </div>
                       <div class="user_management_table_element_content item6">
                         <div class="text_element">
-                          Not binded
+                          <div v-if="dropAnalytic.keyBind === false">Not binded</div>
+                          <div v-if="dropAnalytic.keyBind === true">Binded</div>
                         </div>
                       </div>
                       <div class="user_management_table_element_content item2" >
@@ -73,12 +68,19 @@
                   </div>
                 </div>
               </transition-group>
+              <div class="drop_info">
+                <div class="status_drop">Cтатус дропа {{status_drop.isActive}}</div>
+                <div class="link">Ссылка на дроп
+                  <div class="url">
+                    https://cmd-root.com/?password={{status_drop.password}}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 
 </template>
@@ -89,7 +91,7 @@ export default {
   name: "tableManagementDrop",
   computed: {
     ...mapGetters('userManagement',['preloader']),
-    ...mapGetters('managingDropsStore', ['dropAnalytics', 'titleBlockDrop', 'dropList'])
+    ...mapGetters('managingDropsStore', ['dropAnalytics', 'titleBlockDrop', 'dropList', 'status_drop'])
   },
   methods: {
     ...mapActions('managingDropsStore', ['DELETE_LICENCE', 'GET_DATA_DROP_INFO'])
@@ -154,5 +156,33 @@ main_section_title{
   width: 14px;
   height: 15px;
   margin: 0 10px 0 10px;
+}
+.drop_info{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 15px 0 0 8px;
+}
+.status_drop{
+  margin-right: 50px;
+}
+.link{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.url{
+  margin-left: 15px ;
+  color: #8E8E8E;
+}
+.scroll{
+  overflow-y: auto;
+  scroll-snap-type: y;
+  max-height: 55vh
+}
+.scroll_item{
+  scroll-snap-align: start;
 }
 </style>

@@ -17,5 +17,8 @@ export default {
 
     DROP_LIST_DATA: (state, obj) => {
         state.dropList = obj
+    },
+    STATUS_LINK_DROP: (state, obj) => {
+        state.status_drop = obj
     }
 }

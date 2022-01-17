@@ -1,6 +1,6 @@
 export default {
     dropAnalytics(state) {
-        return state.dropAnalytics.licences
+        return state.dropAnalytics
     },
 
     titleBlockDrop(state) {
@@ -21,6 +21,10 @@ export default {
 
     dropList(state) {
         return state.dropList
+    },
+
+    status_drop(state) {
+        return state.status_drop
     }
 
 

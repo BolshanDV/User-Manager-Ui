@@ -8,7 +8,14 @@
       </div>
     </div>
     <div class="second_section">
-      <tableManagementDrop/>
+      <div v-if="preloader">
+        <Preloader />
+      </div>
+      <transition name="fade">
+      <tableManagementDrop
+          v-if="!preloader"
+      />
+      </transition>
     </div>
 
   </div>
@@ -18,7 +25,7 @@
 import creatingDrop from './creatingDrop'
 import dropAnalytics from './dropAnalytics'
 import tableManagementDrop from './tableManagementDrop'
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 export default {
 name: "ManagingDrops",
   components:{
@@ -28,6 +35,9 @@ name: "ManagingDrops",
   },
   methods:{
     ...mapActions('managingDropsStore', ['CALL_FUNC_FOR_DROP_ANALYTICS'])
+  },
+  computed: {
+    ...mapGetters('userManagement',['preloader']),
   },
   beforeMount() {
     this.CALL_FUNC_FOR_DROP_ANALYTICS()
@@ -42,9 +52,8 @@ name: "ManagingDrops",
   padding-bottom: 20px;
 }
 .first_section{
-  /*width: 40%;*/
   margin-right: 20px;
-  min-width: 400px;
+  max-width: 400px;
 }
 .second_section{
   width: 60%;
