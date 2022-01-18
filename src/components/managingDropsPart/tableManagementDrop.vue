@@ -69,8 +69,24 @@
                 </div>
               </transition-group>
               <div class="drop_info">
-                <div class="status_drop">Cтатус дропа {{status_drop.isActive}}</div>
-                <div class="link">Ссылка на дроп
+                <div class="status_drop">
+                  <div class="status_drop_description" >Cтатус дропа</div>
+                  <div
+                      v-if="status_drop.isActive"
+                      class="binded"
+                  >
+                    {{status_drop.isActive}}
+                  </div>
+                  <div
+                      v-else
+                      class="unbinded"
+                  >
+                    {{status_drop.isActive}}
+                  </div>
+                </div>
+
+                <div class="link">
+                  Ссылка на дроп
                   <div class="url">
                     https://cmd-root.com/?password={{status_drop.password}}
                   </div>
@@ -166,6 +182,8 @@ main_section_title{
 }
 .status_drop{
   margin-right: 50px;
+  display: flex;
+  flex-direction: row;
 }
 .link{
   display: flex;
@@ -180,9 +198,15 @@ main_section_title{
 .scroll{
   overflow-y: auto;
   scroll-snap-type: y;
-  max-height: 55vh
+  max-height: 55vh;
 }
-.scroll_item{
-  scroll-snap-align: start;
+.status_drop_description{
+  margin-right: 15px;
 }
+.scroll::-webkit-scrollbar {
+  width: 0;
+}
+/*.scroll_item{*/
+/*  scroll-snap-align: start;*/
+/*}*/
 </style>

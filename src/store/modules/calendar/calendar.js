@@ -123,6 +123,7 @@ export default {
         },
 
         OUTPUT_INTERVAL: (ctx, calendar) => {
+
             ctx.dispatch('GET_DETAIL_PAYMENTS_ANALYTIC', calendar)
         },
 

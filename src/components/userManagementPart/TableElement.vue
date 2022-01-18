@@ -3,12 +3,12 @@
     <div v-if="preloader"  >
       <Preloader />
     </div>
-    <transition-group name="slide-fade">
+    <transition-group name="slide-fade" tag="div" class="scroll">
       <div
           v-show="!preloader"
           v-for="(user, index) in allUsers"
           :key="user.userDTO.id"
-          class="color user_management_table_section"
+          class="color user_management_table_section scroll_item"
       >
         <div class="table_block">
           <div
@@ -313,5 +313,14 @@ name: "TableElement",
 }
 [data-tooltip]:hover::after {
   opacity: 1;
+}
+.scroll{
+  overflow-y: auto;
+  scroll-snap-type: y;
+  max-height: 60vh;
+  scrollbar-width: none
+}
+.scroll::-webkit-scrollbar {
+  width: 0;
 }
 </style>

@@ -19,8 +19,7 @@
 
         <div class="user_management_table">
           <TitleCategory class="user_management_table_element" />
-          <TableElement>
-          </TableElement>
+          <TableElement/>
         </div>
     </div>
   </div>
@@ -75,16 +74,16 @@ export default {
   line-height: 21px;
   margin: 20px 0 0 10px;
 }
-.user_management_table_element{
-  height: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border-radius: 3px;
-  align-items: center;
-  margin: 0.5vh;
-  width: auto;
-}
+/*.user_management_table_element{*/
+/*  height: 50px;*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  justify-content: space-between;*/
+/*  border-radius: 3px;*/
+/*  align-items: center;*/
+/*  margin: 0.5vh;*/
+/*  width: auto;*/
+/*}*/
 .sorting_btn{
   display: flex;
   flex-direction: row;

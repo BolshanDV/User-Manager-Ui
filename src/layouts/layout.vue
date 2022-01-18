@@ -4,8 +4,11 @@
     <Navbar/>
   </div>
   <div class ="container_flex">
+
     <div class="sidebar">
-      <Sidebar/>
+      <transition name="fade">
+        <Sidebar/>
+      </transition>
     </div>
 
     <div class="work_space">
@@ -60,9 +63,8 @@ name: "NewLayout",
   background-size: cover;
   padding: 60px 20px 20px 20px;
   min-width: 1100px;
-  min-height: 900px;
+  min-height: 94vh;
   width: 100%;
-
   background: #161E29;
 }
 .container_flex{

@@ -165,7 +165,7 @@ export default {
     min-width: 300px;
     background: #0D121A;
     border-radius: 10px;
-    padding: 2vh;
+    padding: 13px;
     margin-right: 3vh;
     display: flex;
     flex-direction: column;
@@ -177,7 +177,7 @@ export default {
     min-height: 500px;
     background: #0D121A;
     border-radius: 10px;
-    padding: 20px;
+    padding: 13px;
   }
   .create_key{
     display: flex;
