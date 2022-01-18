@@ -6,6 +6,7 @@ Vue.use(VueRouter)
 const router = new VueRouter({
     mode:'history',
     base: process.env.BASE_URL,
+
     routes: [
         {
             path: '/analytics',
@@ -14,7 +15,7 @@ const router = new VueRouter({
                 title: 'Analytics',
                 layout:'main'
             },
-            component: () => import('./components/analyticsPart/Analytics')
+            component: () => import('./components/analyticsPart/Analytics'),
         },
         {
             path: '/license',
@@ -51,6 +52,15 @@ const router = new VueRouter({
                 title: 'login'
             },
             component: () => import('./components/login')
+        },
+        {
+            path: '*',
+            name:'notFound',
+            meta : {
+                layout : 'empty',
+                title: 'notFound'
+            },
+            component: () => import('./components/error')
         },
     ]
 })
