@@ -112,20 +112,23 @@
           </div>
         </div>
 
-<!--//        <div class="element_Analytics">-->
-<!--          <div class="element_Analytics_head">-->
-<!--            <div class="title_analytic">Количество отмененных подписок</div>-->
-<!--          </div>-->
+        <div class="element_Analytics">
+          <div class="element_Analytics_head">
+            <div class="title_analytic">Количество отмененных подписок</div>
+          </div>
 
-<!--          <div class="element_Analytics_section">-->
-<!--            <div class="element_Analytics_section_chart">-->
-
-<!--            </div>-->
-<!--            <div class="element_Analytics_section_menu">-->
-<!--              <dateSelectionCancelled/>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+          <div class="element_Analytics_section">
+            <div class="element_Analytics_section_chart">
+              <cancelled-subscription-chart
+                  v-if="!preloader"
+                  :key="this.$store.getters['calendarCancelled/componentKey']"
+              />
+            </div>
+            <div class="element_Analytics_section_menu">
+              <dateSelectionCancelled/>
+            </div>
+          </div>
+        </div>
       </div>
     </transition>
   </div>
@@ -141,7 +144,8 @@ import customers from "../../assets/charts/analyticsPart/customers";
 import Preloader from '../../components/preloader'
 import deductionsChart from "../../assets/charts/analyticsPart/deductionsChart";
 import dateSelectionSuccessfulPayments from "./dateSelectionSuccessfulPayments";
-
+import cancelledSubscriptionChart from "../../assets/charts/analyticsPart/cancelledSubscriptionChart";
+import dateSelectionCancelled from "./dateSelectionCancelled";
 import dateSelectionUnsuccessful from "./dateSelectionUnsuccessful";
 import unsuccessfulPaymentsChart from "../../assets/charts/analyticsPart/unsuccessfulPaymentsChart";
 import successfulPaymentsChart from "../../assets/charts/analyticsPart/successfulPaymentsChart";
@@ -161,10 +165,11 @@ export default {
     Preloader,
     deductionsChart,
     dateSelectionSuccessfulPayments,
-    // dateSelectionCancelled,
+    cancelledSubscriptionChart,
     dateSelectionUnsuccessful,
     successfulPaymentsChart,
-    unsuccessfulPaymentsChart
+    unsuccessfulPaymentsChart,
+    dateSelectionCancelled
   },
   computed:{
     ...mapGetters('userManagement', ['preloader']),
