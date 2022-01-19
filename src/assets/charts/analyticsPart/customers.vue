@@ -8,7 +8,7 @@
 import {mapGetters} from 'vuex'
 import { Doughnut } from 'vue-chartjs'
 export default {
-  name: "AnalyticsRevenue",
+  name: "customer",
   mixins: [Doughnut],
   mounted() {
     this.renderChart({

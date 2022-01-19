@@ -1,8 +1,9 @@
 <template>
-  <canvas ref="canvas" class="canvas"></canvas>
+  <canvas ref="canvas"
+          class="canvas"
+  >
+  </canvas>
 </template>
-
-
 
 <script>
 import {mapGetters} from 'vuex'
@@ -12,15 +13,15 @@ export default {
   mixins: [Doughnut],
   mounted() {
     this.renderChart({
-          // labels: ['5', '10'],
+          labels: ['Оставшиеся пользователи', 'Ушедшие пользователи'],
           datasets: [{
-            data: ['5', '10'],
+            data: [this.CountMember, this.departedUsersData.quantityDepartedUsers],
             backgroundColor: [
               '#2BD6A2',
               '#B41210',
             ],
             borderColor: '#080D16',
-            borderWidth: 4
+            borderWidth: 1
           }]
         },
         {
@@ -36,7 +37,8 @@ export default {
 
   },
   computed: {
-    ...mapGetters('customersChart', ['renewalPriceChart'])
+    ...mapGetters('sideBar', ['CountMember']),
+    ...mapGetters('calendarDeductions', ['departedUsersData'])
   }
 }
 </script>

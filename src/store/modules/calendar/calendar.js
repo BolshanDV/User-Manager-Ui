@@ -1,5 +1,7 @@
 import moment from "moment/moment";
 import objectCreator from "./objectCreator";
+import axios from "axios";
+
 
 export default {
     namespaced: true,
@@ -10,7 +12,8 @@ export default {
         monthWeek: true,
         calendarDateInterval: {},
         totalIncome: null,
-        calendarEndStart: {}
+        calendarEndStart: {},
+        departedUsersData: {}
     }),
 
     getters: {
@@ -40,6 +43,10 @@ export default {
 
         calendarEndStart(state) {
             return state.calendarEndStart
+        },
+
+        departedUsersData(state) {
+            return state.departedUsersData
         }
 
     },
@@ -70,23 +77,53 @@ export default {
 
         CALENDAR_END_START: (state, obj) => {
             state.calendarEndStart = obj
+        },
+
+        COUNTING_DEPARTED_USERS: (state, obj) => {
+            state.departedUsersData = obj
+        },
+
+        UPDATE_CHART: (state) => {
+            state.componentKey++
         }
     },
 
     actions: {
 
-        WEEK_REVENUE: async (ctx) => {
-            let lastWeek = moment().subtract(7, 'days').startOf('day')
+        WEEK_REVENUE: async (ctx, obj_info) => {
+            let lastWeek = moment().subtract(obj_info.interval, 'days').startOf('day')
             let nowDate = new Date()
 
             const obj= await objectCreator.CREATURE_DATE_INTERVAL_FOR_API(lastWeek, nowDate)
-
-            const revenueInterval = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
-
-            ctx.dispatch('CREATE_DATA_FOR_CHART', revenueInterval)
+            let dataIntervalFromApi
+            switch (obj_info.title) {
+                case 'dateSelectionRevenue': {
+                    dataIntervalFromApi = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
+                    ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.incomeList, title: obj_info.title})
+                    ctx.commit('GET_TOTAL_INCOME', dataIntervalFromApi.totalIncome)
+                    break
+                }
+                case 'dateSelectionDeductions': {
+                    dataIntervalFromApi = await ctx.dispatch('RECEPTION_DATA_DEDUCTIONS', obj)
+                    ctx.commit('COUNTING_DEPARTED_USERS', dataIntervalFromApi)
+                    ctx.commit('UPDATE_CHART')
+                    break
+                }
+                case 'dateSelectionCancelled': {
+                    dataIntervalFromApi = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
+                    ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.canceledPaymentDTOS, title: obj_info.title })
+                    ctx.commit('UPDATE_CHART')
+                    break
+                }
+                // case 'dateSelectionSuccessfulPayments': {
+                //     dataIntervalFromApi = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
+                //     ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.incomeList, title: obj_info.title })
+                //     ctx.commit('UPDATE_CHART')
+                //     break
+                // }
+            }
+            ctx.commit('CHANGE_WW_MM')
             ctx.commit('CALENDAR_END_START', obj)
-            ctx.dispatch('GET_TOTAL_INCOME', revenueInterval.totalIncome)
-
         },
 
         CREATE_DATA_FOR_CHART: (ctx, revenueInterval) => {
@@ -94,10 +131,26 @@ export default {
                 const labels = [];
                 const moneys = [];
 
-                for (const oneDay of revenueInterval.incomeList) {
-                    labels.push(oneDay.date.split('-')[1] + '-' + oneDay.date.split('-')[2])
-                    moneys.push(oneDay.oneDayIncome)
+                if (revenueInterval.title === 'dateSelectionRevenue'){
+                    for (const oneDay of revenueInterval.data) {
+                        labels.push(oneDay.date.split('-')[1] + '-' + oneDay.date.split('-')[2])
+                        moneys.push(oneDay.oneDayIncome)
 
+                    }
+                }
+                if (revenueInterval.title === 'dateSelectionCancelled'){
+                    for (const oneDay of revenueInterval.data) {
+                        labels.push(oneDay.date.split('-')[1] + '-' + oneDay.date.split('-')[2])
+                        moneys.push(oneDay.qty)
+
+                    }
+                }
+                if (revenueInterval.title === 'dateSelectionSuccessfulPayments') {
+                    for (const oneDay of revenueInterval.data) {
+                        labels.push(oneDay.date.split('-')[1] + '-' + oneDay.date.split('-')[2])
+                        moneys.push(oneDay.qty)
+
+                    }
                 }
 
                 return {
@@ -113,48 +166,53 @@ export default {
 
         },
 
-        CHANGE_WW_MM: (ctx) => {
+        OUTPUT_INTERVAL: async (ctx, calendarObj) => {
+            const obj= await objectCreator.CREATURE_DATE_INTERVAL_FOR_API(calendarObj.calendar.start, calendarObj.calendar.end)
+            let dataIntervalFromApi
+            switch (calendarObj.title) {
+                case 'dateSelectionRevenue': {
+                    dataIntervalFromApi = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
+                    ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.incomeList, title: calendarObj.title})
+                    ctx.commit('GET_TOTAL_INCOME', dataIntervalFromApi.totalIncome)
+                    ctx.commit('UPDATE_CHART')
+                    break
+                }
+                case 'dateSelectionDeductions': {
+                    dataIntervalFromApi = await ctx.dispatch('RECEPTION_DATA_DEDUCTIONS', obj)
+                    ctx.commit('COUNTING_DEPARTED_USERS', dataIntervalFromApi)
+                    ctx.commit('UPDATE_CHART')
+                    break
+                }
+                case 'dateSelectionCancelled': {
+                    dataIntervalFromApi = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
+                    ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.canceledPaymentDTOS, title: calendarObj.title })
+                    ctx.commit('UPDATE_CHART')
+                    break
+                }
+                // case 'dateSelectionSuccessfulPayments': {
+                //     dataIntervalFromApi = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
+                //     ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.incomeList, title: calendarObj.title })
+                //     ctx.commit('UPDATE_CHART')
+                //     break
+                // }
+            }
             ctx.commit('CHANGE_WW_MM')
-        },
-
-        DOUBLE_FUNC_WEEK_REVENUE: (ctx) => {
-            ctx.dispatch('CHANGE_WW_MM')
-            ctx.dispatch('WEEK_REVENUE')
-        },
-
-        OUTPUT_INTERVAL: (ctx, calendar) => {
-
-            ctx.dispatch('GET_DETAIL_PAYMENTS_ANALYTIC', calendar)
-        },
-
-        GET_DETAIL_PAYMENTS_ANALYTIC: async (ctx, calendar) => {
-            const obj= await objectCreator.CREATURE_DATE_INTERVAL_FOR_API(calendar.start, calendar.end)
-
             ctx.commit('CALENDAR_END_START', obj)
-            const revenueInterval = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
-
-            ctx.dispatch('CREATE_DATA_FOR_CHART', revenueInterval)
-            ctx.dispatch('GET_TOTAL_INCOME', revenueInterval.totalIncome)
-            ctx.dispatch('CHANGE_CALENDAR_DATE')
+            ctx.commit('CHANGE_CALENDAR_DATE')
         },
 
-        GET_TOTAL_INCOME: (ctx, totalIncome) => {
-            ctx.commit('GET_TOTAL_INCOME', totalIncome)
-        },
-
-        MONTH_REVENUE: async (ctx) => {
-            let month = moment().subtract(30, 'days').startOf('day')
-            let nowDate = new Date()
-
-            const obj= await objectCreator.CREATURE_DATE_INTERVAL_FOR_API(month, nowDate)
-
-            const revenueInterval = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
-
-            ctx.dispatch('CREATE_DATA_FOR_CHART', revenueInterval)
-            ctx.commit('CALENDAR_END_START', obj)
-            ctx.dispatch('GET_TOTAL_INCOME', revenueInterval.totalIncome)
-
-        },
+        RECEPTION_DATA_DEDUCTIONS: async (ctx, obj) => {
+            return await axios
+                .post(`http://localhost:8082/api/v1/members/retention`, obj,{
+                    withCredentials: true
+                })
+                .then(response =>
+                    response.data
+                )
+                .catch(error => {
+                    console.log("There was an error!", error);
+                });
+        }
 
 
     }

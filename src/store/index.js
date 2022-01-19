@@ -7,6 +7,9 @@ import navBar from './modules/navBarStore/navBar'
 import customersChart from "./modules/chart/customerChart";
 import calendarRevenue from "./modules/calendar/calendar";
 import calendarDeductions from "./modules/calendar/calendar";
+import calendarSuccessfulPayments from "./modules/calendar/calendar";
+import calendarCancelled from "./modules/calendar/calendar";
+import dateSelectionUnsuccessful from "./modules/calendar/calendar";
 import licenseManagement from "./modules/licenseManagementStore"
 import managingDropsStore from './modules/managingDropsStore'
 
@@ -22,6 +25,9 @@ export default new Vuex.Store({
         calendarRevenue,
         calendarDeductions,
         managingDropsStore,
+        calendarSuccessfulPayments,
+        calendarCancelled,
+        dateSelectionUnsuccessful,
         licenseManagement: licenseManagement
     },
 })

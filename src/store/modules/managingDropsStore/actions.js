@@ -118,19 +118,7 @@ export default {
             .catch(error => {
                 console.log("There was an error!", error);
             });
-        // for( const infItem of item) {
-        //     console.log(infItem)
-        //     switch (infItem.keyBind) {
-        //         case false: {
-        //             Vue.set(infItem.keyBind, 'keyBind', 'unbinded ')
-        //             break
-        //         }
-        //         case true: {
-        //             Vue.set(infItem.keyBind, 'keyBind', 'binded ')
-        //             break
-        //         }
-        //     }
-        // }
+
         ctx.commit('DROP_ANALYTICS', inf)
         ctx.commit('STATUS_LINK_DROP', item)
         ctx.dispatch('DATA_SUCFUL_PAYMENTS_CHART')

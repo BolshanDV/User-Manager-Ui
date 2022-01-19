@@ -8,7 +8,7 @@
             v-show="!calendarIntervalFlag"
         >
           <div class="btn_interval"
-               @click="DOUBLE_FUNC_WEEK_REVENUE">
+               @click="DOUBLE_FUNC_WEEK_REVENUE(title)">
             <!--             :class="{selected: monthWeek}"-->
             Неделя
           </div>
@@ -33,22 +33,28 @@
           </div>
         </div>
       </div>
-        <div
-            class="payments_period"
-            v-show="!calendarIntervalFlag"
-        >
-            <div class="direction">
-              Выручка за указанный период:
-            </div>
-            <div class="total_income">
-              {{totalIncome}}₽
-            </div>
+      <div
+          class="payments_period"
+          v-show="!calendarIntervalFlag"
+      >
+        <div class="direction">
+          Выручка за указанный период:
         </div>
+        <div class="total_income">
+          {{totalIncome}}₽
+        </div>
+      </div>
       <transition name="fade">
-        <CalendarRevenue
+        <v-date-picker
+            v-model="calendar"
+            :value = "null"
+            color="blue"
+            is-dark
+            is-range
             v-show="calendarIntervalFlag"
             :key="componentKey"
         />
+
       </transition>
 
 
@@ -58,19 +64,25 @@
 </template>
 
 <script>
-import CalendarRevenue from '../../assets/calendars/calendarRevenue'
 import {mapGetters, mapActions} from 'vuex'
 export default {
-  name: "dateSelection",
-  components: {
-    CalendarRevenue
+  name: "dateSelectionUnsuccessful",
+  data: function() {
+    return {
+      calendar: new Date(),
+      title: 'dateSelectionUnsuccessful'
+    };
   },
   computed: {
-    ...mapGetters('calendarRevenue', ['calendarIntervalFlag', 'monthWeek', 'calendarDateInterval', 'componentKey', 'totalIncome', 'calendarEndStart'])
+    ...mapGetters('dateSelectionUnsuccessful', ['calendarIntervalFlag', 'monthWeek', 'calendarDateInterval', 'componentKey', 'totalIncome', 'calendarEndStart'])
   },
   methods: {
-    ...mapActions('calendarRevenue', ['CHANGE_CALENDAR_DATE', 'CHANGE_WW_MM', 'WEEK_REVENUE', 'DOUBLE_FUNC_WEEK_REVENUE', 'MONTH_REVENUE'])
-
+    ...mapActions('dateSelectionUnsuccessful', ['OUTPUT_INTERVAL', 'CHANGE_CALENDAR_DATE', 'CHANGE_WW_MM', 'WEEK_REVENUE', 'DOUBLE_FUNC_WEEK_REVENUE', 'MONTH_REVENUE'])
+  },
+  watch: {
+    calendar: function (){
+      this.OUTPUT_INTERVAL(this.calendar)
+    }
   }
 }
 </script>

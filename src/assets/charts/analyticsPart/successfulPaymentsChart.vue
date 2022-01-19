@@ -1,7 +1,6 @@
 <template>
   <div class="analyticsRevenue">
     <canvas ref="canvas"
-
     >
     </canvas>
   </div>
@@ -11,14 +10,14 @@
 import { Bar } from 'vue-chartjs'
 import {mapGetters} from 'vuex'
 export default {
-  name: "RevenueChart",
+  name: "successfulPaymentsChart",
   mixins: [Bar],
   mounted() {
     this.renderChart({
           labels: this.calendarDateInterval.labels,
           datasets: [{
             data: this.calendarDateInterval.moneys,
-            backgroundColor: '#5899db',
+            backgroundColor: '#82D7EA',
             borderColor: '#1c283b',
             borderWidth: 1
           }]
@@ -40,7 +39,7 @@ export default {
     )
   },
   computed: {
-    ...mapGetters('calendarRevenue', ['calendarDateInterval'])
+    ...mapGetters('calendarSuccessfulPayments', ['calendarDateInterval'])
   },
 }
 </script>

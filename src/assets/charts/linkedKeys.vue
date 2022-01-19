@@ -6,7 +6,7 @@
 import { Bar } from 'vue-chartjs'
 import {mapGetters} from "vuex";
 export default {
-  name: "successful_payments_drop",
+  name: "linkedKeys",
   mixins: [Bar],
   computed: {
     ...mapGetters('managingDropsStore', ['linkedKeysChart'])

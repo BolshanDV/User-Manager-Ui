@@ -18,7 +18,7 @@
 
             <div class="element_Analytics_section_chart">
               <RevenueChart
-                  :key="componentKey"
+                  :key="this.$store.getters['calendarRevenue/componentKey']"
                   v-if="!preloader"
               />
             </div>
@@ -51,22 +51,25 @@
             <div class="element_Analytics_section">
               <div class="chart_customer_deductions_column">
                 <div class="chart_customer_deductions">
-
+                  <deductionsChart
+                      :key="this.$store.getters['calendarDeductions//componentKey']"
+                      v-if="!preloader"
+                  />
                 </div>
                 <div>
                   <div class="color_info">
                     <div class="tiffany_color"></div>
-                    <div>Успешных оплат - </div>
+                    <div>Оставшиеся пользователи - {{CountMember}}</div>
                   </div>
                   <div class="color_info">
                     <div class="tiffany_color red_color"></div>
-                    <div>Неуспешных оплат - </div>
+                    <div>Ушедшие пользователи - {{departedUsersData.quantityDepartedUsers}} </div>
                   </div>
                 </div>
 
               </div>
               <div class="element_Analytics_section_menu">
-
+                <dateSelectionDeductions/>
               </div>
             </div>
           </div>
@@ -79,13 +82,14 @@
 
           <div class="element_Analytics_section">
             <div class="element_Analytics_section_chart">
-              <RevenueChart
-                  :key="componentKey"
-              />
+              <successfulPaymentsChart
+                  :key="this.$store.getters['calendarSuccessfulPayments/componentKey']"
+                  v-if="!preloader"/>
             </div>
 
             <div class="element_Analytics_section_menu">
-              <date-selection/>
+              <dateSelectionSuccessfulPayments
+              />
             </div>
           </div>
         </div>
@@ -97,12 +101,13 @@
 
           <div class="element_Analytics_section">
             <div class="element_Analytics_section_chart">
-              <RevenueChart
-                  :key="componentKey"
+              <cancelledChart
+                  v-if="!preloader"
+                  :key="this.$store.getters['calendarCancelled/componentKey']"
               />
             </div>
             <div class="element_Analytics_section_menu">
-              <date-selection/>
+              <dateSelectionCancelled/>
             </div>
           </div>
         </div>
@@ -114,12 +119,11 @@
 
           <div class="element_Analytics_section">
             <div class="element_Analytics_section_chart">
-              <RevenueChart
-                  :key="componentKey"
-              />
+
             </div>
             <div class="element_Analytics_section_menu">
-              <date-selection/>
+              <dateSelectionUnsuccessful
+              />
             </div>
           </div>
         </div>
@@ -133,10 +137,16 @@
 
 <script>
 import RevenueChart from "../../assets/charts/analyticsPart/RevenueChart";
-// import CalendarRevenue from "../../assets/calendars/CalendarRevenue";
-import dateSelection from "./dateSelection"
+import dateSelection from "./dateSelectionRevenue"
+import dateSelectionDeductions from './dateSelectionDeductions'
 import customers from "../../assets/charts/analyticsPart/customers";
 import Preloader from '../../components/preloader'
+import deductionsChart from "../../assets/charts/analyticsPart/deductionsChart";
+import dateSelectionSuccessfulPayments from "./dateSelectionSuccessfulPayments";
+import dateSelectionCancelled from "./dateSelectionCancelled";
+import dateSelectionUnsuccessful from "./dateSelectionUnsuccessful";
+import cancelledChart from "../../assets/charts/analyticsPart/cancelledChart";
+import successfulPaymentsChart from "../../assets/charts/analyticsPart/successfulPaymentsChart";
 import {mapGetters, mapActions} from 'vuex'
 export default {
   name: "Analytics",
@@ -147,21 +157,28 @@ export default {
   },
   components:{
     RevenueChart,
-    // CalendarRevenue,
+    dateSelectionDeductions,
     customers,
     dateSelection,
     Preloader,
+    deductionsChart,
+    dateSelectionSuccessfulPayments,
+    dateSelectionCancelled,
+    dateSelectionUnsuccessful,
+    cancelledChart,
+    successfulPaymentsChart
   },
   computed:{
     ...mapGetters('userManagement', ['preloader']),
-    ...mapGetters('calendarRevenue', ['componentKey'])
+    ...mapGetters('calendarRevenue', ['componentKey']),
+    ...mapGetters('calendarDeductions', ['departedUsersData']),
+    ...mapGetters('sideBar', ['CountMember']),
+
   },
   methods:{
     ...mapActions('calendarRevenue',['WEEK_REVENUE'])
   },
-  beforeMount() {
-    this.WEEK_REVENUE()
-  },
+
 }
 </script>
 
