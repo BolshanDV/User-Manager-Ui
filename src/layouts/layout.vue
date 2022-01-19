@@ -60,12 +60,11 @@ name: "NewLayout",
   float: top;
   margin-left: 275px;
   margin-top: 50px;
-  background-size: cover;
   padding: 60px 20px 20px 20px;
   min-width: 1100px;
   min-height: 95vh;
   width: 100%;
-  background: #161E29;
+  background: url('../assets/photo/background2.png') center/cover no-repeat, url('../assets/photo/background1.png') center/cover no-repeat;
 }
 .container_flex{
   display: flex;

@@ -19,6 +19,7 @@ export default {
         }
 
         await ctx.dispatch('CREATE_DROP_API_REQUEST', mainObj)
+        await ctx.dispatch('CALL_FUNC_FOR_DROP_ANALYTICS')
 
     },
 
