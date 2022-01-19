@@ -17,7 +17,7 @@ export default {
           labels: this.calendarDateInterval.labels,
           datasets: [{
             data: this.calendarDateInterval.moneys,
-            backgroundColor: '#5899db',
+            backgroundColor: '#2BD6A2',
             borderColor: '#1c283b',
             borderWidth: 1
           }]

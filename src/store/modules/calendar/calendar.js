@@ -123,6 +123,12 @@ export default {
                     ctx.commit('GET_TOTAL_INCOME', dataIntervalFromApi.incomeList.length)
                     break
                 }
+                case 'dateSelectionCancelled': {
+                    dataIntervalFromApi = await ctx.dispatch('RECEPTION_DATA_DEDUCTIONS', obj)
+                    ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.listMetrics, title: obj_info.title })
+                    ctx.commit('UPDATE_CHART')
+                    ctx.commit('GET_TOTAL_INCOME', dataIntervalFromApi.quantityDepartedUsers)
+                }
             }
             ctx.commit('CHANGE_WW_MM')
             ctx.commit('CALENDAR_END_START', obj)
@@ -137,21 +143,24 @@ export default {
                     for (const oneDay of revenueInterval.data) {
                         labels.push(oneDay.date.split('-')[1] + '-' + oneDay.date.split('-')[2])
                         moneys.push(oneDay.oneDayIncome)
-
                     }
                 }
                 if (revenueInterval.title === 'dateSelectionUnsuccessful'){
                     for (const oneDay of revenueInterval.data) {
                         labels.push(oneDay.date.split('-')[1] + '-' + oneDay.date.split('-')[2])
                         moneys.push(oneDay.qty)
-
                     }
                 }
                 if (revenueInterval.title === 'dateSelectionSuccessfulPayments') {
                     for (const oneDay of revenueInterval.data) {
                         labels.push(oneDay.date.split('-')[1] + '-' + oneDay.date.split('-')[2])
                         moneys.push(oneDay.qty)
-
+                    }
+                }
+                if (revenueInterval.title === 'dateSelectionCancelled') {
+                    for (const oneDay of revenueInterval.data) {
+                        labels.push(oneDay.date.split('-')[1] + '-' + oneDay.date.split('-')[2])
+                        moneys.push(oneDay.departedUsers)
                     }
                 }
 
@@ -196,6 +205,12 @@ export default {
                     ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.incomeList, title: calendarObj.title })
                     ctx.commit('UPDATE_CHART')
                     break
+                }
+                case 'dateSelectionCancelled': {
+                    dataIntervalFromApi = await ctx.dispatch('RECEPTION_DATA_DEDUCTIONS', obj)
+                    ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.listMetrics, title: calendarObj.title })
+                    ctx.commit('GET_TOTAL_INCOME', dataIntervalFromApi.quantityDepartedUsers)
+                    ctx.commit('UPDATE_CHART')
                 }
             }
             ctx.commit('CHANGE_WW_MM')

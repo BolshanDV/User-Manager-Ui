@@ -38,10 +38,10 @@
           v-show="!calendarIntervalFlag"
       >
         <div class="direction">
-          Успешные платежи за ук.период:
+          Отмены подписок за ук.период:
         </div>
         <div class="total_income">
-
+          {{totalIncome}}
         </div>
       </div>
       <transition name="fade">
@@ -85,97 +85,7 @@ export default {
     }
   },
   beforeMount() {
-    this.WEEK_REVENUE({title: 'calendarCancelled', interval: 7})
+    this.WEEK_REVENUE({title: 'dateSelectionCancelled', interval: 7})
   },
 }
 </script>
-
-<style scoped>
-/*.head_title{*/
-/*  display: block;*/
-/*  flex-direction: row;*/
-/*  justify-content: flex-start;*/
-/*  align-content: center;*/
-/*  margin: 10px 15px 20px 15px;*/
-/*  font-weight: 500;*/
-/*  font-size: 18px;*/
-/*  line-height: 21px;*/
-/*}*/
-/*.calendarParams{*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  justify-content: space-between;*/
-/*  align-content: center;*/
-/*  height: auto;*/
-/*}*/
-/*.calendarParamsInterval{*/
-/*  display: flex;*/
-/*  flex-direction: row;*/
-/*  justify-content: space-around;*/
-/*  align-content: center;*/
-/*}*/
-/*.choice_date{*/
-/*  background: #161E29;*/
-/*  border-radius: 5px;*/
-/*  display: flex;*/
-/*  flex-direction: row;*/
-/*  justify-content: space-around;*/
-/*  align-items: center;*/
-/*  width: 270px;*/
-/*  height: 45px;*/
-/*  margin: 0 0 15px 0;*/
-/*}*/
-/*.btn_interval{*/
-/*  border-radius: 3px;*/
-/*  width: 17vh;*/
-/*  height: 40px;*/
-/*  display: flex;*/
-/*  flex-direction: row;*/
-/*  justify-content: center;*/
-/*  align-items: center;*/
-/*  !*padding: 10px;*!*/
-/*  margin: 3px ;*/
-/*}*/
-/*.calendar_interval{*/
-/*  display: flex;*/
-/*  flex-direction: row;*/
-/*  justify-content: space-around;*/
-/*  align-items: center;*/
-/*  width: 265px;*/
-/*  height: 40px;*/
-/*  border-radius: 3px;*/
-/*  margin: 3px ;*/
-/*}*/
-/*.selected{*/
-/*  background: #272D36;*/
-/*}*/
-/*.selectedMonth{*/
-/*  background-color: #5899db;*/
-/*}*/
-/*.payments_period{*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  justify-content: center;*/
-/*  align-items: center;*/
-/*  margin-top: 25%;*/
-/*}*/
-/*.item{*/
-/*  margin: 3px;*/
-/*}*/
-/*.total_income{*/
-/*  font-weight: 500;*/
-/*  font-size: 50px;*/
-/*  line-height: 57px;*/
-/*}*/
-/*.direction{*/
-/*  font-weight: 500;*/
-/*  font-size: 14px;*/
-/*  line-height: 16px;*/
-/*  color: #CCCCCC;*/
-/*}*/
-/*.calendar{*/
-/*  width: 18px;*/
-/*  height: 18px;*/
-/*  margin-left: 7px;*/
-/*}*/
-</style>
