@@ -96,38 +96,36 @@
 
         <div class="element_Analytics">
           <div class="element_Analytics_head">
-            <div class="title_analytic">Количество отмененных подписок</div>
-          </div>
-
-          <div class="element_Analytics_section">
-            <div class="element_Analytics_section_chart">
-              <cancelledChart
-                  v-if="!preloader"
-                  :key="this.$store.getters['calendarCancelled/componentKey']"
-              />
-            </div>
-            <div class="element_Analytics_section_menu">
-              <dateSelectionCancelled/>
-            </div>
-          </div>
-        </div>
-
-        <div class="element_Analytics">
-          <div class="element_Analytics_head">
             <div class="title_analytic">Количество неудачных платежей</div>
           </div>
 
           <div class="element_Analytics_section">
             <div class="element_Analytics_section_chart">
-
+              <unsuccessfulPaymentsChart
+                  v-if="!preloader"
+                  :key="this.$store.getters['dateSelectionUnsuccessful/componentKey']"
+              />
             </div>
             <div class="element_Analytics_section_menu">
-              <dateSelectionUnsuccessful
-              />
+              <dateSelectionUnsuccessful/>
             </div>
           </div>
         </div>
 
+<!--//        <div class="element_Analytics">-->
+<!--          <div class="element_Analytics_head">-->
+<!--            <div class="title_analytic">Количество отмененных подписок</div>-->
+<!--          </div>-->
+
+<!--          <div class="element_Analytics_section">-->
+<!--            <div class="element_Analytics_section_chart">-->
+
+<!--            </div>-->
+<!--            <div class="element_Analytics_section_menu">-->
+<!--              <dateSelectionCancelled/>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
     </transition>
   </div>
@@ -143,9 +141,9 @@ import customers from "../../assets/charts/analyticsPart/customers";
 import Preloader from '../../components/preloader'
 import deductionsChart from "../../assets/charts/analyticsPart/deductionsChart";
 import dateSelectionSuccessfulPayments from "./dateSelectionSuccessfulPayments";
-import dateSelectionCancelled from "./dateSelectionCancelled";
+
 import dateSelectionUnsuccessful from "./dateSelectionUnsuccessful";
-import cancelledChart from "../../assets/charts/analyticsPart/cancelledChart";
+import unsuccessfulPaymentsChart from "../../assets/charts/analyticsPart/unsuccessfulPaymentsChart";
 import successfulPaymentsChart from "../../assets/charts/analyticsPart/successfulPaymentsChart";
 import {mapGetters, mapActions} from 'vuex'
 export default {
@@ -163,10 +161,10 @@ export default {
     Preloader,
     deductionsChart,
     dateSelectionSuccessfulPayments,
-    dateSelectionCancelled,
+    // dateSelectionCancelled,
     dateSelectionUnsuccessful,
-    cancelledChart,
-    successfulPaymentsChart
+    successfulPaymentsChart,
+    unsuccessfulPaymentsChart
   },
   computed:{
     ...mapGetters('userManagement', ['preloader']),

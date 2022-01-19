@@ -109,18 +109,18 @@ export default {
                     ctx.commit('UPDATE_CHART')
                     break
                 }
-                case 'dateSelectionCancelled': {
+                case 'dateSelectionUnsuccessful': {
                     dataIntervalFromApi = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
                     ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.canceledPaymentDTOS, title: obj_info.title })
                     ctx.commit('UPDATE_CHART')
                     break
                 }
-                // case 'dateSelectionSuccessfulPayments': {
-                //     dataIntervalFromApi = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
-                //     ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.incomeList, title: obj_info.title })
-                //     ctx.commit('UPDATE_CHART')
-                //     break
-                // }
+                case 'dateSelectionSuccessfulPayments': {
+                    dataIntervalFromApi = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
+                    ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.incomeList, title: obj_info.title })
+                    ctx.commit('UPDATE_CHART')
+                    break
+                }
             }
             ctx.commit('CHANGE_WW_MM')
             ctx.commit('CALENDAR_END_START', obj)
@@ -138,7 +138,7 @@ export default {
 
                     }
                 }
-                if (revenueInterval.title === 'dateSelectionCancelled'){
+                if (revenueInterval.title === 'dateSelectionUnsuccessful'){
                     for (const oneDay of revenueInterval.data) {
                         labels.push(oneDay.date.split('-')[1] + '-' + oneDay.date.split('-')[2])
                         moneys.push(oneDay.qty)
@@ -183,18 +183,18 @@ export default {
                     ctx.commit('UPDATE_CHART')
                     break
                 }
-                case 'dateSelectionCancelled': {
+                case 'dateSelectionUnsuccessful': {
                     dataIntervalFromApi = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
                     ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.canceledPaymentDTOS, title: calendarObj.title })
                     ctx.commit('UPDATE_CHART')
                     break
                 }
-                // case 'dateSelectionSuccessfulPayments': {
-                //     dataIntervalFromApi = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
-                //     ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.incomeList, title: calendarObj.title })
-                //     ctx.commit('UPDATE_CHART')
-                //     break
-                // }
+                case 'dateSelectionSuccessfulPayments': {
+                    dataIntervalFromApi = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
+                    ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.incomeList, title: calendarObj.title })
+                    ctx.commit('UPDATE_CHART')
+                    break
+                }
             }
             ctx.commit('CHANGE_WW_MM')
             ctx.commit('CALENDAR_END_START', obj)

@@ -16,11 +16,11 @@ export default {
           datasets: [{
             data: this.renewalPriceChart,
             backgroundColor: [
-              '#82D7EA',
               '#9FFFE2',
+              '#82D7EA',
             ],
             borderColor: '#080D16',
-            borderWidth: 4
+            borderWidth: 1
           }]
         },
         {

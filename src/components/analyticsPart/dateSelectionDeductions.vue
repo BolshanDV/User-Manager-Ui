@@ -70,7 +70,7 @@ export default {
   data: function() {
     return {
       calendar: new Date(),
-      title: 'dateSelectionDeductions'
+      title: 'dateSelectionCancelled'
     };
   },
   computed: {

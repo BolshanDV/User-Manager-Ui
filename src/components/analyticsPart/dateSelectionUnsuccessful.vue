@@ -8,12 +8,12 @@
             v-show="!calendarIntervalFlag"
         >
           <div class="btn_interval"
-               @click="DOUBLE_FUNC_WEEK_REVENUE(title)">
+               @click="WEEK_REVENUE({title, interval: 7})">
             <!--             :class="{selected: monthWeek}"-->
             Неделя
           </div>
           <div class="btn_interval"
-               @click="MONTH_REVENUE">
+               @click="WEEK_REVENUE({title, interval: 30})">
             <!--             :class="{ selected: !monthWeek }"-->
             Месяц
           </div>
@@ -38,10 +38,10 @@
           v-show="!calendarIntervalFlag"
       >
         <div class="direction">
-          Выручка за указанный период:
+          Отмены подписок за ук.период:
         </div>
         <div class="total_income">
-          {{totalIncome}}₽
+
         </div>
       </div>
       <transition name="fade">
@@ -53,8 +53,8 @@
             is-range
             v-show="calendarIntervalFlag"
             :key="componentKey"
-        />
-
+        >
+        </v-date-picker>
       </transition>
 
 
@@ -77,13 +77,16 @@ export default {
     ...mapGetters('dateSelectionUnsuccessful', ['calendarIntervalFlag', 'monthWeek', 'calendarDateInterval', 'componentKey', 'totalIncome', 'calendarEndStart'])
   },
   methods: {
-    ...mapActions('dateSelectionUnsuccessful', ['OUTPUT_INTERVAL', 'CHANGE_CALENDAR_DATE', 'CHANGE_WW_MM', 'WEEK_REVENUE', 'DOUBLE_FUNC_WEEK_REVENUE', 'MONTH_REVENUE'])
+    ...mapActions('dateSelectionUnsuccessful', ['OUTPUT_INTERVAL', 'CHANGE_CALENDAR_DATE', 'WEEK_REVENUE'])
   },
   watch: {
     calendar: function (){
-      this.OUTPUT_INTERVAL(this.calendar)
+      this.OUTPUT_INTERVAL({calendar: this.calendar, title: this.title})
     }
-  }
+  },
+  beforeMount() {
+    this.WEEK_REVENUE({title: 'dateSelectionUnsuccessful', interval: 7})
+  },
 }
 </script>
 

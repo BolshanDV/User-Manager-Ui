@@ -38,7 +38,7 @@
           v-show="!calendarIntervalFlag"
       >
         <div class="direction">
-          Отмены подписок за ук.период:
+          Успешные платежи за ук.период:
         </div>
         <div class="total_income">
 
@@ -66,7 +66,7 @@
 <script>
 import {mapGetters, mapActions} from 'vuex'
 export default {
-  name: "dateSelectionDeductions",
+  name: "dateSelectionSuccessfulPayments",
   data: function() {
     return {
       calendar: new Date(),
@@ -85,7 +85,7 @@ export default {
     }
   },
   beforeMount() {
-    this.WEEK_REVENUE({title: 'dateSelectionCancelled', interval: 7})
+    this.WEEK_REVENUE({title: 'dateSelectionSuccessfulPayments', interval: 7})
   },
 }
 </script>

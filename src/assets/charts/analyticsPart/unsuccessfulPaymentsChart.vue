@@ -10,7 +10,7 @@
 import { Bar } from 'vue-chartjs'
 import {mapGetters} from 'vuex'
 export default {
-  name: "CancelledChart",
+  name: "unsuccessfulPaymentsChart",
   mixins: [Bar],
   mounted() {
     this.renderChart({
@@ -39,7 +39,7 @@ export default {
     )
   },
   computed: {
-    ...mapGetters('calendarCancelled', ['calendarDateInterval'])
+    ...mapGetters('dateSelectionUnsuccessful', ['calendarDateInterval'])
   },
 }
 </script>
