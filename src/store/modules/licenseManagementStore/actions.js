@@ -35,9 +35,6 @@ export default {
     },
 
     LATEST_ADDITION: async (ctx) => {
-        // let latestAdd = users.slice().reverse()
-        // latestAdd = latestAdd.slice(0,10)
-        // ctx.commit('UPDATE_LICENCES', latestAdd)
         const response = await axios
             .get('http://localhost:8082/api/v1/licences/', {
                 withCredentials: true

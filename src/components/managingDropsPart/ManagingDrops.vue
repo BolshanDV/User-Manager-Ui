@@ -54,18 +54,19 @@ name: "ManagingDrops",
 }
 .first_section{
   margin-right: 20px;
-  max-width: 450px;
+  max-width: 410px;
 }
 .second_section{
   width: 55%;
+  min-width: 670px;
   display: flex;
   flex-direction: column;
 }
 .analytics{
   background: #0D121A;
   border-radius: 10px;
-  padding: 15px 10px;
-  min-width: 450px;
+  padding: 15px 5px;
+  min-width: 410px;
 }
 input{
   color: #C4C4C4;

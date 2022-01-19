@@ -9,11 +9,11 @@
     </div>
     <div class="color_info">
       <div class="tiffany_color"></div>
-      <div>Успешных оплат - {{chart_data_payments.successful}}</div>
+      <div>Успешных - {{chart_data_payments.successful}}</div>
     </div>
     <div class="color_info">
       <div class="tiffany_color red_color"></div>
-      <div>Неуспешных оплат - {{chart_data_payments.unsuccessful}}</div>
+      <div>Неуспешных - {{chart_data_payments.unsuccessful}}</div>
     </div>
 
   </div>

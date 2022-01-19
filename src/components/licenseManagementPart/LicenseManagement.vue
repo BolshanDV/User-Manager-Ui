@@ -98,11 +98,19 @@
                     </div>
                   </div>
                   <div class="user_management_table_element_content item6">
-                    <div class="text_element"
+                    <div class="text_element unbinded"
                          :class="latestLicence.keyBindStyle"
+                         v-if="latestLicence.keyBind"
                     >
-                      {{ latestLicence.keyBind}}
+                      Binded
                     </div>
+                    <div class="text_element binded"
+                         :class="latestLicence.keyBindStyle"
+                         v-else
+                    >
+                      None
+                    </div>
+
                   </div>
                   <div class="user_management_table_element_content item5">
                     <div class="text_element">
@@ -115,7 +123,7 @@
                     </div>
                   </div>
                   <div class="user_management_table_element_content item9"
-                       @click="KICK_USER(latestLicence.userDTO.id)"
+                       @click="DELETE_LICENCE(latestLicence.id)"
                   >
                     <img
                         src="../../assets/photo/icons/delete.png"
@@ -145,7 +153,8 @@ export default {
   },
   methods:{
     ...mapActions('licenseManagement', ['LICENSE_FLAG', 'SELECTED_LICENSE', 'CREATE_LICENCE', 'LATEST_ADDITION']),
-    ...mapActions('userManagement', ['KICK_USER', 'INPUT_CHANGE_RENEWAL_DATE'])
+    ...mapActions('managingDropsStore', ['DELETE_LICENCE',])
+
   },
   mounted() {
     this.LATEST_ADDITION()

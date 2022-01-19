@@ -63,7 +63,7 @@ name: "NewLayout",
   background-size: cover;
   padding: 60px 20px 20px 20px;
   min-width: 1100px;
-  min-height: 94vh;
+  min-height: 95vh;
   width: 100%;
   background: #161E29;
 }

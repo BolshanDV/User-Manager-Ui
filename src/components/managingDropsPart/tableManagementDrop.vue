@@ -75,18 +75,18 @@
                       v-if="status_drop.isActive"
                       class="binded"
                   >
-                    {{status_drop.isActive}}
+                    Активный
                   </div>
                   <div
                       v-else
                       class="unbinded"
                   >
-                    {{status_drop.isActive}}
+                    Неактивный
                   </div>
                 </div>
 
                 <div class="link">
-                  Ссылка на дроп
+                  <div class="status_drop_description" >Cсылка на дроп</div>
                   <div class="url">
                     https://cmd-root.com/?password={{status_drop.password}}
                   </div>
@@ -201,7 +201,7 @@ main_section_title{
   max-height: 55vh;
 }
 .status_drop_description{
-  margin-right: 15px;
+  min-width: 120px;
 }
 .scroll::-webkit-scrollbar {
   width: 0;

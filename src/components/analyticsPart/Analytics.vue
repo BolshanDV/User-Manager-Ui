@@ -278,11 +278,11 @@ export default {
     height: 250px;
     padding: 15px;
     border-radius: 5px;
+    margin-bottom: 28px;
   }
   .chart_customer_deductions_column{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     height: 40vh;
     width: 300px;
   }

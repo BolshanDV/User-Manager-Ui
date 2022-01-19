@@ -87,7 +87,10 @@ export default {
             .catch(error => {
                 console.log("There was an error!", error);
             });
-        if (status === 202) ctx.dispatch('CALL_FUNC_FOR_DROP_ANALYTICS')
+        if (status === 202) {
+            ctx.dispatch('CALL_FUNC_FOR_DROP_ANALYTICS')
+            ctx.dispatch('licenseManagement/LATEST_ADDITION', {}, {root: true})
+        }
     },
 
     GET_LIST_DROP: async () => {
