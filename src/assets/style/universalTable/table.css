@@ -15,9 +15,6 @@
     flex-direction: column;
     justify-content: flex-start;
     padding: 0 10px 10px 10px;
-    /*height: 70%;*/
-    /*min-width: 1000px;*/
-    /*width: auto;*/
 }
 .user_management_table_element_content{
     height: 100%;

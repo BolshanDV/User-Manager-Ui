@@ -30,14 +30,28 @@ export default {
                 response.status
             )
             .catch(error => {
-                console.log("There was an error!", error);
+                console.log("There was an error!", error)
             });
     },
 
-    LATEST_ADDITION: (ctx, users) => {
-        let latestAdd = users.slice().reverse()
-        latestAdd = latestAdd.slice(0,10)
-        ctx.commit('UPDATE_LICENCES', latestAdd)
+    LATEST_ADDITION: async () => {
+        // let latestAdd = users.slice().reverse()
+        // latestAdd = latestAdd.slice(0,10)
+        // ctx.commit('UPDATE_LICENCES', latestAdd)
+        const response = await axios
+            .get('http://localhost:8082/api/v1/licences/', {
+                withCredentials: true
+            })
+            .then(resObj => {
+                return {
+                    objects: resObj.data,
+                    status: resObj.status
+                };
+            })
+            .catch(error => {
+                console.log(error)
+            });
+        console.log(response)
     },
 
 }

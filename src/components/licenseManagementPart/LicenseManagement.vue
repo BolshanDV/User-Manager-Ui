@@ -5,7 +5,9 @@
         Создание лицензий
       </div>
       <div class="license_space">
-        <div class="main_text">
+        <div class="main_text"
+          @click="LATEST_ADDITION"
+        >
           Тип лицензии
         </div>
 

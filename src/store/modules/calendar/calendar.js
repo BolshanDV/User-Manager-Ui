@@ -113,12 +113,14 @@ export default {
                     dataIntervalFromApi = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
                     ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.canceledPaymentDTOS, title: obj_info.title })
                     ctx.commit('UPDATE_CHART')
+                    ctx.commit('GET_TOTAL_INCOME', dataIntervalFromApi.canceledPaymentDTOS.length)
                     break
                 }
                 case 'dateSelectionSuccessfulPayments': {
                     dataIntervalFromApi = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
                     ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.incomeList, title: obj_info.title })
                     ctx.commit('UPDATE_CHART')
+                    ctx.commit('GET_TOTAL_INCOME', dataIntervalFromApi.incomeList.length)
                     break
                 }
             }

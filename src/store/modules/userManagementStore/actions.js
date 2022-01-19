@@ -102,7 +102,7 @@ export default {
         }
         ctx.commit('UPDATE_USERS', users)
         ctx.dispatch('sideBar/COUNTING_MEMBERS', users, {root: true})
-        ctx.dispatch('licenseManagement/LATEST_ADDITION', users, {root: true})
+        // ctx.dispatch('licenseManagement/LATEST_ADDITION', users, {root: true})
         ctx.dispatch('customersChart/COUNT_CUSTOMERS', users, {root: true})
     },
 

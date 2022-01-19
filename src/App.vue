@@ -43,6 +43,8 @@ export default {
   @import "assets/style/transitions/transition.css";
   @import "assets/style/colorRoles.css";
   @import "assets/style/fonts/font.css";
-  @import "assets/style/colums.css";
-  @import "assets/style/table.css";
+  @import "assets/style/universalTable/colums.css";
+  @import "assets/style/universalTable/table.css";
+  @import "assets/style/dateSelectionStyle.css";
+
 </style>
