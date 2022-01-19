@@ -34,7 +34,7 @@ export default {
             });
     },
 
-    LATEST_ADDITION: async () => {
+    LATEST_ADDITION: async (ctx) => {
         // let latestAdd = users.slice().reverse()
         // latestAdd = latestAdd.slice(0,10)
         // ctx.commit('UPDATE_LICENCES', latestAdd)
@@ -51,7 +51,7 @@ export default {
             .catch(error => {
                 console.log(error)
             });
-        console.log(response)
+        ctx.commit('UPDATE_LICENCES', response.objects)
     },
 
 }

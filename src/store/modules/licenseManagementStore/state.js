@@ -1,5 +1,28 @@
 export default{
     latestLicences: [],
+    titleTable: [
+        {
+            category: 'License key',
+            class: 'item4'
+        },
+        {
+            category: 'Key bind',
+            class: 'item6'
+        },
+        {
+            category: 'Creation date',
+            class: 'item5'
+        },
+        {
+            category: 'Renewal date',
+            class: 'item5'
+        },
+        {
+            category: '',
+            class: 'item9'
+        },
+    ],
+
     prices: [
         {
             nameRole: 'Member',

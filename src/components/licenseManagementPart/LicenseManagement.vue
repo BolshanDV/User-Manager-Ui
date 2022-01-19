@@ -5,9 +5,7 @@
         Создание лицензий
       </div>
       <div class="license_space">
-        <div class="main_text"
-          @click="LATEST_ADDITION"
-        >
+        <div class="main_text">
           Тип лицензии
         </div>
 
@@ -70,6 +68,21 @@
         >
           <div class="text_header">Недавно созданные</div>
           <div class="table_container">
+              <div class="user_management_table_element"
+
+              >
+                <div
+                    :class="titleTableItem.class"
+                    v-for="titleTableItem in titleTable"
+                    :key="titleTableItem.category"
+                    class="user_management_table_element_content"
+                >
+                  <div class="text_element">
+                    {{ titleTableItem.category }}
+                  </div>
+                </div>
+              </div>
+
             <div
                 class="color user_management_table_section "
                 v-for="(latestLicence, index) in latestLicences"
@@ -81,45 +94,35 @@
                 >
                   <div class="user_management_table_element_content item4">
                     <div class="text_element">
-                      {{ latestLicence.licenceDTO.licenceKey }}
+                      {{ latestLicence.licenceKey }}
                     </div>
                   </div>
                   <div class="user_management_table_element_content item6">
                     <div class="text_element"
                          :class="latestLicence.keyBindStyle"
                     >
-                      {{ latestLicence.licenceDTO.keyBind}}
+                      {{ latestLicence.keyBind}}
                     </div>
                   </div>
                   <div class="user_management_table_element_content item5">
                     <div class="text_element">
-                      Create
+                      {{ latestLicence.creationDate }}
                     </div>
                   </div>
-                  <div class="user_management_table_element_content item10" >
-                    <div class="text_element"
-                         @click="INPUT_CHANGE_RENEWAL_DATE(latestLicence.userDTO.id)"
-                    >
-                      {{ latestLicence.licenceDTO.renewalDate}}
-                      <img src="../../assets/photo/icons/pencil.png" alt="" class="delete">
-                      <div
-                          @click="KICK_USER(latestLicence.userDTO.id)"
-                      >
-                        <img
-                            src="../../assets/photo/icons/delete.png"
-                            class="delete"
-                        >
-                      </div>
-
+                  <div class="user_management_table_element_content item2" >
+                    <div class="text_element">
+                      {{ latestLicence.renewalDate}}
                     </div>
+                  </div>
+                  <div class="user_management_table_element_content item9"
+                       @click="KICK_USER(latestLicence.userDTO.id)"
+                  >
+                    <img
+                        src="../../assets/photo/icons/delete.png"
+                        class="delete"
+                    >
                   </div>
                 </div >
-                <inputField
-                    class="inputRenewal"
-                    :id="latestLicence.userDTO.id"
-                    :inputFlagRenewal="latestLicence.inputFlagRenewal"
-                    v-if="latestLicence.inputFlagRenewal"
-                />
               </div>
             </div>
           </div>
@@ -130,24 +133,23 @@
 </template>
 
 <script>
-import inputField from '../inputField'
 import {mapGetters,mapActions} from 'vuex'
 export default {
   name : "LicenseManagement",
-  components: {
-    inputField
-  },
   data: () => ({
     renewalDate: ''
   }),
   computed:{
-    ...mapGetters('licenseManagement', ['prices', 'licenseFlag', 'selectedLicense', 'latestLicences']),
+    ...mapGetters('licenseManagement', ['prices', 'licenseFlag', 'selectedLicense', 'latestLicences', 'titleTable']),
     ...mapGetters('userManagement', ['preloader'])
   },
   methods:{
     ...mapActions('licenseManagement', ['LICENSE_FLAG', 'SELECTED_LICENSE', 'CREATE_LICENCE', 'LATEST_ADDITION']),
     ...mapActions('userManagement', ['KICK_USER', 'INPUT_CHANGE_RENEWAL_DATE'])
   },
+  mounted() {
+    this.LATEST_ADDITION()
+  }
 }
 </script>
 
@@ -262,7 +264,8 @@ export default {
   .delete{
     width: 14px;
     height: 15px;
-    margin: 0 10px 0 10px;
+    margin: 0 25px 0 10px;
+
   }
   .inputRenewal{
     display: flex;

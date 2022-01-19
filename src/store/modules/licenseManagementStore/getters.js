@@ -17,5 +17,8 @@ export default {
 
     latestLicences(state) {
         return state.latestLicences
+    },
+    titleTable(state) {
+        return state.titleTable
     }
 }
