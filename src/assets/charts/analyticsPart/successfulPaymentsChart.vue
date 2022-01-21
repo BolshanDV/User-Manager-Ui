@@ -29,10 +29,18 @@ export default {
             display: false
           },
           scales: {
+            xAxes: [{
+              gridLines: {
+                zeroLineColor: '#C4C4C4',
+              },
+            }],
             yAxes: [{
               ticks: {
                 beginAtZero: true,
-              }
+              },
+              gridLines: {
+                zeroLineColor: '#C4C4C4',
+              },
             }]
           }
         }

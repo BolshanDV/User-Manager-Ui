@@ -25,7 +25,7 @@ export default {
 
     CREATE_DROP_API_REQUEST: async (ctx, obj) => {
         return await axios
-            .post('http://localhost:8082/api/v1/drop/create', obj, {
+            .post(`${process.env.VUE_APP_URL}/api/v1/drop/create`, obj, {
                 withCredentials: true
             })
             .then(response =>
@@ -79,7 +79,7 @@ export default {
     DELETE_LICENCE: async (ctx, id) => {
         console.log(id)
         const status = await axios
-            .delete(`http://localhost:8082/api/v1/licences/${id}`,{
+            .delete(`${process.env.VUE_APP_URL}/api/v1/licences/${id}`,{
                 withCredentials: true
             })
             .then(response =>
@@ -96,7 +96,7 @@ export default {
 
     GET_LIST_DROP: async () => {
         return await axios
-            .get(`http://localhost:8082/api/v1/drop/`, {
+            .get(`${process.env.VUE_APP_URL}/api/v1/drop/`, {
                 withCredentials: true
             })
             .then(response =>
@@ -113,7 +113,7 @@ export default {
             password: item.password,
         }
         const inf = await axios
-            .post('http://localhost:8082/api/v1/drop/check', obj, {
+            .post(`${process.env.VUE_APP_URL}/api/v1/drop/check`, obj, {
                 withCredentials: true
             })
             .then(response =>

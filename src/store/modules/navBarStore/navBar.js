@@ -27,7 +27,7 @@ export default {
     actions: {
         GET_DISCORD_USER_DATA: async (ctx) => {
             const discordUser =  await axios
-                .get('http://localhost:8082/api/v1/me', {
+                .get(`${process.env.VUE_APP_URL}/api/v1/me`, {
                     withCredentials: true
                 })
                 .then(response =>{

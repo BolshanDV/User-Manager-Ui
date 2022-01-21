@@ -23,7 +23,7 @@ export default {
 
     CREATE_LICENCE_REQUEST: async (ctx, obj) => {
         return await axios
-            .post('http://localhost:8082/api/v1/licences/', obj, {
+            .post(`${process.env.VUE_APP_URL}/api/v1/licences/`, obj, {
                 withCredentials: true
             })
             .then(response =>
@@ -36,7 +36,7 @@ export default {
 
     LATEST_ADDITION: async (ctx) => {
         const response = await axios
-            .get('http://localhost:8082/api/v1/licences/', {
+            .get(`${process.env.VUE_APP_URL}/api/v1/licences/`, {
                 withCredentials: true
             })
             .then(resObj => {

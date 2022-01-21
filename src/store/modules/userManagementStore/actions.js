@@ -5,7 +5,7 @@ import sorts from "./sorts";
 export default {
     async getUsers(ctx) {
         const response = await axios
-            .get('http://localhost:8082/api/v1/users/details', {
+            .get(`${process.env.VUE_APP_URL}/api/v1/users/details`, {
                 withCredentials: true
             })
             .then(resObj => {
@@ -18,7 +18,6 @@ export default {
                 console.log(error);
             });
         ctx.dispatch('PROCESSING', response.objects)
-
     },
 
     PROCESSING: (ctx, users) => {
@@ -102,12 +101,10 @@ export default {
         }
         ctx.commit('UPDATE_USERS', users)
         ctx.dispatch('sideBar/COUNTING_MEMBERS', users, {root: true})
-        // ctx.dispatch('licenseManagement/LATEST_ADDITION', users, {root: true})
         ctx.dispatch('customersChart/COUNT_CUSTOMERS', users, {root: true})
     },
 
     HANDLE_CLICK(ctx, userID) {
-        console.log(userID)
         ctx.commit('HANDLE_CLICK', userID)
     },
 
@@ -138,7 +135,7 @@ export default {
 
     async putRequest(ctx, obj) {
         return await axios
-            .put(`http://localhost:8082/api/v1/billings/`, obj, {
+            .put(`${process.env.VUE_APP_URL}/api/v1/billings/`, obj, {
                     withCredentials: true
                 }
             )
@@ -207,7 +204,7 @@ export default {
 
     KICK_USER: async (ctx, userID) => {
         const status = await axios
-            .delete(`http://localhost:8082/api/v1/users/${userID}`,{
+            .delete(`${process.env.VUE_APP_URL}/api/v1/users/${userID}`,{
                 withCredentials: true
             })
             .then(response =>
@@ -237,7 +234,6 @@ export default {
     },
 
     UPDATE_RENEWAL_DATE: async (ctx, {newRenewalDate, id}) => {
-        console.log(id)
         if (newRenewalDate.length === 10) {
             const obj = {
                 userId: id,
@@ -263,7 +259,7 @@ export default {
 
     async putRequestRenewalPrice(ctx, {obj, userId}) {
         return await axios
-            .put(`http://localhost:8082/api/v1/licences/${userId}`, obj,{
+            .put(`${process.env.VUE_APP_URL}/api/v1/licences/${userId}`, obj,{
                     withCredentials: true
                 }
             )

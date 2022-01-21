@@ -1,9 +1,6 @@
 <template>
   <div class="analyticsRevenue">
-    <canvas ref="canvas"
-
-    >
-    </canvas>
+    <canvas ref="canvas"></canvas>
   </div>
 </template>
 
@@ -30,7 +27,16 @@ export default {
             display: false
           },
           scales: {
+            xAxes: [{
+              gridLines: {
+                zeroLineColor: '#C4C4C4',
+              },
+
+            }],
             yAxes: [{
+              gridLines: {
+                zeroLineColor: '#C4C4C4'
+              },
               ticks: {
                 beginAtZero: true,
               }

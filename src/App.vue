@@ -13,19 +13,18 @@ import {mapActions} from 'vuex'
 export default {
   name: 'App',
   head: {
-    link: [
-      {
-        rel: "icon",
-        href: ('../public/logo.ico')
-      },
-    ]
+    link: [{
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '../public/favicon-x.svg'
+    }],
   },
-  computed:{
+  computed: {
     layout(){
       return (this.$route.meta.layout || 'empty') + 'Layout'
     }
   },
-  components:{
+  components: {
     mainLayout,
     emptyLayout
   },

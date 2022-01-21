@@ -69,7 +69,7 @@ export default {
 
          ANALYTICS: async (ctx,obj) => {
              return  await axios
-                 .post('http://localhost:8082/api/v1/payments/', obj, {
+                 .post(`${process.env.VUE_APP_URL}/api/v1/payments/`, obj, {
                      withCredentials: true
                      }
                  )

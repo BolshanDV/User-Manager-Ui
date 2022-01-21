@@ -5,11 +5,11 @@ import titleCategory from './modules/titleCategoryStore/titleCategory';
 import sideBar from "./modules/sideBarStore/sideBar";
 import navBar from './modules/navBarStore/navBar'
 import customersChart from "./modules/chart/customerChart";
-import calendarRevenue from "./modules/calendar/calendar";
-import calendarDeductions from "./modules/calendar/calendar";
-import calendarSuccessfulPayments from "./modules/calendar/calendar";
-import calendarCancelled from "./modules/calendar/calendar";
-import dateSelectionUnsuccessful from "./modules/calendar/calendar";
+import calendarRevenue from "./modules/calendarStore";
+import calendarDeductions from "./modules/calendarStore";
+import calendarSuccessfulPayments from "./modules/calendarStore";
+import calendarCancelled from "./modules/calendarStore";
+import dateSelectionUnsuccessful from "./modules/calendarStore";
 import licenseManagement from "./modules/licenseManagementStore"
 import managingDropsStore from './modules/managingDropsStore'
 
