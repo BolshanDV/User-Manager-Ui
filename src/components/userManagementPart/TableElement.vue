@@ -3,7 +3,7 @@
     <div v-if="preloader"  >
       <Preloader />
     </div>
-    <transition-group name="slide-fade" tag="div" class="scroll">
+    <transition-group name="fade" tag="div" class="scroll">
       <div
           v-show="!preloader"
           v-for="(user, index) in allUsers"

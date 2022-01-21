@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <img src="../assets/photo/root.png" alt="">
+    <img src="../assets/photo/crypto.svg" alt="" class="logo">
     <div class="title item">
       User Manager
     </div>
@@ -50,5 +50,9 @@ img{
   justify-content: center;
   flex-direction: row;
   align-items: center;
+}
+.logo{
+  height: 128px;
+  width: 128px;
 }
 </style>

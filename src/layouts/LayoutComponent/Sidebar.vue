@@ -3,7 +3,7 @@
   <div class="sidebar">
     <div class="sidebar_mainData ">
       <div class="logo">
-        <img src="@/assets/photo/root.png" alt="img" class="logo_image">
+        <img src="@/assets/photo/crypto.svg" alt="myImage" class="logo_image">
       </div>
       <transition name="fade">
         <div v-show="!preloader">
@@ -111,7 +111,7 @@ export default {
   background-color: #161E29;
   border-radius: 10px;
   padding: 2vh;
-  margin: 6vh 3vh 4vh 3vh;
+  margin: 10px 3vh 4vh 3vh;
   display: flex;
   flex-direction: column;
 
@@ -139,8 +139,8 @@ export default {
   color: #EBEBEB;
 }
 .logo{
-  margin: 2vh 2vh 1.5vh 0;
-  text-align: center;
+  margin: 0 2vh;
+  text-align: left;
 }
 .icons{
   height: 26px;
@@ -148,9 +148,9 @@ export default {
   margin-right: 1.75vh;
 }
 .logo_image {
-  height: 50px;
-  width: 128px;
-  margin-left: 1.75vh;
+  height: 65px;
+  width: 65px;
+  margin-top: 5px;
 }
 .totalIncome{
   font-weight: 400;
