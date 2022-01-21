@@ -15,7 +15,9 @@
               <div class="countCustomer">
                 {{CountMember}}
               </div>
-              <div class="mainData_header">вкл.</div>
+              <div class="mainData_header">
+                вкл.
+              </div>
               <div class="countLifetime">
                 {{countLifetime}}
               </div>
@@ -165,6 +167,7 @@ export default {
 .mainData_header{
   color: #CCCCCC;
   margin-bottom: 5px;
+  margin-left: 2px;
 }
 .members_info{
   display: flex;

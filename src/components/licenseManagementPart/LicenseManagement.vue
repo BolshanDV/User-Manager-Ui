@@ -62,15 +62,13 @@
       <div v-if="preloader"  >
         <Preloader />
       </div>
-      <transition name="slide-fade">
+<!--      <transition name="slide-fade">-->
         <div
             v-show="!preloader"
         >
           <div class="text_header">Недавно созданные</div>
           <div class="table_container">
-              <div class="user_management_table_element"
-
-              >
+              <div class="user_management_table_element">
                 <div
                     :class="titleTableItem.class"
                     v-for="titleTableItem in titleTable"
@@ -82,6 +80,8 @@
                   </div>
                 </div>
               </div>
+            <transition-group name="slide-fade">
+
 
             <div
                 class="color user_management_table_section "
@@ -118,9 +118,18 @@
                     </div>
                   </div>
                   <div class="user_management_table_element_content item2" >
-                    <div class="text_element">
+                    <div
+                        v-if="latestLicence.renewalDate === null"
+                        class="text_element">
+                      ~
+                    </div>
+                    <div
+                        v-else
+                        class="text_element"
+                    >
                       {{ latestLicence.renewalDate}}
                     </div>
+
                   </div>
                   <div class="user_management_table_element_content item9"
                        @click="DELETE_LICENCE(latestLicence.id)"
@@ -133,9 +142,10 @@
                 </div >
               </div>
             </div>
+            </transition-group>
           </div>
         </div>
-      </transition>
+<!--      </transition>-->
     </div>
   </div>
 </template>

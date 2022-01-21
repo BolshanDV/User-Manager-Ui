@@ -64,7 +64,8 @@ name: "NewLayout",
   min-width: 1100px;
   min-height: 95vh;
   width: 100%;
-  background: url('../assets/photo/background2.png') center/cover no-repeat, url('../assets/photo/background1.png') center/cover no-repeat;
+  background: url('../assets/photo/background2.png') bottom right/ 100% auto no-repeat fixed, url('../assets/photo/background1.png') top left/ 100% auto no-repeat fixed;
+
 }
 .container_flex{
   display: flex;

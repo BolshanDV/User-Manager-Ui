@@ -193,6 +193,7 @@ export default {
     align-content: center;
     flex-flow: column nowrap;
     align-items: center;
+    /*background-color: #161E29;*/
   }
   .element_Analytics {
     height: 47vh;
@@ -255,7 +256,7 @@ export default {
   .element_Analytics_section_menu{
     width: 40vh ;
     min-width: 300px;
-    height: 100%;
+    /*height: 100%;*/
     min-height: 350px;
     border-radius: 10px;
     background: #080D16;

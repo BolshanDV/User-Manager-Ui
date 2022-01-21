@@ -38,7 +38,7 @@
           v-show="!calendarIntervalFlag"
       >
         <div class="direction">
-          Отмены подписок за ук.период:
+          Неудач. платежи за ук.период:
         </div>
         <div class="total_income">
           {{totalIncome}}

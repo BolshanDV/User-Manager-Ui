@@ -113,21 +113,30 @@ export default {
                     dataIntervalFromApi = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
                     ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.canceledPaymentDTOS, title: obj_info.title })
                     ctx.commit('UPDATE_CHART')
-                    ctx.commit('GET_TOTAL_INCOME', dataIntervalFromApi.canceledPaymentDTOS.length)
+                    let successfulPayments = 0
+                    for (const item of dataIntervalFromApi.canceledPaymentDTOS) {
+                        successfulPayments += item.qty
+                    }
+                    ctx.commit('GET_TOTAL_INCOME', successfulPayments)
                     break
                 }
                 case 'dateSelectionSuccessfulPayments': {
                     dataIntervalFromApi = await ctx.dispatch('sideBar/ANALYTICS', obj, { root: true})
                     ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.incomeList, title: obj_info.title })
                     ctx.commit('UPDATE_CHART')
-                    ctx.commit('GET_TOTAL_INCOME', dataIntervalFromApi.incomeList.length)
+
+                    let successfulPayments = 0
+                     for (const item of dataIntervalFromApi.incomeList) {
+                         successfulPayments += item.qty
+                     }
+                    ctx.commit('GET_TOTAL_INCOME', successfulPayments)
                     break
                 }
                 case 'dateSelectionCancelled': {
                     dataIntervalFromApi = await ctx.dispatch('RECEPTION_DATA_DEDUCTIONS', obj)
                     ctx.dispatch('CREATE_DATA_FOR_CHART', {data: dataIntervalFromApi.listMetrics, title: obj_info.title })
                     ctx.commit('UPDATE_CHART')
-                    ctx.commit('GET_TOTAL_INCOME', dataIntervalFromApi.quantityDepartedUsers)
+                    ctx.commit('GET_TOTAL_INCOME', dataIntervalFromApi.quantityIncomeUsers)
                 }
             }
             ctx.commit('CHANGE_WW_MM')
