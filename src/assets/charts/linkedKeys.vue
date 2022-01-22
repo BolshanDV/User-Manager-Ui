@@ -40,7 +40,6 @@ export default {
             yAxes: [{
               ticks: {
                 beginAtZero: true,
-                // display: false
               }
             }]
           }
