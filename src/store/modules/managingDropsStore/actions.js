@@ -32,7 +32,7 @@ export default {
                 response.status
             )
             .catch(error => {
-                ctx.dispatch('toastedStore/ADDING_ERROR',  error.response.data.message ,{root: true})
+                ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})
                 console.log("There was an error!", error);
             });
     },
@@ -87,7 +87,7 @@ export default {
                 response.status
             )
             .catch(error => {
-                ctx.dispatch('toastedStore/ADDING_ERROR',  error.response.data.message ,{root: true})
+                ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})
                 console.log("There was an error!", error);
             });
         if (status === 202) {
@@ -105,7 +105,7 @@ export default {
                 response.data
             )
             .catch(error => {
-                ctx.dispatch('toastedStore/ADDING_ERROR',  error.response.data.message ,{root: true})
+                ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})
                 console.log("There was an error!", error);
             });
     },
@@ -123,7 +123,7 @@ export default {
                 response.data
             )
             .catch(error => {
-                ctx.dispatch('toastedStore/ADDING_ERROR',  error.response.data.message ,{root: true})
+                ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})
                 console.log("There was an error!", error);
             });
 

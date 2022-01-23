@@ -37,7 +37,7 @@ export default {
                     }
                 })
                 .catch(error => {
-                    ctx.dispatch('toastedStore/ADDING_ERROR',  error.response.data.message ,{root: true})
+                    ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})
                     console.log("There was an error!", error);
                 });
             ctx.commit('AUTHORIZED', discordUser)

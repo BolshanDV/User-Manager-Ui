@@ -15,7 +15,7 @@ export default {
                 };
             })
             .catch(error => {
-                ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
+                ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})
                 console.log(error);
             });
         ctx.dispatch('PROCESSING', response.objects)
@@ -143,7 +143,7 @@ export default {
                 response.status
             )
             .catch(error => {
-                ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
+                ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})
                 console.log("There was an error!", error);
             });
     },
@@ -211,7 +211,7 @@ export default {
                 response.status
             )
             .catch(error => {
-                ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
+                ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})
                 console.log("There was an error!", error);
             });
         if (status === 202) ctx.dispatch('getUsers')
@@ -268,7 +268,7 @@ export default {
                 response.status
             )
             .catch(error => {
-                ctx.dispatch('toastedStore/ADDING_ERROR',  error.response.data.message ,{root: true})
+                ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})
                 console.log("There was an error!", error);
             });
     },
