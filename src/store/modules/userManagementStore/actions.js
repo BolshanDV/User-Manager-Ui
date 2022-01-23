@@ -113,6 +113,8 @@ export default {
         ctx.state.renewalDate = new Date((ctx.state.users[id].licenceDTO.renewalDate))
         ctx.state.renewalDate.setMonth(ctx.state.renewalDate.getMonth() + 1)
 
+        //TODO вынести логику
+
         let dd = ctx.state.renewalDate.getDate();
         if (dd < 10) dd = '0' + dd;
 
@@ -127,6 +129,7 @@ export default {
             licenceKey: ctx.state.users[id].licenceDTO.licenceKey,
             keyBind: ctx.state.users[id].licenceDTO.keyBind,
             renewalDate: ctx.state.renewalDate,
+            discordUsername: ctx.state.users[id].userDTO.discordUsername
         }
 
         const status = await ctx.dispatch('putRequest', obj)
@@ -139,8 +142,11 @@ export default {
                     withCredentials: true
                 }
             )
-            .then(response =>
-                response.status
+            .then(response => {
+                    ctx.dispatch('toastedStore/ADDING_ERROR', {text: `"${(obj.discordUsername).toUpperCase()}" added a free month`, status: response.status}, {root: true})
+                    return response.status
+            }
+
             )
             .catch(error => {
                 ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})
@@ -202,14 +208,17 @@ export default {
         ctx.commit('NO_SORTING')
     },
 
-    KICK_USER: async (ctx, userID) => {
+    KICK_USER: async (ctx, user) => {
+        console.log(user)
         const status = await axios
-            .delete(`${process.env.VUE_APP_URL}/api/v1/users/${userID}`,{
+            .delete(`${process.env.VUE_APP_URL}/api/v1/users/${user.id}`,{
                 withCredentials: true
             })
-            .then(response =>
-                response.status
-            )
+            .then(response => {
+                ctx.dispatch('toastedStore/ADDING_ERROR', {text: `"${(user.discordUsername).toUpperCase()}" has been kicked`, status: response.status}, {root: true})
+                return response.status
+            }
+    )
             .catch(error => {
                 ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})
                 console.log("There was an error!", error);
@@ -280,6 +289,5 @@ export default {
     SHOW_POPUP: (ctx, user) => {
         ctx.commit('SHOW_POPUP')
         ctx.commit('CHANGE_ID_KICK_USER', user)
-        console.log(user)
     },
 }

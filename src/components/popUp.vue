@@ -7,7 +7,7 @@
           @click="SHOW_POPUP"
         >Close</div>
         <div class="btn_color waves-effect waves-light z-depth-3"
-             @click="KICK_USER(idKickUser.id)"
+             @click="KICK_USER(idKickUser)"
         >Kick</div>
       </div>
     </div>

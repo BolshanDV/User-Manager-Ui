@@ -6,8 +6,10 @@
           name="slide-fade"
       >
         <div class="toasted_element"
-             v-for="arrayError in arrayErrors"
+             v-for="(arrayError, index) in arrayErrors"
              :key="arrayError.id"
+             :class="arrayError.style"
+             @click="DELETE_PUSH_UP(index)"
         >
           <div class="content_text">{{arrayError.text}}</div>
         </div>
@@ -18,11 +20,14 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 export default {
 name: "toasted",
   computed: {
     ...mapGetters('toastedStore', ['arrayErrors'])
+  },
+  methods: {
+    ...mapActions('toastedStore', ['DELETE_PUSH_UP'])
   }
 }
 </script>
@@ -46,7 +51,6 @@ name: "toasted",
   height: 50px;
   min-width: 200px;
   margin-bottom: 16px;
-  background: rgb(250, 10, 10);
 }
 .content_text{
   display: flex;
@@ -56,5 +60,11 @@ name: "toasted",
 .error_block{
   display: flex;
   flex-direction: column-reverse;
+}
+.error{
+  background-color: rgba(119,2,0,0.82);
+}
+.success{
+  background-color: rgba(3,73,43,0.82);
 }
 </style>

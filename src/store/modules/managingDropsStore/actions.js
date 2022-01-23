@@ -28,8 +28,10 @@ export default {
             .post(`${process.env.VUE_APP_URL}/api/v1/drop/create`, obj, {
                 withCredentials: true
             })
-            .then(response =>
+            .then(response =>{
                 response.status
+                ctx.dispatch('toastedStore/ADDING_ERROR', {text: 'The drop was successfully created', status: response.status}, {root: true})
+            }
             )
             .catch(error => {
                 ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})
