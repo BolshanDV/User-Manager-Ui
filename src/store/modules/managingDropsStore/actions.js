@@ -32,6 +32,7 @@ export default {
                 response.status
             )
             .catch(error => {
+                ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
                 console.log("There was an error!", error);
             });
     },
@@ -86,6 +87,7 @@ export default {
                 response.status
             )
             .catch(error => {
+                ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
                 console.log("There was an error!", error);
             });
         if (status === 202) {
@@ -94,7 +96,7 @@ export default {
         }
     },
 
-    GET_LIST_DROP: async () => {
+    GET_LIST_DROP: async (ctx) => {
         return await axios
             .get(`${process.env.VUE_APP_URL}/api/v1/drop/`, {
                 withCredentials: true
@@ -103,6 +105,7 @@ export default {
                 response.data
             )
             .catch(error => {
+                ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
                 console.log("There was an error!", error);
             });
     },
@@ -120,6 +123,7 @@ export default {
                 response.data
             )
             .catch(error => {
+                ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
                 console.log("There was an error!", error);
             });
 

@@ -17,7 +17,9 @@ export default {
             licenceTypeId : selectedLicense.idRole
         }
         const status = await dispatch('CREATE_LICENCE_REQUEST', obj)
-        if (status === 202) dispatch('userManagement/getUsers')
+        if (status === 201) {
+            dispatch('LATEST_ADDITION')
+        }
 
     },
 
@@ -30,6 +32,7 @@ export default {
                 response.status
             )
             .catch(error => {
+                ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
                 console.log("There was an error!", error)
             });
     },
@@ -43,9 +46,11 @@ export default {
                 return {
                     objects: resObj.data,
                     status: resObj.status
+
                 };
             })
             .catch(error => {
+                ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
                 console.log(error)
             });
         ctx.commit('UPDATE_LICENCES', response.objects)

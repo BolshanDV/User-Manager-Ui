@@ -11,7 +11,9 @@
 
         <div class="element_Analytics">
           <div class="element_Analytics_head">
-            <div class="title_analytic">Выручка</div>
+            <div class="title_analytic"
+                 @click="ADDING_ERROR"
+            >Выручка</div>
           </div>
 
           <div class="element_Analytics_section">
@@ -154,7 +156,7 @@ export default {
   name: "Analytics",
   data() {
     return {
-      calendar:''
+      calendar: '',
     };
   },
   components:{
@@ -169,7 +171,7 @@ export default {
     dateSelectionUnsuccessful,
     successfulPaymentsChart,
     unsuccessfulPaymentsChart,
-    dateSelectionCancelled
+    dateSelectionCancelled,
   },
   computed:{
     ...mapGetters('userManagement', ['preloader']),
@@ -178,10 +180,10 @@ export default {
     ...mapGetters('sideBar', ['CountMember']),
 
   },
-  methods:{
-    ...mapActions('calendarRevenue',['WEEK_REVENUE'])
-  },
-
+  methods: {
+    ...mapActions('calendarRevenue',['WEEK_REVENUE']),
+    ...mapActions('toastedStore', ['ADDING_ERROR'])
+  }
 }
 </script>
 

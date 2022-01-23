@@ -77,7 +77,7 @@ export default {
     ...mapGetters('calendarRevenue', ['calendarIntervalFlag', 'monthWeek', 'calendarDateInterval', 'componentKey', 'totalIncome', 'calendarEndStart'])
   },
   methods: {
-    ...mapActions('calendarRevenue', ['OUTPUT_INTERVAL', 'CHANGE_CALENDAR_DATE', 'WEEK_REVENUE'])
+    ...mapActions('calendarRevenue', ['OUTPUT_INTERVAL', 'CHANGE_CALENDAR_DATE', 'WEEK_REVENUE']),
   },
   watch: {
     calendar: function (){

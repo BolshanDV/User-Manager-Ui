@@ -12,6 +12,7 @@
     </div>
 
     <div class="work_space">
+      <toasted/>
       <transition name="fade">
         <router-view />
       </transition>
@@ -24,11 +25,13 @@
 <script>
 import Navbar from "@/layouts/LayoutComponent/Navbar";
 import Sidebar from "@/layouts/LayoutComponent/Sidebar";
+import toasted from "../components/toastedPart/toasted";
 export default {
 name: "NewLayout",
   components:{
     Navbar,
-    Sidebar
+    Sidebar,
+    toasted
   },
   data: () => ({
     isOpen: true,

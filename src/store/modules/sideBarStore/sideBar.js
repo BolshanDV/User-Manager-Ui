@@ -69,7 +69,7 @@ export default {
 
          ANALYTICS: async (ctx,obj) => {
              return  await axios
-                 .post(`${process.env.VUE_APP_URL}/api/v1/payments/`, obj, {
+                 .get(`${process.env.VUE_APP_URL}/api/v1/payments/?startDate=${obj.startDate}&endDate=${obj.endDate}`, {
                      withCredentials: true
                      }
                  )
@@ -77,6 +77,7 @@ export default {
                      return resObj.data;
                  })
                  .catch(error => {
+                     ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
                      console.log(error);
                  });
          },
@@ -97,6 +98,6 @@ export default {
                  }
              }
              commit('UPDATE_MEMBERS', {newCountMember, newCountLifetime})
-         }
+         },
      }
 }

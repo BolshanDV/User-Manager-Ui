@@ -15,6 +15,7 @@ export default {
                 };
             })
             .catch(error => {
+                ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
                 console.log(error);
             });
         ctx.dispatch('PROCESSING', response.objects)
@@ -129,7 +130,6 @@ export default {
         }
 
         const status = await ctx.dispatch('putRequest', obj)
-
         if (status === 200) ctx.dispatch('getUsers')
     },
 
@@ -143,12 +143,12 @@ export default {
                 response.status
             )
             .catch(error => {
+                ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
                 console.log("There was an error!", error);
             });
     },
 
     SORT_HANDLER: async (ctx, sortType) => {
-        console.log(sortType)
         if ((sortType === 'byRenewDate') || (sortType === 'byLicence') || (sortType === 'byRole') || (sortType === 'byKeyBind') || (sortType === 'byPaymentState') || (sortType === 'byCartBind')){
             let currentButton = sortType;
 
@@ -211,6 +211,7 @@ export default {
                 response.status
             )
             .catch(error => {
+                ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
                 console.log("There was an error!", error);
             });
         if (status === 202) ctx.dispatch('getUsers')
@@ -267,6 +268,7 @@ export default {
                 response.status
             )
             .catch(error => {
+                ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
                 console.log("There was an error!", error);
             });
     },
