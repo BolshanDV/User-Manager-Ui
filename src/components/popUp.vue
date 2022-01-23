@@ -1,13 +1,13 @@
 <template>
   <div class="popUp">
     <div class="popUp_delete">
-      <div class="main_text"><div>Are you sure you want to delete the user?</div></div>
+      <div class="main_text"><div>Are you sure you want to delete {{ idKickUser.discordUsername }}?</div></div>
       <div class="button_popUp">
         <div class="btn_color waves-effect waves-light z-depth-3 item"
           @click="SHOW_POPUP"
         >Close</div>
         <div class="btn_color waves-effect waves-light z-depth-3"
-             @click="KICK_USER(idKickUser)"
+             @click="KICK_USER(idKickUser.id)"
         >Kick</div>
       </div>
     </div>
@@ -36,10 +36,14 @@ name: "popUp",
   padding: 100px;
   top: 100px;
   left: 300px;
+  margin: 0;
+  /*margin-left: auto;*/
+  /*margin-right: auto;*/
+  width: 6em
 }
 .btn_color{
   color: #C4C4C4;
-  background-color: #1F2A39;
+  background-color: #1f2a39;
   padding: 5px;
   width: 170px;
   height: 40px;
@@ -62,10 +66,10 @@ name: "popUp",
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #161E29;
+  background-color: rgba(22,30,41,0.96);
   margin:0 25% 0 25%;
   width: 500px;
-  box-shadow: 20px 30px 50px 40px rgba(0, 0, 0, .5);
+  box-shadow: 20px 30px 30px 35px rgba(0, 0, 0, .5);
   border-radius: 5px;
 }
 .item{

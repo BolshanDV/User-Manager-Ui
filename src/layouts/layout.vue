@@ -11,7 +11,7 @@
       </transition>
     </div>
 
-    <div class="work_space">
+    <div class="work_space color">
       <toasted/>
       <transition name="fade">
         <router-view />
@@ -46,8 +46,8 @@ name: "NewLayout",
   flex-direction: column;
   width: 100%;
   justify-content: flex-start;
-  background: #161E29;
   height: 100%;
+  background-color: #161E29;
   min-width: 1200px;
 }
 .navbar{
@@ -68,10 +68,12 @@ name: "NewLayout",
   min-height: 95vh;
   width: 100%;
   background: url('../assets/photo/background2.png') bottom right/ 100% auto no-repeat fixed, url('../assets/photo/background1.png') top left/ 100% auto no-repeat fixed;
-
+}
+.color{
+  background-color: #161E29;
 }
 .container_flex{
   display: flex;
-  background-size: contain;
+  /*background-size: contain;*/
 }
 </style>

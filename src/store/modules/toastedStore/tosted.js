@@ -15,21 +15,26 @@ export default {
     mutations: {
         ADDING_ERROR: (state, message) => {
             let textMessage
+            let time
             switch (message.status) {
                 case 401 : {
                     textMessage = 'Unauthorized'
+                    time = 1000000
                     break
                 }
                 case 500 : {
                     textMessage = 'Server internal error'
+                    time = 4500
                     break
                 }
                 case 404 : {
                     textMessage = 'Request failed'
+                    time = 4500
                     break
                 }
                 case 400 : {
                     textMessage = message.data.message
+                    time = 4500
                     break
                 }
             }
@@ -41,7 +46,7 @@ export default {
             if (state.arrayErrors.length) {
                 setTimeout(() => {
                     state.arrayErrors.splice(0, 1)
-                }, 4500)
+                }, time)
             }
         },
     },

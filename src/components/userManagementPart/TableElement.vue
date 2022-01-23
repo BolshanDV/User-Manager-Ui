@@ -152,7 +152,7 @@
             </div>
             <div class="element_content_show_container button">
               <div class="waves-effect waves-light btn1"
-                      @click="SHOW_POPUP(user.userDTO.id)"
+                      @click="SHOW_POPUP(user.userDTO)"
               >
                 <div class="text_element"
                 >
@@ -318,7 +318,7 @@ name: "TableElement",
   overflow-y: auto;
   scroll-snap-type: y;
   max-height: 60vh;
-  scrollbar-width: none
+  scrollbar-width: none;
 }
 .scroll::-webkit-scrollbar {
   width: 0;

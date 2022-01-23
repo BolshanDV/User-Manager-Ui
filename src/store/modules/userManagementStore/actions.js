@@ -277,8 +277,9 @@ export default {
         ctx.commit('FILTERED_NAME', search)
     },
 
-    SHOW_POPUP: (ctx, userId) => {
+    SHOW_POPUP: (ctx, user) => {
         ctx.commit('SHOW_POPUP')
-        ctx.commit('CHANGE_ID_KICK_USER', userId)
+        ctx.commit('CHANGE_ID_KICK_USER', user)
+        console.log(user)
     },
 }
