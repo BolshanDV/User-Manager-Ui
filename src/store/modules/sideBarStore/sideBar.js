@@ -76,9 +76,9 @@ export default {
                  .then(resObj => {
                      return resObj.data;
                  })
-                 .catch(error => {
-                     ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
-                     console.log(error);
+                 .catch( error => {
+                     ctx.dispatch('toastedStore/ADDING_ERROR', error.response.data.message , {root: true})
+                     console.log(error.response.data.message);
                  });
          },
 

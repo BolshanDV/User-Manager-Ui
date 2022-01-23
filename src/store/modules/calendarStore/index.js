@@ -232,7 +232,7 @@ export default {
                     response.data
                 )
                 .catch(error => {
-                    ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
+                    ctx.dispatch('toastedStore/ADDING_ERROR',  error.response.data.message ,{root: true})
                     console.log("There was an error!", error);
                 });
         }

@@ -17,10 +17,7 @@ export default {
             licenceTypeId : selectedLicense.idRole
         }
         const status = await dispatch('CREATE_LICENCE_REQUEST', obj)
-        if (status === 201) {
-            dispatch('LATEST_ADDITION')
-        }
-
+        if (status === 201) dispatch('LATEST_ADDITION')
     },
 
     CREATE_LICENCE_REQUEST: async (ctx, obj) => {
@@ -31,8 +28,8 @@ export default {
             .then(response =>
                 response.status
             )
-            .catch(error => {
-                ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
+            .catch( error  => {
+                ctx.dispatch('toastedStore/ADDING_ERROR', error.response.data.message ,{root: true})
                 console.log("There was an error!", error)
             });
     },
@@ -50,7 +47,7 @@ export default {
                 };
             })
             .catch(error => {
-                ctx.dispatch('toastedStore/ADDING_ERROR','',{root: true})
+                ctx.dispatch('toastedStore/ADDING_ERROR',  error.response.data.message ,{root: true})
                 console.log(error)
             });
         ctx.commit('UPDATE_LICENCES', response.objects)

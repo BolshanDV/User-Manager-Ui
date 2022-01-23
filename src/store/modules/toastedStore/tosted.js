@@ -13,9 +13,9 @@ export default {
     },
 
     mutations: {
-        ADDING_ERROR: (state) => {
+        ADDING_ERROR: (state, message) => {
             const obj = {
-                text: 'There was some error contact the developers!',
+                text: message + '!',
                 id: Date.now().toLocaleString()
             }
             state.arrayErrors.push(obj)
@@ -28,8 +28,9 @@ export default {
     },
 
     actions: {
-        ADDING_ERROR: (ctx) => {
-            ctx.commit('ADDING_ERROR')
+        ADDING_ERROR: (ctx, message) => {
+            ctx.commit('ADDING_ERROR', message)
+            console.log(message)
         },
     }
 }
