@@ -12,7 +12,7 @@ import calendarCancelled from "./modules/calendarStore/index";
 import dateSelectionUnsuccessful from "./modules/calendarStore/index";
 import licenseManagement from "./modules/licenseManagementStore"
 import managingDropsStore from './modules/managingDropsStore'
-import toastedStore from './modules/toastedStore/tosted'
+import toastedStore from './modules/toastsStore/toasts'
 
 Vue.use(Vuex);
 
