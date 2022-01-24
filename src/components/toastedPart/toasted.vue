@@ -65,6 +65,6 @@ name: "toasted",
   background-color: rgba(119,2,0,0.82);
 }
 .success{
-  background-color: rgba(3,73,43,0.82);
+  background-color: rgba(26,120,91,0.83);
 }
 </style>

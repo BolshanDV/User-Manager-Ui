@@ -132,21 +132,19 @@ export default {
             discordUsername: ctx.state.users[id].userDTO.discordUsername
         }
 
-        const status = await ctx.dispatch('putRequest', obj)
-        if (status === 200) ctx.dispatch('getUsers')
+        await ctx.dispatch('putRequest', obj)
     },
 
     async putRequest(ctx, obj) {
-        return await axios
+        await axios
             .put(`${process.env.VUE_APP_URL}/api/v1/billings/`, obj, {
                     withCredentials: true
                 }
             )
             .then(response => {
-                    ctx.dispatch('toastedStore/ADDING_ERROR', {text: `"${(obj.discordUsername).toUpperCase()}" added a free month`, status: response.status}, {root: true})
-                    return response.status
-            }
-
+                    ctx.dispatch('toastedStore/ADDING_ERROR', {text: `FOR "${(obj.discordUsername).toUpperCase()}", the payment date has been changed`, status: response.status}, {root: true})
+                    if (response.status === 200) ctx.dispatch('getUsers')
+                }
             )
             .catch(error => {
                 ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})
@@ -209,7 +207,6 @@ export default {
     },
 
     KICK_USER: async (ctx, user) => {
-        console.log(user)
         const status = await axios
             .delete(`${process.env.VUE_APP_URL}/api/v1/users/${user.id}`,{
                 withCredentials: true
@@ -243,20 +240,19 @@ export default {
         ctx.commit('INPUT_CHANGE_LICENCE', userId)
     },
 
-    UPDATE_RENEWAL_DATE: async (ctx, {newRenewalDate, id}) => {
+    UPDATE_RENEWAL_DATE: async (ctx, {newRenewalDate, id, name}) => {
         if (newRenewalDate.length === 10) {
             const obj = {
                 userId: id,
-                renewalDate: newRenewalDate + ' 00:00:00.000000'
+                renewalDate: newRenewalDate + ' 00:00:00.000000',
+                discordUsername: name
             }
-            const status = await ctx.dispatch('putRequest', obj)
-            if (status === 200) ctx.dispatch('getUsers')
-
+            await ctx.dispatch('putRequest', obj)
         }
     },
 
     UPDATE_RENEWAL_PRICE: async (ctx, {renewalPrice, newRole,  id}) => {
-        if(newRole === 'Customer' || (newRole === 'Lifetime') || (newRole === 'Support time') || (newRole === 'Moderator') || (newRole === 'Developer') || (newRole === 'Beta EN') || (newRole === 'Friends & Family')) {
+        if(newRole === 'Member' || (newRole === 'Lifetime') || (newRole === 'Support time') || (newRole === 'Moderator') || (newRole === 'Developer') || (newRole === 'Beta EN') || (newRole === 'Friends & Family')) {
             const userId = id
             const obj = {
                 renewPrice: renewalPrice,
@@ -273,8 +269,10 @@ export default {
                     withCredentials: true
                 }
             )
-            .then(response =>
+            .then(response =>{
                 response.status
+            }
+
             )
             .catch(error => {
                 ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})

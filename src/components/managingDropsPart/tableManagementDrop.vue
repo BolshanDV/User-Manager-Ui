@@ -196,8 +196,9 @@ main_section_title{
   color: #8E8E8E;
 }
 .scroll{
-  overflow-y: auto;
+  overflow-x: auto;
   scroll-snap-type: y;
+  scrollbar-width: none;
   max-height: 55vh;
 }
 .status_drop_description{
@@ -206,7 +207,4 @@ main_section_title{
 .scroll::-webkit-scrollbar {
   width: 0;
 }
-/*.scroll_item{*/
-/*  scroll-snap-align: start;*/
-/*}*/
 </style>

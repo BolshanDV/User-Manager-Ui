@@ -98,13 +98,13 @@
                     </div>
                   </div>
                   <div class="user_management_table_element_content item6">
-                    <div class="text_element unbinded"
+                    <div class="text_element binded"
                          :class="latestLicence.keyBindStyle"
                          v-if="latestLicence.keyBind"
                     >
                       Binded
                     </div>
-                    <div class="text_element binded"
+                    <div class="text_element unbinded"
                          :class="latestLicence.keyBindStyle"
                          v-else
                     >

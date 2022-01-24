@@ -102,6 +102,7 @@
                     :id="user.userDTO.id"
                     :inputFlagRenewal="user.inputFlagRenewal"
                     :inputFlagLicence="user.inputFlagLicence"
+                    :name = "user.userDTO.discordUsername"
                     v-if="(user.inputFlagRenewal) || (user.inputFlagLicence)"
                 />
 

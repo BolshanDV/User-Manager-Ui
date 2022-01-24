@@ -80,13 +80,14 @@ export default {
     },
 
     DELETE_LICENCE: async (ctx, id) => {
-        console.log(id)
         const status = await axios
             .delete(`${process.env.VUE_APP_URL}/api/v1/licences/${id}`,{
                 withCredentials: true
             })
-            .then(response =>
-                response.status
+            .then(response => {
+                    ctx.dispatch('toastedStore/ADDING_ERROR', {text: `The license has been deleted`, status: response.status}, {root: true})
+                return response.status
+            }
             )
             .catch(error => {
                 ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})

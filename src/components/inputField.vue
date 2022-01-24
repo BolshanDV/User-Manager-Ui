@@ -12,7 +12,7 @@
         />
       </div>
       <div class="btn_color waves-effect waves-light z-depth-5"
-        @click="UPDATE_RENEWAL_DATE({newRenewalDate, id})"
+        @click="UPDATE_RENEWAL_DATE({newRenewalDate, id, name})"
       >
         save
       </div>
@@ -45,7 +45,7 @@ name: "inputField",
     renewalPrice:'',
 
   }),
-  props:['inputFlagRenewal', 'inputFlagLicence', 'id'],
+  props:['inputFlagRenewal', 'inputFlagLicence', 'id', 'name'],
   methods:{
     ...mapActions('userManagement', ['UPDATE_RENEWAL_DATE', 'UPDATE_RENEWAL_PRICE'])
   }
