@@ -85,7 +85,7 @@ export default {
                 withCredentials: true
             })
             .then(response => {
-                    ctx.dispatch('toastedStore/ADDING_ERROR', {text: `The license has been deleted`, status: response.status}, {root: true})
+                ctx.dispatch('toastedStore/ADDING_ERROR', {text: `The license has been deleted`, status: response.status}, {root: true})
                 return response.status
             }
             )

@@ -25,8 +25,11 @@ export default {
             .post(`${process.env.VUE_APP_URL}/api/v1/licences/`, obj, {
                 withCredentials: true
             })
-            .then(response =>
-                response.status
+            .then(response =>{
+                    ctx.dispatch('toastedStore/ADDING_ERROR', {text: `The license ${response.data.licenceKey} was successfully created`, status: response.status}, {root: true})
+                    return response.status
+            }
+
             )
             .catch( error  => {
                 ctx.dispatch('toastedStore/ADDING_ERROR', error.response, {root: true})

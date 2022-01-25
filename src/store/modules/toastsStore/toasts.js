@@ -38,6 +38,7 @@ export default {
                     style = 'error'
                     break
                 }
+                case 201 :
                 case 202 :
                 case 200 : {
                     textMessage = message.text
