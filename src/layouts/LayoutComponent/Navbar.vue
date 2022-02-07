@@ -5,7 +5,7 @@
       <div class="navbar_user">{{discordUserData.username}}</div>
       <div class="navbar_exit">
         <div>
-          <a class="waves-effect waves-light btn" href="">Выйти</a>
+          <a class="waves-effect waves-light btn" href="http://localhost:8082/api/v1/logout">Выйти</a>
         </div>
       </div>
     </div>

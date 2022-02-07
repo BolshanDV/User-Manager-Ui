@@ -161,7 +161,7 @@
                 </div>
               </div>
               <div class="waves-effect waves-light btn1 "
-                      @click="FREE_MONTH(index)"
+                      @click="FREE_MONTH(user)"
               >
                 <div class="text_element">Add Free Month</div>
               </div>

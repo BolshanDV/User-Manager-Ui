@@ -1,6 +1,7 @@
 import axios from "axios";
 import Vue from "vue";
 import sorts from "./sorts";
+import dateIntervalFilter from "../sideBarStore/dateIntervalFilter";
 
 export default {
     async getUsers(ctx) {
@@ -109,27 +110,18 @@ export default {
         ctx.commit('HANDLE_CLICK', userID)
     },
 
-    async FREE_MONTH(ctx, id) {
-        ctx.state.renewalDate = new Date((ctx.state.users[id].licenceDTO.renewalDate))
-        ctx.state.renewalDate.setMonth(ctx.state.renewalDate.getMonth() + 1)
+    async FREE_MONTH(ctx, user) {
+        let renewalDate = new Date((user.licenceDTO.renewalDate))
+        renewalDate.setMonth(renewalDate.getMonth() + 1)
 
-        //TODO вынести логику
-
-        let dd = ctx.state.renewalDate.getDate();
-        if (dd < 10) dd = '0' + dd;
-
-        let mm = ctx.state.renewalDate.getMonth() + 1;
-        if (mm < 10) mm = '0' + mm;
-
-        let yy = ctx.state.renewalDate.getFullYear();
-        ctx.state.renewalDate = yy + '-' + mm + '-' + dd + ' 20:45:10.000000'
+        const newRenewalDate = await dateIntervalFilter.CREATURE_DATE(renewalDate)
 
         const obj = {
-            userId: ctx.state.users[id].userDTO.id,
-            licenceKey: ctx.state.users[id].licenceDTO.licenceKey,
-            keyBind: ctx.state.users[id].licenceDTO.keyBind,
-            renewalDate: ctx.state.renewalDate,
-            discordUsername: ctx.state.users[id].userDTO.discordUsername
+            userId: user.userDTO.id,
+            licenceKey: user.licenceDTO.licenceKey,
+            keyBind: user.licenceDTO.keyBind,
+            renewalDate: newRenewalDate,
+            discordUsername: user.userDTO.discordUsername
         }
 
         await ctx.dispatch('putRequest', obj)

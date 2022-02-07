@@ -75,7 +75,7 @@
                       v-if="status_drop.isActive"
                       class="binded"
                   >
-                    Активный
+                    Активный {{status_drop.isActive}}
                   </div>
                   <div
                       v-else
